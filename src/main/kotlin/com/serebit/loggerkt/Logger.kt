@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter
 object Logger {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     /**
+     * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.INFO].
+     */
+    @JvmStatic var level: LogLevel = LogLevel.INFO
+    /**
      * The log message format.
      */
     @JvmStatic var format = { time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String ->
@@ -56,6 +60,7 @@ object Logger {
     @JvmStatic fun error(message: String) = log(LogLevel.ERROR, message)
 
     private fun log(level: LogLevel, rawMessage: String) {
+        if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
         val time = OffsetDateTime.now()
         val thread = Thread.currentThread()
         val (className, methodName) = thread.stackTrace[3].let { it.className to it.methodName }
