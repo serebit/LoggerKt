@@ -3,49 +3,59 @@ package com.serebit.loggerkt
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * The logger singleton. This object is both used for actual logging and for logger configuration.
+ */
 object Logger {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-    var format = { time: OffsetDateTime, thread: String, className: String, method: String, level: Level, message: String ->
+    /**
+     * The log message format.
+     */
+    var format = { time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String ->
         "${time.format(timestampFormat)} [$thread] ($className.$method) $level: $message"
     }
+    /**
+     * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
+     * implementation.
+     */
     var writer: LogWriter = ConsoleWriter()
 
     /**
-     * Logs a message with the level [TRACE][Level.TRACE].
+     * Logs a message with the level [TRACE][LogLevel.TRACE].
      *
      * @param message The message to log.
      */
-    fun trace(message: String) = log(Level.TRACE, message)
+    fun trace(message: String) = log(LogLevel.TRACE, message)
 
     /**
-     * Logs a message with the level [DEBUG][Level.DEBUG].
+     * Logs a message with the level [DEBUG][LogLevel.DEBUG].
      *
      * @param message The message to log.
      */
-    fun debug(message: String) = log(Level.DEBUG, message)
+    fun debug(message: String) = log(LogLevel.DEBUG, message)
 
     /**
-     * Logs a message with the level [INFO][Level.INFO].
+     * Logs a message with the level [INFO][LogLevel.INFO].
      *
      * @param message The message to log.
      */
-    fun info(message: String) = log(Level.INFO, message)
+    fun info(message: String) = log(LogLevel.INFO, message)
 
     /**
-     * Logs a message with the level [WARNING][Level.WARNING].
+     * Logs a message with the level [WARNING][LogLevel.WARNING].
      *
      * @param message The message to log.
      */
-    fun warn(message: String) = log(Level.WARNING, message)
+    fun warn(message: String) = log(LogLevel.WARNING, message)
 
     /**
-     * Logs a message with the level [ERROR][Level.ERROR].
+     * Logs a message with the level [ERROR][LogLevel.ERROR].
      *
      * @param message The message to log.
      */
-    fun error(message: String) = log(Level.ERROR, message)
+    fun error(message: String) = log(LogLevel.ERROR, message)
 
-    private fun log(level: Level, rawMessage: String) {
+    private fun log(level: LogLevel, rawMessage: String) {
         val time = OffsetDateTime.now()
         val thread = Thread.currentThread()
         val (className, methodName) = thread.stackTrace[3].let { it.className to it.methodName }

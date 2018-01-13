@@ -8,6 +8,11 @@ interface LogWriter {
     fun log(message: String)
 }
 
+/**
+ * An implementation of [LogWriter] that outputs to a file. This output is not color-coded.
+ *
+ * @param path The path to the log file.
+ */
 class FileWriter(path: String) : LogWriter {
     private val printWriter = if (path.startsWith("/")) {
         File(path)
@@ -20,6 +25,10 @@ class FileWriter(path: String) : LogWriter {
     }
 }
 
+/**
+ * An implementation of [LogWriter] that outputs to the console. The output of this LogWriter is color-coded based
+ * on the log level, using ANSI color codes.
+ */
 class ConsoleWriter : LogWriter {
     override fun log(message: String) = println(message)
 }
