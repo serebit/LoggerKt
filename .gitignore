@@ -1,0 +1,15 @@
+# IntelliJ IDEA files
+*.iml
+.idea/
+
+# Gradle definitionCache
+.gradle/
+
+# Compilation output
+bin/
+target/
+build/
+out/
+
+# Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
