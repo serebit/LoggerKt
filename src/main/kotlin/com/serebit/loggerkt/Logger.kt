@@ -11,49 +11,49 @@ object Logger {
     /**
      * The log message format.
      */
-    var format = { time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String ->
+    @JvmStatic var format = { time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String ->
         "${time.format(timestampFormat)} [$thread] ($className.$method) $level: $message"
     }
     /**
      * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
      * implementation.
      */
-    var writer: LogWriter = ConsoleWriter()
+    @JvmStatic var writer: LogWriter = ConsoleWriter()
 
     /**
      * Logs a message with the level [TRACE][LogLevel.TRACE].
      *
      * @param message The message to log.
      */
-    fun trace(message: String) = log(LogLevel.TRACE, message)
+    @JvmStatic fun trace(message: String) = log(LogLevel.TRACE, message)
 
     /**
      * Logs a message with the level [DEBUG][LogLevel.DEBUG].
      *
      * @param message The message to log.
      */
-    fun debug(message: String) = log(LogLevel.DEBUG, message)
+    @JvmStatic fun debug(message: String) = log(LogLevel.DEBUG, message)
 
     /**
      * Logs a message with the level [INFO][LogLevel.INFO].
      *
      * @param message The message to log.
      */
-    fun info(message: String) = log(LogLevel.INFO, message)
+    @JvmStatic fun info(message: String) = log(LogLevel.INFO, message)
 
     /**
      * Logs a message with the level [WARNING][LogLevel.WARNING].
      *
      * @param message The message to log.
      */
-    fun warn(message: String) = log(LogLevel.WARNING, message)
+    @JvmStatic fun warn(message: String) = log(LogLevel.WARNING, message)
 
     /**
      * Logs a message with the level [ERROR][LogLevel.ERROR].
      *
      * @param message The message to log.
      */
-    fun error(message: String) = log(LogLevel.ERROR, message)
+    @JvmStatic fun error(message: String) = log(LogLevel.ERROR, message)
 
     private fun log(level: LogLevel, rawMessage: String) {
         val time = OffsetDateTime.now()
