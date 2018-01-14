@@ -1,5 +1,7 @@
 package com.serebit.loggerkt
 
+import com.serebit.loggerkt.writers.ConsoleWriter
+import com.serebit.loggerkt.writers.LogWriter
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -59,16 +61,21 @@ object Logger {
      */
     @JvmStatic fun error(message: String) = log(LogLevel.ERROR, message)
 
-    private fun log(level: LogLevel, rawMessage: String) {
+    private fun log(level: LogLevel, message: String) {
+        // check if the message should actually be logged
         if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
-        val time = OffsetDateTime.now()
         val thread = Thread.currentThread()
         val (className, methodName) = thread.stackTrace[3].let { it.className to it.methodName }
         // example: 2018-01-12 21:03:25 [main] TestKt.main
-        val message = format(time, thread.name, className, methodName, level, rawMessage)
-        when(writer) {
-            is ConsoleWriter -> writer.log(message.let(level.ansiColorTransform))
-            is FileWriter -> writer.log(message)
+        format(
+                OffsetDateTime.now(),
+                thread.name,
+                className,
+                methodName,
+                level,
+                message
+        ).let { formattedMessage ->
+            writer.log(level, formattedMessage)
         }
     }
 }
