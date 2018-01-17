@@ -1,9 +1,14 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.10"
+    id "com.github.johnrengelman.shadow" version "2.0.2"
+    id 'com.github.ben-manes.versions' version '0.17.0'
+    id "com.jfrog.bintray" version "1.8.0"
+    id "maven-publish"
+    id "java-library"
 }
 
 group "com.serebit"
-version "0.0.0"
+version "0.1.0"
 
 repositories {
     jcenter()
@@ -20,4 +25,36 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    publications = ["BintrayRelease"]
+    pkg {
+        repo = "Maven"
+        name = "LoggerKt"
+        licenses = ["Apache-2.0"]
+        vcsUrl = "https://github.com/serebit/LoggerKt.git"
+        publish = true
+        version {
+            name = project.version
+            released  = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+        BintrayRelease(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId archivesBaseName
+            version version
+        }
+    }
+}
+
+bintrayUpload {
+    dependsOn build
 }
