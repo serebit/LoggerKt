@@ -3,7 +3,6 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.17.0'
     id "com.jfrog.bintray" version "1.8.0"
     id "maven-publish"
-    id "java-library"
 }
 
 group "com.serebit"
@@ -16,6 +15,7 @@ repositories {
 
 dependencies {
     compile group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk8", version: "1.2.20"
+    compile group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "1.2.20"
     testCompile group: "io.kotlintest", name: "kotlintest", version: "2.0.7"
 }
 
