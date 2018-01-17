@@ -12,7 +12,8 @@ interface LogWriter {
 /**
  * An implementation of [LogWriter] that outputs to a file. This output is not color-coded.
  *
- * @param path The path to the log file.
+ * @param path The path at which the file will reside.
+ * @param overwrite Whether or not the file at the specified path will be overwritten. Defaults to true.
  */
 class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
     private val file = if (path.startsWith("/")) {
@@ -25,9 +26,8 @@ class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
 }
 
 /**
- * An implementation of [LogWriter] that outputs to the console. This writer's output can be color-coded.
- *
- * @property useAnsiColors Defines whether or not the writer will output color-coded text to the console.
+ * An implementation of [LogWriter] that outputs to the console. This writer's output is color coded if the property
+ * [useAnsiColors] is set to true.
  */
 class ConsoleWriter(private val useAnsiColors: Boolean = true) : LogWriter {
     override fun log(level: LogLevel, message: String) = if (useAnsiColors) {
@@ -39,9 +39,7 @@ class ConsoleWriter(private val useAnsiColors: Boolean = true) : LogWriter {
 
 /**
  * An implementation of [LogWriter] that contains multiple LogWriters. This writer passes the log messages through to
- * its internal writers, allowing for multiple log outputs.
- *
- * @property writers The writers that will log the messages passed to this writer.
+ * its internal [writers], allowing for multiple log outputs.
  */
 class MultiWriter(private vararg val writers: LogWriter) : LogWriter {
     override fun log(level: LogLevel, message: String) = writers.forEach { it.log(level, message) }
