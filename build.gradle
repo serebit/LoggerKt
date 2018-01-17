@@ -1,6 +1,5 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.10"
-    id "com.github.johnrengelman.shadow" version "2.0.2"
     id 'com.github.ben-manes.versions' version '0.17.0'
     id "com.jfrog.bintray" version "1.8.0"
     id "maven-publish"
@@ -33,7 +32,7 @@ bintray {
     publications = ["BintrayRelease"]
     pkg {
         repo = "Maven"
-        name = "LoggerKt"
+        name = "loggerkt"
         licenses = ["Apache-2.0"]
         vcsUrl = "https://github.com/serebit/LoggerKt.git"
         publish = true
