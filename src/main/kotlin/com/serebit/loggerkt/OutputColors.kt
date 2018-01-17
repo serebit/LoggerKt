@@ -1,4 +1,5 @@
 @file:JvmName("OutputDecorator")
+
 package com.serebit.loggerkt
 
 private const val ESCAPE = '\u001B'

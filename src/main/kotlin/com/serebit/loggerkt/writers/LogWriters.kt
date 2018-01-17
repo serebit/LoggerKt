@@ -18,7 +18,7 @@ class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
     private val file = if (path.startsWith("/")) {
         File(path)
     } else {
-        File(this::class.java.protectionDomain.codeSource.location.toURI().path + "/" + path)
+        File("${this::class.java.protectionDomain.codeSource.location.toURI().path}/$path")
     }.also { if (overwrite) it.delete() }
 
     override fun log(level: LogLevel, message: String) = file.appendText("$message\n")

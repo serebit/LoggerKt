@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.10"
+    id "org.jetbrains.kotlin.jvm" version "1.2.20"
     id 'com.github.ben-manes.versions' version '0.17.0'
     id "com.jfrog.bintray" version "1.8.0"
     id "maven-publish"
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk8"
+    compile group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk8", version: "1.2.20"
     testCompile group: "io.kotlintest", name: "kotlintest", version: "2.0.7"
 }
 

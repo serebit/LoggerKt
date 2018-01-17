@@ -1,4 +1,3 @@
-
 import com.serebit.loggerkt.Logger
 import com.serebit.loggerkt.writers.FileWriter
 import io.kotlintest.TestCaseContext
