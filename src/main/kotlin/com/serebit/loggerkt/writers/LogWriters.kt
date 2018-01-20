@@ -26,10 +26,12 @@ class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
 }
 
 /**
- * An implementation of [LogWriter] that outputs to the console. This writer's output is color coded if the property
- * [useAnsiColors] is set to true.
+ * An implementation of [LogWriter] that outputs to the console. This writer's output is color coded using ANSI
+ * escape codes if the property [useAnsiColors] is set to true and the OS is not Windows.
  */
-class ConsoleWriter(private val useAnsiColors: Boolean = true) : LogWriter {
+class ConsoleWriter(useAnsiColors: Boolean = true) : LogWriter {
+    private val useAnsiColors = if (System.getProperty("os.name").startsWith("Windows")) false else useAnsiColors
+
     override fun log(level: LogLevel, message: String) = if (useAnsiColors) {
         println(message.let(level.ansiColorTransform))
     } else {
