@@ -18,7 +18,7 @@
 <td>
 <code><span class="keyword">class </span><span class="identifier">ConsoleWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-writer/index.html"><span class="identifier">LogWriter</span></a></code>
 <p>An implementation of <a href="-log-writer/index.html">LogWriter</a> that outputs to the console. This writer's output is color coded using ANSI
-escape codes if the property <a href="#">useAnsiColors</a> is set to true and the OS is not Windows.</p>
+escape codes by default, unless the operating system is Windows.</p>
 </td>
 </tr>
 <tr>
@@ -27,7 +27,8 @@ escape codes if the property <a href="#">useAnsiColors</a> is set to true and th
 </td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FileWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-writer/index.html"><span class="identifier">LogWriter</span></a></code>
-<p>An implementation of <a href="-log-writer/index.html">LogWriter</a> that outputs to a <a href="#">file</a> at the given path.</p>
+<p>An implementation of <a href="-log-writer/index.html">LogWriter</a> that outputs to a file at the given path. Can be set to either append to the
+file at the given path, or overwrite it entirely.</p>
 </td>
 </tr>
 <tr>
@@ -35,7 +36,9 @@ escape codes if the property <a href="#">useAnsiColors</a> is set to true and th
 <p><a href="-log-writer/index.html">LogWriter</a></p>
 </td>
 <td>
-<code><span class="keyword">interface </span><span class="identifier">LogWriter</span></code></td>
+<code><span class="keyword">interface </span><span class="identifier">LogWriter</span></code>
+<p>The interface which all LogWriters inherit.</p>
+</td>
 </tr>
 <tr>
 <td>

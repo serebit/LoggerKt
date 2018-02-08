@@ -10,7 +10,7 @@
 <h1>ConsoleWriter</h1>
 <code><span class="keyword">class </span><span class="identifier">ConsoleWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-log-writer/index.html"><span class="identifier">LogWriter</span></a></code>
 <p>An implementation of <a href="../-log-writer/index.html">LogWriter</a> that outputs to the console. This writer's output is color coded using ANSI
-escape codes if the property <a href="#">useAnsiColors</a> is set to true and the OS is not Windows.</p>
+escape codes by default, unless the operating system is Windows.</p>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -19,9 +19,8 @@ escape codes if the property <a href="#">useAnsiColors</a> is set to true and th
 <p><a href="-init-.html">&lt;init&gt;</a></p>
 </td>
 <td>
-<code><span class="identifier">ConsoleWriter</span><span class="symbol">(</span><span class="identifier" id="com.serebit.loggerkt.writers.ConsoleWriter$<init>(kotlin.Boolean)/useAnsiColors">useAnsiColors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span></code>
-<p>An implementation of <a href="../-log-writer/index.html">LogWriter</a> that outputs to the console. This writer's output is color coded using ANSI
-escape codes if the property <a href="-init-.html#com.serebit.loggerkt.writers.ConsoleWriter$<init>(kotlin.Boolean)/useAnsiColors">useAnsiColors</a> is set to true and the OS is not Windows.</p>
+<code><span class="identifier">ConsoleWriter</span><span class="symbol">(</span><span class="identifier" id="com.serebit.loggerkt.writers.ConsoleWriter$<init>(kotlin.Boolean)/shouldUseAnsiColors">shouldUseAnsiColors</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">)</span></code>
+<p>Creates a new instance, using ANSI color transforms if specified.</p>
 </td>
 </tr>
 </tbody>
@@ -34,7 +33,10 @@ escape codes if the property <a href="-init-.html#com.serebit.loggerkt.writers.C
 <p><a href="log.html">log</a></p>
 </td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="com.serebit.loggerkt.writers.ConsoleWriter$log(com.serebit.loggerkt.LogMessage)/message">message</span><span class="symbol">:</span>&nbsp;<a href="../../com.serebit.loggerkt/-log-message/index.html"><span class="identifier">LogMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+<code><span class="keyword">fun </span><span class="identifier">log</span><span class="symbol">(</span><span class="identifier" id="com.serebit.loggerkt.writers.ConsoleWriter$log(com.serebit.loggerkt.LogMessage)/message">message</span><span class="symbol">:</span>&nbsp;<a href="../../com.serebit.loggerkt/-log-message/index.html"><span class="identifier">LogMessage</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Prints the given <a href="log.html#com.serebit.loggerkt.writers.ConsoleWriter$log(com.serebit.loggerkt.LogMessage)/message">message</a> to the console, applying the proper ANSI color transform if <a href="#">useAnsiColors</a> is set to
+true and the given <a href="log.html#com.serebit.loggerkt.writers.ConsoleWriter$log(com.serebit.loggerkt.LogMessage)/message">message</a> is an instance of <a href="../../com.serebit.loggerkt/-leveled-log-message/index.html">LeveledLogMessage</a>.</p>
+</td>
 </tr>
 </tbody>
 </table>

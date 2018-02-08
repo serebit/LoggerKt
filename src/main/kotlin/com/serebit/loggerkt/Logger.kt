@@ -6,7 +6,7 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 /**
- * The logger singleton. This object is both used for actual logging and for logger configuration.
+ * The logger singleton. This object is both used for logging and for logger configuration.
  */
 object Logger {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -34,30 +34,40 @@ object Logger {
 
     /**
      * Logs a [message] with the level [TRACE][LogLevel.TRACE].
+     *
+     * @param message The message to log.
      */
     @JvmStatic
     fun trace(message: String) = log(LogLevel.TRACE, message)
 
     /**
      * Logs a [message] with the level [DEBUG][LogLevel.DEBUG].
+     *
+     * @param message The message to log.
      */
     @JvmStatic
     fun debug(message: String) = log(LogLevel.DEBUG, message)
 
     /**
      * Logs a [message] with the level [INFO][LogLevel.INFO].
+     *
+     * @param message The message to log.
      */
     @JvmStatic
     fun info(message: String) = log(LogLevel.INFO, message)
 
     /**
      * Logs a [message] with the level [WARNING][LogLevel.WARNING].
+     *
+     * @param message The message to log.
      */
     @JvmStatic
     fun warn(message: String) = log(LogLevel.WARNING, message)
 
     /**
      * Logs a [message] with the level [ERROR][LogLevel.ERROR].
+     *
+     * @param message The message to log.
      */
     @JvmStatic
     fun error(message: String) = log(LogLevel.ERROR, message)
@@ -76,7 +86,8 @@ object Logger {
             level,
             message
         ).let { formattedMessage ->
-            writer.log(LeveledLogMessage(formattedMessage, level))
+            if (writer is ConsoleWriter) writer.log(LeveledLogMessage(formattedMessage, level))
+            else writer.log(SimpleLogMessage(formattedMessage))
         }
     }
 }
