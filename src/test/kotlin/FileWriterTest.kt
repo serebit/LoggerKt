@@ -1,6 +1,7 @@
-import com.serebit.loggerkt.Logger
+
+import com.serebit.loggerkt.SimpleLogMessage
 import com.serebit.loggerkt.writers.FileWriter
-import io.kotlintest.TestCaseContext
+import io.kotlintest.matchers.should
 import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
 import java.io.File
@@ -9,24 +10,33 @@ class FileWriterTest : StringSpec() {
     private val file = File("/tmp/test.tmp")
 
     init {
-        "Logger should log messages to the set file" {
-            Logger.info("My name jeff")
-            file.readText().trim() shouldBe "INFO: My name jeff"
+        "Writer should log messages to the set file" {
+            val writer = FileWriter(file.absolutePath)
+            writer.log(SimpleLogMessage("Test text"))
+            file.readText() should { it.isNotEmpty() }
         }
 
-        "Logger should log multiple messages to the same file" {
-            Logger.info("Test string")
-            Logger.info("Second test string")
-            file.readText().trim() shouldBe "INFO: Test string\nINFO: Second test string"
+        "Writer should log multiple messages to the same file" {
+            val writer = FileWriter(file.absolutePath)
+            writer.log(SimpleLogMessage("Test string"))
+            writer.log(SimpleLogMessage("Second test string"))
+            file.readText() shouldBe "Test string\nSecond test string\n"
         }
-    }
 
-    override fun interceptTestCase(context: TestCaseContext, test: () -> Unit) {
-        Logger.writer = FileWriter(file.absolutePath, false)
-        Logger.format = { _, _, _, _, level, message ->
-            "$level: $message"
+        "Writer should overwrite the output file if set as such" {
+            var writer = FileWriter(file.absolutePath)
+            writer.log(SimpleLogMessage("Old test string"))
+            writer = FileWriter(file.absolutePath, overwrite = true)
+            writer.log(SimpleLogMessage("New test string"))
+            file.readText() shouldBe "New test string\n"
         }
-        test()
-        file.delete()
+
+        "Writer should append to the output file if set as such" {
+            var writer = FileWriter(file.absolutePath)
+            writer.log(SimpleLogMessage("Old test string"))
+            writer = FileWriter(file.absolutePath, overwrite = false)
+            writer.log(SimpleLogMessage("New test string"))
+            file.readText() shouldBe "Old test string\nNew test string\n"
+        }
     }
 }

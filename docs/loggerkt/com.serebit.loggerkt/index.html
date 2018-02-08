@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.serebit.loggerkt - loggerkt</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">loggerkt</a>&nbsp;/&nbsp;<a href=".">com.serebit.loggerkt</a><br/>
+<br/>
+<h2>Package com.serebit.loggerkt</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-leveled-log-message/index.html">LeveledLogMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">LeveledLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-message/index.html"><span class="identifier">LogMessage</span></a></code>
+<p>An implementation of LogMessage that includes the <a href="#">level</a> of the message, along with the message <a href="-leveled-log-message/text.html">text</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-log-level/index.html">LogLevel</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">LogLevel</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-log-message/index.html">LogMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">LogMessage</span></code>
+<p>The wrapper class around a log message. Implementations must include an override of the message <a href="-log-message/text.html">text</a>, and can
+include accompanying data.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-logger/index.html">Logger</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">Logger</span></code>
+<p>The logger singleton. This object is both used for actual logging and for logger configuration.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-simple-log-message/index.html">SimpleLogMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SimpleLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-message/index.html"><span class="identifier">LogMessage</span></a></code>
+<p>The simplest implementation of LogMessage, with its only argument being the message <a href="-simple-log-message/text.html">text</a>, and no accompanying data.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

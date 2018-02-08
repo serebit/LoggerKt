@@ -66,7 +66,9 @@ object Logger {
         // check if the message should actually be logged
         if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
         val thread = Thread.currentThread()
-        val (className, methodName) = thread.stackTrace[3].let { it.className to it.methodName }
+        val (className, methodName) = thread.stackTrace[3].let {
+            it.className.split(".").last() to it.methodName
+        }
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
         format(
             OffsetDateTime.now(),
@@ -74,7 +76,7 @@ object Logger {
             level,
             message
         ).let { formattedMessage ->
-            writer.log(level, formattedMessage)
+            writer.log(LeveledLogMessage(formattedMessage, level))
         }
     }
 }
