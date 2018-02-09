@@ -47,12 +47,14 @@ class LoggerTest : StringSpec() {
             Logger.info("Test info string")
             Logger.warn("Test warning string")
             Logger.error("Test error string")
+            Logger.fatal("Test fatal string")
             (Logger.writer as TestWriter).log shouldBe """
                 TRACE: Test trace string
                 DEBUG: Test debug string
                 INFO: Test info string
                 WARNING: Test warning string
                 ERROR: Test error string
+                FATAL: Test fatal string
 
             """.trimIndent()
         }

@@ -72,6 +72,14 @@ object Logger {
     @JvmStatic
     fun error(message: String) = log(LogLevel.ERROR, message)
 
+    /**
+     * Logs a [message] with the level [FATAL][LogLevel.FATAL].
+     *
+     * @param message The message to log.
+     */
+    @JvmStatic
+    fun fatal(message: String) = log(LogLevel.FATAL, message)
+
     private fun log(level: LogLevel, message: String) {
         // check if the message should actually be logged
         if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return

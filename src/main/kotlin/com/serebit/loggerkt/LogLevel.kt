@@ -25,5 +25,9 @@ enum class LogLevel(internal val ansiColorTransform: (String) -> String) {
     /**
      * A log level for errors in the application that may be recovered from. Shown by default.
      */
-    ERROR(String::ansiRed);
+    ERROR(String::ansiRed),
+    /**
+     * A log level for severe errors that will cause the application to crash or hang. Shown by default.
+     */
+    FATAL(String::ansiRedBackground);
 }
