@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter
 /**
  * The logger singleton. This object is both used for logging and for logger configuration.
  */
-object Logger {
+object LoggerKt {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.INFO].
