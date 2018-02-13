@@ -59,7 +59,7 @@ class LoggerTest : StringSpec() {
             """.trimIndent()
         }
 
-        "Logger should output correct thread, class and function" {
+        "Logger should output correct thread, className and function" {
             LoggerKt.format = { _, thread, className, method, _, _ ->
                 "$thread $className.$method"
             }

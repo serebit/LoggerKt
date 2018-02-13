@@ -19,12 +19,10 @@ object LoggerKt {
      * The log message format.
      */
     @JvmStatic
-    var format = { time: OffsetDateTime,
-                   thread: String, className: String, method: String,
-                   level: LogLevel,
-                   message: String ->
-        "${time.format(timestampFormat)} [$thread] ($className.$method) $level: $message"
-    }
+    var format: (MessageInfo) -> String =
+        { (time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String) ->
+            "${time.format(timestampFormat)} [$thread] ($className.$method) $level: $message"
+        }
     /**
      * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
      * implementation.
@@ -89,13 +87,22 @@ object LoggerKt {
         }
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
         format(
-            OffsetDateTime.now(),
-            thread.name, className, methodName,
-            level,
-            message
+            MessageInfo(
+                OffsetDateTime.now(),
+                thread.name, className, methodName,
+                level,
+                message
+            )
         ).let { formattedMessage ->
             if (writer is ConsoleWriter) writer.log(LeveledLogMessage(formattedMessage, level))
             else writer.log(SimpleLogMessage(formattedMessage))
         }
     }
+
+    data class MessageInfo(
+        val time: OffsetDateTime,
+        val threadName: String, val className: String, val method: String,
+        val level: LogLevel,
+        val message: String
+    )
 }
