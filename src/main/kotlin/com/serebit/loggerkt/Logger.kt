@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter
 /**
  * The logger singleton. This object is both used for logging and for logger configuration.
  */
-object LoggerKt {
+object Logger {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.INFO].
@@ -16,13 +16,12 @@ object LoggerKt {
     @JvmStatic
     var level: LogLevel = LogLevel.INFO
     /**
-     * The log message format.
+     * The log message formatter.
      */
     @JvmStatic
-    var format: (MessageInfo) -> String =
-        { (time: OffsetDateTime, thread: String, className: String, method: String, level: LogLevel, message: String) ->
-            "${time.format(timestampFormat)} [$thread] ($className.$method) $level: $message"
-        }
+    var formatter: (FormatterPayload) -> String = { (time, threadName, className, methodName, level, message) ->
+        "${time.format(timestampFormat)} [$threadName] ($className.$methodName) $level: $message"
+    }
     /**
      * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
      * implementation.
@@ -86,8 +85,8 @@ object LoggerKt {
             it.className.split(".").last() to it.methodName
         }
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
-        format(
-            MessageInfo(
+        formatter(
+            FormatterPayload(
                 OffsetDateTime.now(),
                 thread.name, className, methodName,
                 level,
@@ -98,11 +97,4 @@ object LoggerKt {
             else writer.log(SimpleLogMessage(formattedMessage))
         }
     }
-
-    data class MessageInfo(
-        val time: OffsetDateTime,
-        val threadName: String, val className: String, val method: String,
-        val level: LogLevel,
-        val message: String
-    )
 }
