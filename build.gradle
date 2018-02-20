@@ -1,12 +1,5 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.21"
-    id "org.jetbrains.dokka" version "0.9.15"
     id "com.github.ben-manes.versions" version "0.17.0"
     id "com.jfrog.bintray" version "1.8.0"
     id "maven-publish"
@@ -23,11 +16,6 @@ dependencies {
     compile group: "org.jetbrains.kotlin", name: "kotlin-stdlib-jdk8", version: "1.2.21"
     compile group: "org.jetbrains.kotlin", name: "kotlin-reflect", version: "1.2.21"
     testCompile group: "io.kotlintest", name: "kotlintest", version: "2.0.7"
-}
-
-dokka {
-    outputFormat = "html"
-    outputDirectory = "docs"
 }
 
 bintray {
