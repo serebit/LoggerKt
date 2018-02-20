@@ -1,4 +1,5 @@
 # LoggerKt
+[![Build Status](https://travis-ci.org/serebit/LoggerKt.svg?branch=master)](https://travis-ci.org/serebit/LoggerKt) [![Download](https://api.bintray.com/packages/serebit/Maven/loggerkt/images/download.svg)](https://bintray.com/serebit/Maven/loggerkt)
 
 LoggerKt is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator. 
 
@@ -6,9 +7,7 @@ LoggerKt is a simple, lightweight Kotlin logger with no dependencies and an idio
 LoggerKt is compatible with **Java 6** or newer, and requires **JDK 8** or newer to compile, as per Kotlin's default standards.
 
 ## Get Started
-### Gradle
-Groovy build script: 
-
+### Gradle (Groovy build script)
 ```gradle
 repositories {
     jcenter()
@@ -18,8 +17,7 @@ dependencies {
     compile group: "com.serebit", name: "loggerkt", version: "0.2.0"
 }
 ```
-Kotlin build script: 
-
+### Gradle (Kotlin build script)
 ```kotlin
 repositories {
     jcenter()
