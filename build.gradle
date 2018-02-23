@@ -1,6 +1,7 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.21"
     id "com.github.ben-manes.versions" version "0.17.0"
+    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
     id "com.jfrog.bintray" version "1.8.0"
     id "maven-publish"
 }
@@ -22,6 +23,7 @@ bintray {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_KEY")
     publications = ["BintrayRelease"]
+    publish = true
     pkg {
         repo = "Maven"
         name = "loggerkt"
@@ -49,6 +51,10 @@ bintrayUpload {
     dependsOn build
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = "4.5.1"
+detekt {
+    profile("main") {
+        input = "$projectDir/src/main/kotlin"
+        config = "$projectDir/detekt.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    }
 }

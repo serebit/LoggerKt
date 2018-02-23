@@ -1,4 +1,3 @@
-
 import com.serebit.loggerkt.SimpleLogMessage
 import com.serebit.loggerkt.writers.FileWriter
 import io.kotlintest.matchers.should
