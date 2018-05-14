@@ -21,7 +21,7 @@ data class FormatterPayload(
     val message: String
 ) {
     internal companion object {
-        private const val stackTraceDepth = 4
+        private const val stackTraceDepth = 5
 
         fun generate(level: LogLevel, message: String): FormatterPayload {
             val thread = Thread.currentThread()
