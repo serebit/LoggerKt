@@ -1,6 +1,8 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.BintrayUploadTask
 import org.apache.tools.ant.types.resources.comparators.Date
+import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
@@ -22,13 +24,29 @@ repositories {
 dependencies {
     compile(kotlin("stdlib-jdk8"))
     compile(kotlin("reflect"))
+    compile(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "0.22.5")
     testCompile(group = "io.kotlintest", name = "kotlintest", version = "2.0.7")
+}
+
+tasks {
+    withType<BintrayUploadTask> {
+        dependsOn("build")
+    }
+
+    withType<DokkaTask> {
+        outputFormat = "html"
+        outputDirectory = "docs"
+    }
+}
+
+val sourcesJar by tasks.creating(Jar::class) {
+    classifier = "sources"
+    from(java.sourceSets["main"].allJava.sourceDirectories.files)
 }
 
 bintray {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_KEY")
-    publish = true
     setPublications("BintrayRelease")
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
         repo = "Maven"
@@ -43,21 +61,11 @@ publishing {
     publications.invoke {
         "BintrayRelease"(MavenPublication::class) {
             from(components["java"])
-            groupId = group.toString()
-            artifactId = name
-            version = version.toString()
+            artifact(sourcesJar)
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
         }
-    }
-}
-
-tasks {
-    withType<BintrayUploadTask> {
-        dependsOn("build")
-    }
-
-    withType<DokkaTask> {
-        outputFormat = "html"
-        outputDirectory = "docs"
     }
 }
 
