@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../../../style.css">
 </HEAD>
 <BODY>
-<a href="../../index.html">loggerkt</a>&nbsp;/&nbsp;<a href="../index.html">com.serebit.loggerkt.writers</a>&nbsp;/&nbsp;<a href=".">LogWriter</a><br/>
+<a href="../../index.html">loggerkt</a>&nbsp;/&nbsp;<a href="../index.html">com.serebit.loggerkt.writers</a>&nbsp;/&nbsp;<a href="./index.html">LogWriter</a><br/>
 <br/>
 <h1>LogWriter</h1>
 <code><span class="keyword">interface </span><span class="identifier">LogWriter</span></code>
@@ -32,8 +32,8 @@
 <p><a href="../-console-writer/index.html">ConsoleWriter</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">ConsoleWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">LogWriter</span></code>
-<p>An implementation of LogWriter that outputs to the console. This writer's output is color coded using ANSI
+<code><span class="keyword">class </span><span class="identifier">ConsoleWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogWriter</span></a></code>
+<p>An implementation of <a href="./index.html">LogWriter</a> that outputs to the console. This writer's output is color coded using ANSI
 escape codes by default, unless the operating system is Windows.</p>
 </td>
 </tr>
@@ -42,8 +42,8 @@ escape codes by default, unless the operating system is Windows.</p>
 <p><a href="../-file-writer/index.html">FileWriter</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">FileWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">LogWriter</span></code>
-<p>An implementation of LogWriter that outputs to a file at the given path. Can be set to either append to the
+<code><span class="keyword">class </span><span class="identifier">FileWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogWriter</span></a></code>
+<p>An implementation of <a href="./index.html">LogWriter</a> that outputs to a file at the given path. Can be set to either append to the
 file at the given path, or overwrite it entirely.</p>
 </td>
 </tr>
@@ -52,8 +52,8 @@ file at the given path, or overwrite it entirely.</p>
 <p><a href="../-multi-writer/index.html">MultiWriter</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">MultiWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">LogWriter</span></code>
-<p>An implementation of LogWriter that contains multiple LogWriters. This writer passes the log messages through to
+<code><span class="keyword">class </span><span class="identifier">MultiWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogWriter</span></a></code>
+<p>An implementation of <a href="./index.html">LogWriter</a> that contains multiple LogWriters. This writer passes the log messages through to
 its internal <a href="#">writers</a>, allowing for multiple log outputs.</p>
 </td>
 </tr>
@@ -62,8 +62,8 @@ its internal <a href="#">writers</a>, allowing for multiple log outputs.</p>
 <p><a href="../-print-stream-writer/index.html">PrintStreamWriter</a></p>
 </td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">PrintStreamWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">LogWriter</span></code>
-<p>An implementation of LogWriter that outputs to the given <a href="#">stream</a>. This writer's output is not color-coded,
+<code><span class="keyword">class </span><span class="identifier">PrintStreamWriter</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogWriter</span></a></code>
+<p>An implementation of <a href="./index.html">LogWriter</a> that outputs to the given <a href="#">stream</a>. This writer's output is not color-coded,
 as that property is exclusive to <a href="../-console-writer/index.html">ConsoleWriter</a>.</p>
 </td>
 </tr>

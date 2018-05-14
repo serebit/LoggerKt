@@ -1,9 +1,11 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.BintrayUploadTask
 import org.apache.tools.ant.types.resources.comparators.Date
+import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
     kotlin("jvm") version "1.2.41"
+    id("org.jetbrains.dokka") version "0.9.16"
     id("com.github.ben-manes.versions") version "0.17.0"
     id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7"
     id("com.jfrog.bintray") version "1.8.0"
@@ -51,6 +53,11 @@ publishing {
 tasks {
     withType<BintrayUploadTask> {
         dependsOn("build")
+    }
+
+    withType<DokkaTask> {
+        outputFormat = "html"
+        outputDirectory = "docs"
     }
 }
 
