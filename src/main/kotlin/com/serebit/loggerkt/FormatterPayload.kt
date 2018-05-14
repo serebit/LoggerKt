@@ -19,4 +19,21 @@ data class FormatterPayload(
     val threadName: String, val className: String, val methodName: String,
     val level: LogLevel,
     val message: String
-)
+) {
+    internal companion object {
+        private const val stackTraceDepth = 4
+
+        fun generate(level: LogLevel, message: String): FormatterPayload {
+            val thread = Thread.currentThread()
+            val (className, methodName) = thread.stackTrace[stackTraceDepth].let {
+                it.className.split(".").last() to it.methodName
+            }
+            return FormatterPayload(
+                OffsetDateTime.now(),
+                thread.name, className, methodName,
+                level,
+                message
+            )
+        }
+    }
+}

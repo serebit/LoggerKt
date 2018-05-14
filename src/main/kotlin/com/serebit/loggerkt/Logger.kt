@@ -11,6 +11,12 @@ import java.time.format.DateTimeFormatter
 object Logger {
     private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     /**
+     * Determines whether logs should be written asynchronously via coroutines. While this does provide significant
+     * performance improvements, logs just before a program exit may not be written, so this defaults to false.
+     */
+    @JvmStatic
+    var async: Boolean = false
+    /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.INFO].
      */
     @JvmStatic
@@ -80,19 +86,9 @@ object Logger {
     private fun log(level: LogLevel, message: String) {
         // check if the message should actually be logged
         if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
-        val thread = Thread.currentThread()
-        val (className, methodName) = thread.stackTrace[3].let {
-            it.className.split(".").last() to it.methodName
-        }
+
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
-        formatter(
-            FormatterPayload(
-                OffsetDateTime.now(),
-                thread.name, className, methodName,
-                level,
-                message
-            )
-        ).let { formattedMessage ->
+        formatter(FormatterPayload.generate(level, message)).let { formattedMessage ->
             if (writer is ConsoleWriter) writer.log(LeveledLogMessage(formattedMessage, level))
             else writer.log(SimpleLogMessage(formattedMessage))
         }
