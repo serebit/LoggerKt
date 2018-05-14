@@ -21,7 +21,7 @@ dependencies {
 }
 ```
 ### Gradle (Kotlin build script)
-```kotlin
+```kts
 repositories {
     jcenter()
 }
