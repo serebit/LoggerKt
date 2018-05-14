@@ -4,6 +4,7 @@ import org.apache.tools.ant.types.resources.comparators.Date
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.gradle.DokkaPlugin
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
     kotlin("jvm") version "1.2.41"
@@ -37,6 +38,10 @@ tasks {
         outputFormat = "html"
         outputDirectory = "docs"
     }
+}
+
+kotlin {
+    experimental.coroutines = Coroutines.ENABLE
 }
 
 val sourcesJar by tasks.creating(Jar::class) {

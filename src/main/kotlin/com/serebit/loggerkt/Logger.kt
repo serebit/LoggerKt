@@ -2,7 +2,7 @@ package com.serebit.loggerkt
 
 import com.serebit.loggerkt.writers.ConsoleWriter
 import com.serebit.loggerkt.writers.LogWriter
-import java.time.OffsetDateTime
+import kotlinx.coroutines.experimental.launch
 import java.time.format.DateTimeFormatter
 
 /**
@@ -86,7 +86,12 @@ object Logger {
     private fun log(level: LogLevel, message: String) {
         // check if the message should actually be logged
         if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
+        if (async) launch {
+            writeLog(level, message)
+        } else writeLog(level, message)
+    }
 
+    private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
         formatter(FormatterPayload.generate(level, message)).let { formattedMessage ->
             if (writer is ConsoleWriter) writer.log(LeveledLogMessage(formattedMessage, level))
