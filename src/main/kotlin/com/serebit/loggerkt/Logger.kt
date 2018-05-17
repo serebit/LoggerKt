@@ -1,5 +1,6 @@
 package com.serebit.loggerkt
 
+import com.serebit.loggerkt.formatting.FormatterPayload
 import com.serebit.loggerkt.writers.ConsoleWriter
 import com.serebit.loggerkt.writers.LogWriter
 import kotlinx.coroutines.experimental.launch
@@ -94,8 +95,8 @@ object Logger {
     private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
         formatter(FormatterPayload.generate(level, message)).let { formattedMessage ->
-            if (writer is ConsoleWriter) writer.log(LeveledLogMessage(formattedMessage, level))
-            else writer.log(SimpleLogMessage(formattedMessage))
+            if (writer is ConsoleWriter) writer.log(LogMessage.Leveled(formattedMessage, level))
+            else writer.log(LogMessage.Simple(formattedMessage))
         }
     }
 }

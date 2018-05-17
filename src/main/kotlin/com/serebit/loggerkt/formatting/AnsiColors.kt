@@ -1,6 +1,6 @@
 @file:JvmName("OutputDecorator")
 
-package com.serebit.loggerkt
+package com.serebit.loggerkt.formatting
 
 private const val ESCAPE = '\u001B'
 private const val RESET = "$ESCAPE[0m"

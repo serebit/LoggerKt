@@ -13,26 +13,6 @@
 <tbody>
 <tr>
 <td>
-<p><a href="-formatter-payload/index.html">FormatterPayload</a></p>
-</td>
-<td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">FormatterPayload</span></code>
-<p>The payload that is sent to <a href="-logger/formatter.html">Logger.formatter</a> when creating a new <a href="-log-message/index.html">LogMessage</a>. Contains all the information
-needed to create a log message, including the <a href="-formatter-payload/time.html">time</a>, the <a href="-formatter-payload/thread-name.html">thread name</a>, the <a href="-formatter-payload/class-name.html">class name</a>,
-the <a href="-formatter-payload/method-name.html">method name</a>, the <a href="-formatter-payload/level.html">log level</a>, and the <a href="-formatter-payload/message.html">message text</a>.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-leveled-log-message/index.html">LeveledLogMessage</a></p>
-</td>
-<td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">LeveledLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-message/index.html"><span class="identifier">LogMessage</span></a></code>
-<p>An implementation of LogMessage that includes the <a href="-log-level/index.html">LogLevel</a> of the message, along with the message <a href="-leveled-log-message/text.html">text</a>.</p>
-</td>
-</tr>
-<tr>
-<td>
 <p><a href="-log-level/index.html">LogLevel</a></p>
 </td>
 <td>
@@ -59,15 +39,6 @@ include accompanying data.</p>
 <td>
 <code><span class="keyword">object </span><span class="identifier">Logger</span></code>
 <p>The logger singleton. This object is both used for logging and for logger configuration.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p><a href="-simple-log-message/index.html">SimpleLogMessage</a></p>
-</td>
-<td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SimpleLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-message/index.html"><span class="identifier">LogMessage</span></a></code>
-<p>The simplest implementation of LogMessage, with its only argument being the message <a href="-simple-log-message/text.html">text</a>, and no accompanying data.</p>
 </td>
 </tr>
 </tbody>

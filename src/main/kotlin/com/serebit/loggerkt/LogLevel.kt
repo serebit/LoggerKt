@@ -1,5 +1,9 @@
 package com.serebit.loggerkt
 
+import com.serebit.loggerkt.formatting.ansiGray
+import com.serebit.loggerkt.formatting.ansiRed
+import com.serebit.loggerkt.formatting.ansiWhite
+import com.serebit.loggerkt.formatting.ansiYellow
 import com.serebit.loggerkt.writers.ConsoleWriter
 
 /**

@@ -2,4 +2,5 @@ $dokka.format:html
 $dokka.linkExtension:html
 
 com.serebit.loggerkt
+com.serebit.loggerkt.formatting
 com.serebit.loggerkt.writers

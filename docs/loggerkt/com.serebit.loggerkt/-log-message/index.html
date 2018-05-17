@@ -11,6 +11,29 @@
 <code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">LogMessage</span></code>
 <p>The wrapper class around a log message. Implementations must include an override of the message <a href="text.html">text</a>, and can
 include accompanying data.</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-leveled/index.html">Leveled</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Leveled</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
+<p>An implementation of LogMessage that includes the <a href="../-log-level/index.html">LogLevel</a> of the message, along with the message <a href="-leveled/text.html">text</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-simple/index.html">Simple</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Simple</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
+<p>The simplest implementation of LogMessage, with its only argument being the message <a href="-simple/text.html">text</a>, and no accompanying data.</p>
+</td>
+</tr>
+</tbody>
+</table>
 <h3>Properties</h3>
 <table>
 <tbody>
@@ -30,20 +53,20 @@ include accompanying data.</p>
 <tbody>
 <tr>
 <td>
-<p><a href="../-leveled-log-message/index.html">LeveledLogMessage</a></p>
+<p><a href="-leveled/index.html">Leveled</a></p>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">LeveledLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
-<p>An implementation of LogMessage that includes the <a href="../-log-level/index.html">LogLevel</a> of the message, along with the message <a href="../-leveled-log-message/text.html">text</a>.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Leveled</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
+<p>An implementation of LogMessage that includes the <a href="../-log-level/index.html">LogLevel</a> of the message, along with the message <a href="-leveled/text.html">text</a>.</p>
 </td>
 </tr>
 <tr>
 <td>
-<p><a href="../-simple-log-message/index.html">SimpleLogMessage</a></p>
+<p><a href="-simple/index.html">Simple</a></p>
 </td>
 <td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SimpleLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
-<p>The simplest implementation of LogMessage, with its only argument being the message <a href="../-simple-log-message/text.html">text</a>, and no accompanying data.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Simple</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">LogMessage</span></a></code>
+<p>The simplest implementation of LogMessage, with its only argument being the message <a href="-simple/text.html">text</a>, and no accompanying data.</p>
 </td>
 </tr>
 </tbody>
