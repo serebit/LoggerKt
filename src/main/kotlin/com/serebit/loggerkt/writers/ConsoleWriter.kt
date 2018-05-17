@@ -1,6 +1,5 @@
 package com.serebit.loggerkt.writers
 
-import com.serebit.loggerkt.LeveledLogMessage
 import com.serebit.loggerkt.LogMessage
 
 /**
@@ -16,7 +15,7 @@ class ConsoleWriter(shouldUseAnsiColors: Boolean = true) : LogWriter {
     /**
      * Prints the given [message] to the console, applying the proper ANSI color transform if necessary.
      */
-    override fun log(message: LogMessage) = if (useAnsiColors && message is LeveledLogMessage) {
+    override fun log(message: LogMessage) = if (useAnsiColors && message is LogMessage.Leveled) {
         println(message.withAnsiColorTransform)
     } else {
         println(message)

@@ -11,7 +11,7 @@ sealed class LogMessage {
     abstract val text: String
 
     /**
-     * The simplest implementation of LogMessage, with its only argument being the message [text], and no accompanying data.
+     * The simplest implementation of LogMessage, with its only argument being the message [text].
      *
      * @constructor Creates a new instance with the given [text].
      */
