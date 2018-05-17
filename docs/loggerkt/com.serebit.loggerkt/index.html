@@ -28,7 +28,7 @@ the <a href="-formatter-payload/method-name.html">method name</a>, the <a href="
 </td>
 <td>
 <code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">LeveledLogMessage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-log-message/index.html"><span class="identifier">LogMessage</span></a></code>
-<p>An implementation of LogMessage that includes the <a href="#">level</a> of the message, along with the message <a href="-leveled-log-message/text.html">text</a>.</p>
+<p>An implementation of LogMessage that includes the <a href="-log-level/index.html">LogLevel</a> of the message, along with the message <a href="-leveled-log-message/text.html">text</a>.</p>
 </td>
 </tr>
 <tr>
@@ -37,8 +37,8 @@ the <a href="-formatter-payload/method-name.html">method name</a>, the <a href="
 </td>
 <td>
 <code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">LogLevel</span></code>
-<p>The level at which a message is output. Each LogLevel has a different level of severity, ranging from <a href="-log-level/-t-r-a-c-e.html">TRACE</a> to
-<a href="-log-level/-e-r-r-o-r.html">ERROR</a>. In addition, each LogLevel has an assigned <a href="#">ansiColorTransform</a> for use with
+<p>The level at which a message is output. Each LogLevel has a different level of severity, ranging from
+<a href="-log-level/-t-r-a-c-e.html">LogLevel.TRACE</a> to <a href="-log-level/-e-r-r-o-r.html">LogLevel.ERROR</a>. In addition, each LogLevel has an assigned ANSI color transform for use with
 <a href="../com.serebit.loggerkt.writers/-console-writer/index.html">ConsoleWriter</a>.</p>
 </td>
 </tr>

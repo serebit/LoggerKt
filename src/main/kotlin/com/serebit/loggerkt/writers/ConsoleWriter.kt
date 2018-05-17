@@ -14,8 +14,7 @@ class ConsoleWriter(shouldUseAnsiColors: Boolean = true) : LogWriter {
     private val useAnsiColors = if (System.getProperty("os.name").startsWith("Windows")) false else shouldUseAnsiColors
 
     /**
-     * Prints the given [message] to the console, applying the proper ANSI color transform if [useAnsiColors] is set to
-     * true and the given [message] is an instance of [LeveledLogMessage].
+     * Prints the given [message] to the console, applying the proper ANSI color transform if necessary.
      */
     override fun log(message: LogMessage) = if (useAnsiColors && message is LeveledLogMessage) {
         println(message.withAnsiColorTransform)

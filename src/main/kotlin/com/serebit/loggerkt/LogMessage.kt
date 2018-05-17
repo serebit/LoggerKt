@@ -21,14 +21,13 @@ data class SimpleLogMessage(override val text: String) : LogMessage() {
 }
 
 /**
- * An implementation of LogMessage that includes the [level] of the message, along with the message [text].
+ * An implementation of LogMessage that includes the [LogLevel] of the message, along with the message [text].
  *
- * @constructor Creates a new instance with the given [text] and [level].
+ * @constructor Creates a new instance with the given [text] and level.
  */
 data class LeveledLogMessage(override val text: String, private val level: LogLevel) : LogMessage() {
     /**
-     * A property that returns a copy of this instance with the [level]'s respective ANSI color transformation
-     * applied to it.
+     * A property that returns a copy of this instance with the respective ANSI color transformation applied to it.
      */
     val withAnsiColorTransform get() = copy(text = text.let(level.ansiColorTransform))
 

@@ -37,15 +37,15 @@ the <a href="../com.serebit.loggerkt/-formatter-payload/method-name.html">method
 <td>
 <a href="../com.serebit.loggerkt/-leveled-log-message/index.html">com.serebit.loggerkt.LeveledLogMessage</a></td>
 <td>
-<p>An implementation of LogMessage that includes the <a href="#">level</a> of the message, along with the message <a href="../com.serebit.loggerkt/-leveled-log-message/text.html">text</a>.</p>
+<p>An implementation of LogMessage that includes the <a href="../com.serebit.loggerkt/-log-level/index.html">LogLevel</a> of the message, along with the message <a href="../com.serebit.loggerkt/-leveled-log-message/text.html">text</a>.</p>
 </td>
 </tr>
 <tr>
 <td>
 <a href="../com.serebit.loggerkt/-log-level/index.html">com.serebit.loggerkt.LogLevel</a></td>
 <td>
-<p>The level at which a message is output. Each LogLevel has a different level of severity, ranging from <a href="../com.serebit.loggerkt/-log-level/-t-r-a-c-e.html">TRACE</a> to
-<a href="../com.serebit.loggerkt/-log-level/-e-r-r-o-r.html">ERROR</a>. In addition, each LogLevel has an assigned <a href="#">ansiColorTransform</a> for use with
+<p>The level at which a message is output. Each LogLevel has a different level of severity, ranging from
+<a href="../com.serebit.loggerkt/-log-level/-t-r-a-c-e.html">LogLevel.TRACE</a> to <a href="../com.serebit.loggerkt/-log-level/-e-r-r-o-r.html">LogLevel.ERROR</a>. In addition, each LogLevel has an assigned ANSI color transform for use with
 <a href="../com.serebit.loggerkt.writers/-console-writer/index.html">ConsoleWriter</a>.</p>
 </td>
 </tr>
@@ -76,14 +76,14 @@ include accompanying data.</p>
 <a href="../com.serebit.loggerkt.writers/-multi-writer/index.html">com.serebit.loggerkt.writers.MultiWriter</a></td>
 <td>
 <p>An implementation of <a href="../com.serebit.loggerkt.writers/-log-writer/index.html">LogWriter</a> that contains multiple LogWriters. This writer passes the log messages through to
-its internal <a href="#">writers</a>, allowing for multiple log outputs.</p>
+its internal writers, allowing for multiple log outputs.</p>
 </td>
 </tr>
 <tr>
 <td>
 <a href="../com.serebit.loggerkt.writers/-print-stream-writer/index.html">com.serebit.loggerkt.writers.PrintStreamWriter</a></td>
 <td>
-<p>An implementation of <a href="../com.serebit.loggerkt.writers/-log-writer/index.html">LogWriter</a> that outputs to the given <a href="#">stream</a>. This writer's output is not color-coded,
+<p>An implementation of <a href="../com.serebit.loggerkt.writers/-log-writer/index.html">LogWriter</a> that outputs to the given stream. This writer's output is not color-coded,
 as that property is exclusive to <a href="../com.serebit.loggerkt.writers/-console-writer/index.html">ConsoleWriter</a>.</p>
 </td>
 </tr>

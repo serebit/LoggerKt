@@ -5,7 +5,7 @@ import java.io.PrintStream
 
 /**
  * An implementation of [LogWriter] that contains multiple LogWriters. This writer passes the log messages through to
- * its internal [writers], allowing for multiple log outputs.
+ * its internal writers, allowing for multiple log outputs.
  *
  * @constructor The default constructor.
  */
