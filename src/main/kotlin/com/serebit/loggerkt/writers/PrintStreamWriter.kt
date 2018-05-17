@@ -4,8 +4,7 @@ import com.serebit.loggerkt.LogMessage
 import java.io.PrintStream
 
 /**
- * An implementation of [LogWriter] that outputs to the given stream. This writer's output is not color-coded,
- * as that property is exclusive to [ConsoleWriter].
+ * An implementation of [LogWriter] that outputs to the given stream.
  *
  * @constructor Creates a new instance with the specified stream.
  * @param stream The output stream to be printed to.
