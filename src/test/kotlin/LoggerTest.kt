@@ -5,6 +5,7 @@ import com.serebit.loggerkt.writers.LogWriter
 import io.kotlintest.TestCaseContext
 import io.kotlintest.matchers.should
 import io.kotlintest.matchers.shouldBe
+import io.kotlintest.matchers.shouldNotBe
 import io.kotlintest.specs.StringSpec
 
 class LoggerTest : StringSpec() {
@@ -66,6 +67,15 @@ class LoggerTest : StringSpec() {
             functionForTest()
             (Logger.writer as? TestWriter)?.log shouldBe
                 "${Thread.currentThread().name} ${this::class.simpleName}.${::functionForTest.name}\n"
+        }
+
+        "Logger should use a separate thread to log if async is true" {
+            Logger.formatter = { (_, thread, _, _, _, _) ->
+                thread
+            }
+            Logger.async = true
+            Logger.info("")
+            (Logger.writer as? TestWriter)?.log shouldNotBe "${Thread.currentThread().name}\n"
         }
     }
 
