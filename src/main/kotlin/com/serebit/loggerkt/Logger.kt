@@ -18,10 +18,10 @@ object Logger {
     @JvmStatic
     var async: Boolean = false
     /**
-     * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.INFO].
+     * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
      */
     @JvmStatic
-    var level: LogLevel = LogLevel.INFO
+    var level: LogLevel = LogLevel.WARNING
     /**
      * The log message formatter.
      */
