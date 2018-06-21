@@ -9,7 +9,7 @@ import com.serebit.loggerkt.LogMessage
  * @constructor The default constructor.
  */
 class MultiWriter(private vararg val writers: LogWriter) : LogWriter {
-    override fun log(message: LogMessage) = writers.forEach {
-        it.log(message)
+    override fun write(message: LogMessage) = writers.forEach {
+        it.write(message)
     }
 }

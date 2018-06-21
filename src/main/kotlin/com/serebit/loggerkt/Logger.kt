@@ -95,8 +95,8 @@ object Logger {
     private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
         formatter(FormatterPayload.generate(level, message)).let { formattedMessage ->
-            if (writer is ConsoleWriter) writer.log(LogMessage.Leveled(formattedMessage, level))
-            else writer.log(LogMessage.Simple(formattedMessage))
+            if (writer is ConsoleWriter) writer.write(LogMessage.Leveled(formattedMessage, level))
+            else writer.write(LogMessage.Simple(formattedMessage))
         }
     }
 }

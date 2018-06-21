@@ -1,5 +1,5 @@
 import com.jfrog.bintray.gradle.BintrayExtension
-import com.jfrog.bintray.gradle.BintrayUploadTask
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.apache.tools.ant.types.resources.comparators.Date
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.gradle.DokkaPlugin
@@ -7,11 +7,11 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
-    kotlin("jvm") version "1.2.41"
-    id("org.jetbrains.dokka") version "0.9.16"
-    id("com.github.ben-manes.versions") version "0.17.0"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7"
-    id("com.jfrog.bintray") version "1.8.0"
+    kotlin("jvm") version "1.2.50"
+    id("org.jetbrains.dokka") version "0.9.17"
+    id("com.github.ben-manes.versions") version "0.20.0"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7-2"
+    id("com.jfrog.bintray") version "1.8.2"
     id("maven-publish")
 }
 
@@ -24,8 +24,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    compile(kotlin("reflect"))
-    compile(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "0.22.5")
+    compile(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "0.23.3")
     testCompile(group = "io.kotlintest", name = "kotlintest", version = "2.0.7")
 }
 
@@ -36,7 +35,7 @@ tasks {
 
     withType<DokkaTask> {
         outputFormat = "html"
-        outputDirectory = "docs"
+        outputDirectory = "public"
     }
 }
 

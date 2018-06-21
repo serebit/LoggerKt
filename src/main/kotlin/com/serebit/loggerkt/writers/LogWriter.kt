@@ -9,5 +9,5 @@ interface LogWriter {
     /**
      * Logs the given [message].
      */
-    fun log(message: LogMessage)
+    fun write(message: LogMessage)
 }
