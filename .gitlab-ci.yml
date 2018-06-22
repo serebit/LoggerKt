@@ -33,13 +33,13 @@ lint:
   - ./gradlew detektCheck
 
 pages:
-  stage: pages
+  stage: deploy
   script:
   - ./gradlew dokka
+  when: manual
   artifacts:
     paths:
-      - public
-  when: manual
+  - public
   only:
     refs:
     - master
