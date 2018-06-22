@@ -1,5 +1,4 @@
 import com.serebit.loggerkt.LogLevel
-import com.serebit.loggerkt.LogMessage
 import com.serebit.loggerkt.Logger
 import com.serebit.loggerkt.writers.LogWriter
 import io.kotlintest.TestCaseContext
@@ -10,17 +9,17 @@ import io.kotlintest.specs.StringSpec
 
 class LoggerTest : StringSpec() {
     init {
-        "Logger should write messages" {
-            Logger.info("Test write string")
+        "Logger should log messages" {
+            Logger.info("Test log string")
             (Logger.writer as? TestWriter)?.log should { it?.isNotEmpty() }
         }
 
-        "Logger should write the text given to it" {
-            Logger.info("Test write string")
+        "Logger should log the text given to it" {
+            Logger.info("Test log string")
             (Logger.writer as? TestWriter)?.log shouldBe "INFO: Test log string\n"
         }
 
-        "Logger should write the correct LogLevels" {
+        "Logger should log the correct LogLevels" {
             Logger.formatter = { (_, _, _, _, level, _) ->
                 level.toString()
             }
@@ -41,7 +40,7 @@ class LoggerTest : StringSpec() {
             (Logger.writer as? TestWriter)?.log shouldBe "INFO: Test info string\n"
         }
 
-        "Logger should be able to write messages of all levels" {
+        "Logger should be able to log messages of all levels" {
             Logger.level = LogLevel.TRACE
             Logger.trace("Test trace string")
             Logger.debug("Test debug string")
@@ -69,7 +68,7 @@ class LoggerTest : StringSpec() {
                 "${Thread.currentThread().name} ${this::class.simpleName}.${::functionForTest.name}\n"
         }
 
-        "Logger should use a separate thread to write if async is true" {
+        "Logger should use a separate thread to log if async is true" {
             Logger.formatter = { (_, thread, _, _, _, _) ->
                 thread
             }
@@ -94,7 +93,7 @@ class LoggerTest : StringSpec() {
         var log: String = ""
             private set
 
-        override fun write(message: LogMessage) {
+        override fun write(message: String) {
             log += "$message\n"
         }
     }

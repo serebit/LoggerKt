@@ -1,6 +1,5 @@
 package com.serebit.loggerkt.writers
 
-import com.serebit.loggerkt.LogMessage
 import java.io.File
 
 /**
@@ -23,5 +22,5 @@ class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
     /**
      * Appends the given [message] to the file.
      */
-    override fun write(message: LogMessage) = file.appendText("$message\n")
+    override fun write(message: String) = file.appendText("$message\n")
 }

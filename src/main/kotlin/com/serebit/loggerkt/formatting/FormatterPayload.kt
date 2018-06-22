@@ -1,7 +1,6 @@
 package com.serebit.loggerkt.formatting
 
 import com.serebit.loggerkt.LogLevel
-import com.serebit.loggerkt.LogMessage
 import com.serebit.loggerkt.Logger
 import java.time.OffsetDateTime
 

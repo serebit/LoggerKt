@@ -1,7 +1,5 @@
 package com.serebit.loggerkt.writers
 
-import com.serebit.loggerkt.LogMessage
-
 /**
  * An implementation of [LogWriter] that contains multiple LogWriters. This writer passes the log messages through to
  * its internal writers, allowing for multiple log outputs.
@@ -9,7 +7,7 @@ import com.serebit.loggerkt.LogMessage
  * @constructor The default constructor.
  */
 class MultiWriter(private vararg val writers: LogWriter) : LogWriter {
-    override fun write(message: LogMessage) = writers.forEach {
+    override fun write(message: String) = writers.forEach {
         it.write(message)
     }
 }

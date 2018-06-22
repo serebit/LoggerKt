@@ -1,6 +1,5 @@
 package com.serebit.loggerkt.writers
 
-import com.serebit.loggerkt.LogMessage
 import java.io.OutputStream
 import java.io.PrintStream
 
@@ -16,7 +15,7 @@ class StreamWriter(output: OutputStream) : LogWriter {
     /**
      * Prints the given [message] to the stream.
      */
-    override fun write(message: LogMessage) {
-        stream.println(message.text)
+    override fun write(message: String) {
+        stream.println(message)
     }
 }
