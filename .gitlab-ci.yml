@@ -39,7 +39,7 @@ pages:
   when: manual
   artifacts:
     paths:
-  - public
+    - public
   only:
     refs:
     - master
