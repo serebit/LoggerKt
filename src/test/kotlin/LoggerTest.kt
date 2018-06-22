@@ -11,12 +11,12 @@ class LoggerTest : StringSpec() {
     init {
         "Logger should log messages" {
             Logger.info("Test log string")
-            (Logger.writer as? TestWriter)?.log should { it?.isNotEmpty() }
+            (Logger.writer as TestWriter).log should { it.isNotEmpty() }
         }
 
         "Logger should log the text given to it" {
             Logger.info("Test log string")
-            (Logger.writer as? TestWriter)?.log shouldBe "INFO: Test log string\n"
+            (Logger.writer as TestWriter).log shouldBe "INFO: Test log string\n"
         }
 
         "Logger should log the correct LogLevels" {
@@ -29,7 +29,7 @@ class LoggerTest : StringSpec() {
             Logger.info("")
             Logger.warn("")
             Logger.error("")
-            (Logger.writer as? TestWriter)?.log shouldBe "TRACE\nDEBUG\nINFO\nWARNING\nERROR\n"
+            (Logger.writer as TestWriter).log shouldBe "TRACE\nDEBUG\nINFO\nWARNING\nERROR\n"
         }
 
         "Logger should ignore messages below the set LogLevel" {
@@ -37,7 +37,7 @@ class LoggerTest : StringSpec() {
             Logger.debug("Test debug string")
             Logger.trace("Test trace string")
             Logger.info("Test info string")
-            (Logger.writer as? TestWriter)?.log shouldBe "INFO: Test info string\n"
+            (Logger.writer as TestWriter).log shouldBe "INFO: Test info string\n"
         }
 
         "Logger should be able to log messages of all levels" {
@@ -48,7 +48,7 @@ class LoggerTest : StringSpec() {
             Logger.warn("Test warning string")
             Logger.error("Test error string")
             Logger.fatal("Test fatal string")
-            (Logger.writer as? TestWriter)?.log shouldBe """
+            (Logger.writer as TestWriter).log shouldBe """
                 TRACE: Test trace string
                 DEBUG: Test debug string
                 INFO: Test info string
@@ -64,7 +64,7 @@ class LoggerTest : StringSpec() {
                 "$thread $className.$method"
             }
             functionForTest()
-            (Logger.writer as? TestWriter)?.log shouldBe
+            (Logger.writer as TestWriter).log shouldBe
                 "${Thread.currentThread().name} ${this::class.simpleName}.${::functionForTest.name}\n"
         }
 
@@ -74,7 +74,7 @@ class LoggerTest : StringSpec() {
             }
             Logger.async = true
             Logger.info("")
-            (Logger.writer as? TestWriter)?.log shouldNotBe "${Thread.currentThread().name}\n"
+            (Logger.writer as TestWriter).log shouldNotBe "${Thread.currentThread().name}\n"
         }
     }
 

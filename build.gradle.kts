@@ -25,6 +25,7 @@ repositories {
 dependencies {
     compile(kotlin("stdlib-jdk8"))
     compile(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "0.23.3")
+    testCompile(kotlin("reflect"))
     testCompile(group = "io.kotlintest", name = "kotlintest", version = "2.0.7")
 }
 
