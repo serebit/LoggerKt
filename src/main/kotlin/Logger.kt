@@ -86,7 +86,7 @@ object Logger {
 
     private fun log(level: LogLevel, message: String) {
         // check if the message should actually be logged
-        if (LogLevel.values().indexOf(this.level) > LogLevel.values().indexOf(level)) return
+        if (this.level > level) return
         if (async) launch {
             writeLog(level, message)
         } else writeLog(level, message)
