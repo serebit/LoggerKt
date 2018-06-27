@@ -10,13 +10,22 @@ import java.time.format.DateTimeFormatter
  * The logger singleton. This object is both used for logging and for logger configuration.
  */
 object Logger {
-    private val timestampFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    private var timestampFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     /**
      * Determines whether logs should be written asynchronously via coroutines. While this does provide significant
      * performance improvements, logs just before a program exit may not be written, so this defaults to false.
      */
     @JvmStatic
     var async: Boolean = false
+    /**
+     * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
+     */
+    @JvmStatic
+    var timestampPattern: String
+        get() = timestampFormatter.toString()
+        set(value) {
+            timestampFormatter = DateTimeFormatter.ofPattern(value)
+        }
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
      */
@@ -27,7 +36,7 @@ object Logger {
      */
     @JvmStatic
     var formatter: (FormatterPayload) -> String = { (time, threadName, className, methodName, level, message) ->
-        "${time.format(timestampFormat)} [$threadName] ($className.$methodName) $level: $message"
+        "${time.format(timestampFormatter)} [$threadName] ($className.$methodName) $level: $message"
     }
     /**
      * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
@@ -94,10 +103,8 @@ object Logger {
 
     private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
-        formatter(FormatterPayload.generate(level, message)).let { formattedMessage ->
-            (writer as? ConsoleWriter)
-                ?.write(formattedMessage, level)
-                ?: writer.write(formattedMessage)
+        FormatterPayload.generate(timestampFormatter, level, message).let(formatter).let { formattedMessage ->
+            (writer as? ConsoleWriter)?.write(formattedMessage, level) ?: writer.write(formattedMessage)
         }
     }
 }
