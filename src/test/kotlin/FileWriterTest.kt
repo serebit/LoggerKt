@@ -1,5 +1,3 @@
-
-import com.serebit.loggerkt.SimpleLogMessage
 import com.serebit.loggerkt.writers.FileWriter
 import io.kotlintest.matchers.should
 import io.kotlintest.matchers.shouldBe
@@ -10,32 +8,32 @@ class FileWriterTest : StringSpec() {
     private val file = File("/tmp/test.tmp")
 
     init {
-        "Writer should log messages to the set file" {
+        "Writer should write messages to the set file" {
             val writer = FileWriter(file.absolutePath)
-            writer.log(SimpleLogMessage("Test text"))
+            writer.write("Test text")
             file.readText() should { it.isNotEmpty() }
         }
 
-        "Writer should log multiple messages to the same file" {
+        "Writer should write multiple messages to the same file" {
             val writer = FileWriter(file.absolutePath)
-            writer.log(SimpleLogMessage("Test string"))
-            writer.log(SimpleLogMessage("Second test string"))
+            writer.write("Test string")
+            writer.write("Second test string")
             file.readText() shouldBe "Test string\nSecond test string\n"
         }
 
         "Writer should overwrite the output file if set as such" {
             var writer = FileWriter(file.absolutePath)
-            writer.log(SimpleLogMessage("Old test string"))
+            writer.write("Old test string")
             writer = FileWriter(file.absolutePath, overwrite = true)
-            writer.log(SimpleLogMessage("New test string"))
+            writer.write("New test string")
             file.readText() shouldBe "New test string\n"
         }
 
         "Writer should append to the output file if set as such" {
             var writer = FileWriter(file.absolutePath)
-            writer.log(SimpleLogMessage("Old test string"))
+            writer.write("Old test string")
             writer = FileWriter(file.absolutePath, overwrite = false)
-            writer.log(SimpleLogMessage("New test string"))
+            writer.write("New test string")
             file.readText() shouldBe "Old test string\nNew test string\n"
         }
     }

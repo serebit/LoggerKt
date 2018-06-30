@@ -2,8 +2,11 @@
 *.iml
 .idea/
 
-# Gradle definitionCache
+# Gradle cache
 .gradle/
+
+# Generated documentation
+public/
 
 # Compilation output
 bin/
