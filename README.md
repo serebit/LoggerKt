@@ -1,13 +1,22 @@
 # LoggerKt
-[![Download](https://api.bintray.com/packages/serebit/Maven/loggerkt/images/download.svg)](https://bintray.com/serebit/Maven/loggerkt)
-[![Build Status](https://img.shields.io/travis/serebit/LoggerKt.svg)](https://travis-ci.org/serebit/LoggerKt)
-[![Codacy Grade](https://img.shields.io/codacy/grade/4d9ef218ebde4807bb58d6aba7a61772.svg)](https://app.codacy.com/app/serebit/LoggerKt)
-[![License](https://img.shields.io/github/license/serebit/loggerkt.svg)](https://github.com/serebit/loggerkt/tree/master/LICENSE.md)
+[![Download][bintray]](https://bintray.com/serebit/Maven/loggerkt)
+[![Pipeline Status][gitlab-ci]](https://travis-ci.org/serebit/LoggerKt)
+[![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Donate][paypal]](https://paypal.me/gdeadshot)
 
-LoggerKt is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator. 
+LoggerKt is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator.
 
-## System Requirements
-LoggerKt is compatible with **Java 6** or newer, and requires **JDK 8** or newer to compile, as per Kotlin's default standards.
+## Usage
+Logging is made as simple as possible. To write a log message, just invoke one of the methods on the `Logger` class. 
+Each method corresponds to a different `LogLevel`, from `TRACE` to `FATAL`.
+```kotlin
+Logger.trace("Received a message from the server.")
+Logger.debug("Sent a message to the server.")
+Logger.info("Disconnected from the server.")
+Logger.warning("Failed to resolve the server timeout.")
+Logger.error("The response from the server was incomplete.")
+Logger.fatal("Server connection halted unexpectedly.")
+```
 
 ## Get Started
 ### Gradle (Groovy build script)
@@ -45,3 +54,8 @@ dependencies {
     <version>0.2.0</version>
 </dependency>
 ```
+
+[bintray]: https://api.bintray.com/packages/serebit/Maven/loggerkt/images/download.svg "Download from Bintray"
+[gitlab-ci]: https://gitlab.com/serebit/loggerkt/badges/master/build.svg "Pipeline Status"
+[license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg "License"
+[paypal]: https://img.shields.io/badge/Donate-PayPal-blue.svg "Donate via PayPal"

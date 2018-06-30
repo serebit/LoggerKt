@@ -10,8 +10,8 @@ plugins {
     kotlin("jvm") version "1.2.50"
     id("org.jetbrains.dokka") version "0.9.17"
     id("com.github.ben-manes.versions") version "0.20.0"
-    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7-2"
-    id("com.jfrog.bintray") version "1.8.2"
+    id("io.gitlab.arturbosch.detekt") version "1.0.0.RC7-3"
+    id("com.jfrog.bintray") version "1.8.3"
     id("maven-publish")
 }
 
