@@ -50,7 +50,7 @@ val sourcesJar by tasks.creating(Jar::class) {
 }
 
 bintray {
-    user = System.getenv("BINTRAY_USER")
+    user = "serebit"
     key = System.getenv("BINTRAY_KEY")
     setPublications("BintrayRelease")
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
