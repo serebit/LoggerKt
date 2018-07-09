@@ -1,6 +1,7 @@
 package com.serebit.loggerkt.writers
 
-import java.io.File
+import com.serebit.loggerkt.platform.Platform
+import com.serebit.loggerkt.platform.File
 
 /**
  * An implementation of [LogWriter] that outputs to a file at the given path. Can be set to either append to the
@@ -16,7 +17,7 @@ class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
     private val file = if (path.startsWith("/")) {
         File(path)
     } else {
-        File("${this::class.java.protectionDomain.codeSource.location.path}/../$path")
+        File("${Platform.classpath}/$path")
     }.also { if (overwrite) it.delete() }
 
     /**

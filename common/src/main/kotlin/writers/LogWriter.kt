@@ -1,7 +1,5 @@
 package com.serebit.loggerkt.writers
 
-import com.serebit.loggerkt.Logger
-
 /**
  * Defines an object that receives messages from the [Logger] and writes them to an output vector, such as the
  * console or a file.
