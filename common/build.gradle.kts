@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
     id("kotlin-platform-common") version "1.2.51"
+    id("io.gitlab.arturbosch.detekt")
 }
 
 dependencies {
@@ -11,4 +12,11 @@ dependencies {
 
 kotlin {
     experimental.coroutines = Coroutines.ENABLE
+}
+
+detekt {
+    defaultProfile(Action {
+        input = "$projectDir/src/main/kotlin"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    })
 }

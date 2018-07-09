@@ -4,8 +4,8 @@ import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
     id("kotlin-platform-jvm") version "1.2.51"
-    id("com.jfrog.bintray") version "1.8.4"
-    id("maven-publish")
+    id("com.jfrog.bintray")
+    `maven-publish`
 }
 
 dependencies {
@@ -13,12 +13,6 @@ dependencies {
     compile(group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8")
     testCompile(group = "org.jetbrains.kotlin", name = "kotlin-reflect")
     testCompile(group = "io.kotlintest", name = "kotlintest", version = "2.0.7")
-}
-
-tasks {
-    withType<BintrayUploadTask> {
-        dependsOn("build")
-    }
 }
 
 kotlin {
