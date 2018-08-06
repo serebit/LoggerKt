@@ -4,7 +4,17 @@ import com.serebit.loggerkt.LogLevel
 
 data class FormatterPayload(
     val timestamp: String,
-    val threadName: String, val className: String, val methodName: String,
+    val thread: String,
     val level: LogLevel,
     val message: String
-)
+) {
+    companion object {
+        internal fun generate(timestampGenerator: TimestampGenerator, level: LogLevel, message: String) =
+            FormatterPayload(
+                timestampGenerator.now(),
+                ThreadProvider.currentThreadName,
+                level,
+                message
+            )
+    }
+}

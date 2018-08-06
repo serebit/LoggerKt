@@ -1,7 +1,6 @@
 package com.serebit.loggerkt
 
 import com.serebit.loggerkt.formatting.FormatterPayload
-import com.serebit.loggerkt.formatting.FormatterPayloadGenerator
 import com.serebit.loggerkt.formatting.TimestampGenerator
 import com.serebit.loggerkt.writers.ConsoleWriter
 import com.serebit.loggerkt.writers.LogWriter
@@ -32,8 +31,8 @@ object Logger {
     /**
      * The log message formatter.
      */
-    var formatter: (FormatterPayload) -> String = { (time, threadName, className, methodName, level, message) ->
-        "$time [$threadName] ($className.$methodName) $level: $message"
+    var formatter: (FormatterPayload) -> String = { (time, threadName, level, message) ->
+        "$time [$threadName] $level: $message"
     }
     /**
      * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
@@ -93,7 +92,7 @@ object Logger {
 
     private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
-        FormatterPayloadGenerator.generate(timestampGenerator, level, message)
+        FormatterPayload.generate(timestampGenerator, level, message)
             .let(formatter)
             .let { formattedMessage ->
                 (writer as? ConsoleWriter)?.write(formattedMessage, level) ?: writer.write(formattedMessage)

@@ -20,16 +20,15 @@ class LoggerTest : StringSpec() {
         }
 
         "Logger should log the correct LogLevels" {
-            Logger.formatter = { (_, _, _, _, level, _) ->
-                level.toString()
-            }
+            Logger.formatter = { it.level.toString() }
             Logger.level = LogLevel.TRACE
             Logger.trace("")
             Logger.debug("")
             Logger.info("")
             Logger.warn("")
             Logger.error("")
-            (Logger.writer as TestWriter).log shouldBe "TRACE\nDEBUG\nINFO\nWARNING\nERROR\n"
+            Logger.fatal("")
+            (Logger.writer as TestWriter).log shouldBe "TRACE\nDEBUG\nINFO\nWARNING\nERROR\nFATAL\n"
         }
 
         "Logger should ignore messages below the set LogLevel" {
@@ -58,34 +57,12 @@ class LoggerTest : StringSpec() {
 
             """.trimIndent()
         }
-
-        "Logger should output correct thread, className and function" {
-            Logger.formatter = { (_, thread, className, method, _, _) ->
-                "$thread $className.$method"
-            }
-            functionForTest()
-            (Logger.writer as TestWriter).log shouldBe
-                "${Thread.currentThread().name} ${this::class.simpleName}.${::functionForTest.name}\n"
-        }
-
-        "Logger should use a separate thread to log if async is true" {
-            Logger.formatter = { (_, thread, _, _, _, _) ->
-                thread
-            }
-            Logger.async = true
-            Logger.info("")
-            (Logger.writer as TestWriter).log shouldNotBe "${Thread.currentThread().name}\n"
-        }
     }
-
-    private fun functionForTest() = Logger.info("")
 
     override fun interceptTestCase(context: TestCaseContext, test: () -> Unit) {
         Logger.level = LogLevel.INFO
         Logger.writer = TestWriter()
-        Logger.formatter = { (_, _, _, _, level, message) ->
-            "$level: $message"
-        }
+        Logger.formatter = { (_, _, level, message) -> "$level: $message" }
         test()
     }
 

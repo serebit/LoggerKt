@@ -3,7 +3,7 @@ import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
-    id("kotlin-platform-jvm") version "1.2.51"
+    id("kotlin-platform-jvm") version "1.2.60"
     id("com.jfrog.bintray")
     `maven-publish`
 }
