@@ -8,13 +8,6 @@ data class FormatterPayload(
     val level: LogLevel,
     val message: String
 ) {
-    companion object {
-        internal fun generate(timestampGenerator: TimestampGenerator, level: LogLevel, message: String) =
-            FormatterPayload(
-                timestampGenerator.now(),
-                ThreadProvider.currentThreadName,
-                level,
-                message
-            )
-    }
+    internal constructor(timestampGenerator: TimestampGenerator, level: LogLevel, message: String) :
+        this(timestampGenerator.now(), ThreadProvider.currentThreadName, level, message)
 }

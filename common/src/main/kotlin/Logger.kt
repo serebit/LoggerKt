@@ -91,8 +91,8 @@ object Logger {
     }
 
     private fun writeLog(level: LogLevel, message: String) {
-        // example: 2018-01-12 21:03:25 [main] (TestKt.main) INFO: Logged Message
-        FormatterPayload.generate(timestampGenerator, level, message)
+        // example: 2018-01-12 21:03:25 [main] INFO: Logged Message
+        FormatterPayload(timestampGenerator, level, message)
             .let(formatter)
             .let { formattedMessage ->
                 (writer as? ConsoleWriter)?.write(formattedMessage, level) ?: writer.write(formattedMessage)

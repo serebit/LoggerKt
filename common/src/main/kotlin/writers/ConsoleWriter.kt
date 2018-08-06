@@ -18,5 +18,6 @@ class ConsoleWriter constructor(shouldUseAnsiColors: Boolean = true) : LogWriter
      */
     override fun write(message: String) = println(message)
 
-    internal fun write(message: String, level: LogLevel) = println(message.let(level.ansiColorTransform))
+    internal fun write(message: String, level: LogLevel) =
+        println(message.let { if (useAnsiColors) level.ansiColorTransform(it) else it })
 }
