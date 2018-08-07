@@ -8,8 +8,8 @@ import com.serebit.loggerkt.writers.ConsoleWriter
 
 /**
  * The level at which a message is output. Each LogLevel has a different level of severity, ranging from
- * [TRACE][LogLevel.TRACE] to [ERROR][LogLevel.ERROR]. In addition, each LogLevel has an assigned ANSI color transform
- * for use with [ConsoleWriter].
+ * [TRACE][LogLevel.TRACE] (least severe) to [ERROR][LogLevel.ERROR] (most severe). In addition, each LogLevel has an
+ * assigned ANSI color transform for use with [ConsoleWriter].
  */
 enum class LogLevel(internal val ansiColorTransform: (String) -> String) {
     /**

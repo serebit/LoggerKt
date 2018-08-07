@@ -3,13 +3,14 @@ package com.serebit.loggerkt
 import com.serebit.loggerkt.formatting.FormatterPayload
 import com.serebit.loggerkt.formatting.TimestampGenerator
 import com.serebit.loggerkt.writers.ConsoleWriter
-import com.serebit.loggerkt.writers.LogWriter
+import com.serebit.loggerkt.writers.MessageWriter
 import kotlinx.coroutines.experimental.launch
 
 /**
- * The logger singleton. This object is both used for logging and for logger configuration.
+ * The main logging class, through which messages are processed and sent to an output vector. This object can be
+ * configured at runtime, extended, and instantiated.
  */
-object Logger {
+open class Logger {
     private var timestampGenerator = TimestampGenerator("yyyy-MM-dd HH:mm:ss")
     /**
      * Determines whether logs should be written asynchronously via coroutines. While this does provide significant
@@ -35,10 +36,10 @@ object Logger {
         "$time [$threadName] $level: $message"
     }
     /**
-     * The [LogWriter] that will be used to output log messages. Can be any predefined LogWriter, or a custom
+     * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
      * implementation.
      */
-    var writer: LogWriter = ConsoleWriter()
+    var writer: MessageWriter = ConsoleWriter()
 
     /**
      * Logs a [message] with the level [TRACE][LogLevel.TRACE].
@@ -98,4 +99,6 @@ object Logger {
                 (writer as? ConsoleWriter)?.write(formattedMessage, level) ?: writer.write(formattedMessage)
             }
     }
+
+    companion object : Logger()
 }

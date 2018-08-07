@@ -4,7 +4,7 @@ import com.serebit.loggerkt.platform.Platform
 import com.serebit.loggerkt.platform.File
 
 /**
- * An implementation of [LogWriter] that outputs to a file at the given path. Can be set to either append to the
+ * An implementation of [MessageWriter] that outputs to a file at the given path. Can be set to either append to the
  * file at the given path, or overwrite it entirely.
  *
  * @constructor Creates an instance writing to a file at the given path.
@@ -13,7 +13,7 @@ import com.serebit.loggerkt.platform.File
  * classpath.
  * @param overwrite Whether or not the file at the specified path will be overwritten. Defaults to true.
  */
-class FileWriter(path: String, overwrite: Boolean = true) : LogWriter {
+class FileWriter(path: String, overwrite: Boolean = true) : MessageWriter {
     private val file = if (path.startsWith("/")) {
         File(path)
     } else {

@@ -1,10 +1,9 @@
 import com.serebit.loggerkt.LogLevel
 import com.serebit.loggerkt.Logger
-import com.serebit.loggerkt.writers.LogWriter
+import com.serebit.loggerkt.writers.MessageWriter
 import io.kotlintest.TestCaseContext
 import io.kotlintest.matchers.should
 import io.kotlintest.matchers.shouldBe
-import io.kotlintest.matchers.shouldNotBe
 import io.kotlintest.specs.StringSpec
 
 class LoggerTest : StringSpec() {
@@ -66,7 +65,7 @@ class LoggerTest : StringSpec() {
         test()
     }
 
-    private class TestWriter : LogWriter {
+    private class TestWriter : MessageWriter {
         var log: String = ""
             private set
 

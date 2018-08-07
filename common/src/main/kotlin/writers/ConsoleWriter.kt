@@ -4,13 +4,13 @@ import com.serebit.loggerkt.LogLevel
 import com.serebit.loggerkt.platform.Platform
 
 /**
- * An implementation of [LogWriter] that outputs to the console. This writer's output is color coded using ANSI
+ * An implementation of [MessageWriter] that outputs to the console. This writer's output is color coded using ANSI
  * escape codes by default, unless the operating system is Windows.
  *
  * @constructor Creates a new instance, using ANSI color transforms if specified.
  * @param shouldUseAnsiColors Whether or not the writer should use ANSI color transforms. Defaults to true.
  */
-class ConsoleWriter constructor(shouldUseAnsiColors: Boolean = true) : LogWriter {
+class ConsoleWriter(shouldUseAnsiColors: Boolean = true) : MessageWriter {
     private val useAnsiColors = if (Platform.supportsAnsiColors) false else shouldUseAnsiColors
 
     /**
