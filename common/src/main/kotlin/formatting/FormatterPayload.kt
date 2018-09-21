@@ -9,5 +9,5 @@ data class FormatterPayload(
     val message: String
 ) {
     internal constructor(timestampGenerator: TimestampGenerator, level: LogLevel, message: String) :
-        this(timestampGenerator.now(), ThreadProvider.currentThreadName, level, message)
+            this(timestampGenerator.now(), ThreadProvider.currentThreadName, level, message)
 }
