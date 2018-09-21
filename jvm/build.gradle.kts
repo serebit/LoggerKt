@@ -1,10 +1,12 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
     id("kotlin-platform-jvm") version "1.2.70"
     id("com.jfrog.bintray") version "1.8.4"
+    id("org.jetbrains.dokka") version "0.9.17"
     `maven-publish`
 }
 
@@ -22,14 +24,21 @@ val sourcesJar by tasks.creating(Jar::class) {
 }
 
 publishing.publications.create<MavenPublication>("BintrayRelease") {
-        from(components["java"])
-        artifact(sourcesJar)
-        groupId = rootProject.group.toString()
-        artifactId = "${rootProject.name}-${project.name}"
-        version = rootProject.version.toString()
+    from(components["java"])
+    artifact(sourcesJar)
+    groupId = rootProject.group.toString()
+    artifactId = "${rootProject.name}-${project.name}"
+    version = rootProject.version.toString()
 }
 
-tasks.getByName("bintrayUpload").doFirst { require(System.getenv("BINTRAY_KEY").isNotBlank()) }
+tasks {
+    getByName("bintrayUpload").doFirst { require(System.getenv("BINTRAY_KEY").isNotBlank()) }
+
+    getByName<DokkaTask>("dokka") {
+        moduleName = "jvm"
+        outputDirectory = "$rootDir/public"
+    }
+}
 
 bintray {
     user = "serebit"
