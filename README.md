@@ -17,6 +17,12 @@ Logger.warning("Failed to resolve the server timeout.")
 Logger.error("The response from the server was incomplete.")
 Logger.fatal("Server connection halted unexpectedly.")
 ```
+The Logger class can also be instantiated, which is the recommended method of logging for libraries. To instantiate 
+the logger, just use the default constructor.
+```kotlin
+val logger = Logger()
+logger.error("Test class was not loaded correctly.")
+```
 
 ## Get Started
 ### Gradle (Groovy build script)
@@ -26,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.serebit", name: "loggerkt", version: "0.2.0"
+    compile group: "com.serebit", name: "loggerkt", version: "0.4.0"
 }
 ```
 ### Gradle (Kotlin build script)
@@ -36,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    compile(group = "com.serebit", name = "loggerkt", version = "0.2.0")
+    compile(group = "com.serebit", name = "loggerkt", version = "0.4.0")
 }
 ```
 ### Maven
@@ -51,7 +57,7 @@ dependencies {
 <dependency>
     <groupId>com.serebit</groupId>
     <artifactId>loggerkt</artifactId>
-    <version>0.2.0</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
