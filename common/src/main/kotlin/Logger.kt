@@ -4,13 +4,17 @@ import com.serebit.loggerkt.formatting.FormatterPayload
 import com.serebit.loggerkt.formatting.TimestampGenerator
 import com.serebit.loggerkt.writers.ConsoleWriter
 import com.serebit.loggerkt.writers.MessageWriter
+import kotlinx.coroutines.experimental.CoroutineScope
+import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.launch
+import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * The main logging class, through which messages are processed and sent to an output vector. This object can be
  * configured at runtime, extended, and instantiated.
  */
-open class Logger {
+open class Logger : CoroutineScope {
+    override val coroutineContext: CoroutineContext = Dispatchers.Default
     private var timestampGenerator = TimestampGenerator("yyyy-MM-dd HH:mm:ss")
     /**
      * Determines whether logs should be written asynchronously via coroutines. While this does provide significant

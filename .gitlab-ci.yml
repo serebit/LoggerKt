@@ -27,11 +27,6 @@ test:
   script:
   - ./gradlew test
 
-lint:
-  stage: analyze
-  script:
-  - ./gradlew detektCheck
-
 pages:
   stage: deploy
   script:
