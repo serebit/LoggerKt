@@ -1,6 +1,6 @@
 # LoggerKt
-[![Download][bintray]](https://bintray.com/serebit/Maven/loggerkt)
-[![Pipeline Status][gitlab-ci]](https://travis-ci.org/serebit/LoggerKt)
+[![Download][bintray]](https://bintray.com/serebit/public/loggerkt-jvm)
+[![Pipeline Status][gitlab-ci]](https://gitlab.com/serebit/loggerkt/pipelines)
 [![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Donate][paypal]](https://paypal.me/gdeadshot)
 
@@ -61,7 +61,7 @@ dependencies {
 </dependency>
 ```
 
-[bintray]: https://api.bintray.com/packages/serebit/Maven/loggerkt/images/download.svg "Download from Bintray"
+[bintray]: https://api.bintray.com/packages/serebit/public/loggerkt-jvm/images/download.svg "Download from Bintray"
 [gitlab-ci]: https://gitlab.com/serebit/loggerkt/badges/master/build.svg "Pipeline Status"
 [license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg "License"
 [paypal]: https://img.shields.io/badge/Donate-PayPal-blue.svg "Donate via PayPal"
