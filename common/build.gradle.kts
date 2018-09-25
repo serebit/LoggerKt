@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
-    id("kotlin-platform-common") version "1.2.70"
+    id("kotlin-platform-common") version "1.2.71"
 }
 
 dependencies {

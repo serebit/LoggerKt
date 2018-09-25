@@ -1,6 +1,6 @@
-package com.serebit.loggerkt.formatting
+package com.serebit.logkat.formatting
 
-import com.serebit.loggerkt.LogLevel
+import com.serebit.logkat.LogLevel
 
 data class FormatterPayload(
     val timestamp: String,

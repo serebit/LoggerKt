@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.writers
+package com.serebit.logkat.writers
 
 import java.io.OutputStream
 import java.io.PrintStream

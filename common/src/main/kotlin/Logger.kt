@@ -1,9 +1,9 @@
-package com.serebit.loggerkt
+package com.serebit.logkat
 
-import com.serebit.loggerkt.formatting.FormatterPayload
-import com.serebit.loggerkt.formatting.TimestampGenerator
-import com.serebit.loggerkt.writers.ConsoleWriter
-import com.serebit.loggerkt.writers.MessageWriter
+import com.serebit.logkat.formatting.FormatterPayload
+import com.serebit.logkat.formatting.TimestampGenerator
+import com.serebit.logkat.writers.ConsoleWriter
+import com.serebit.logkat.writers.MessageWriter
 import kotlinx.coroutines.experimental.CoroutineScope
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.launch

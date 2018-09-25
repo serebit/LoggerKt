@@ -1,10 +1,10 @@
-# LoggerKt
-[![Download][bintray]](https://bintray.com/serebit/public/loggerkt-jvm)
-[![Pipeline Status][gitlab-ci]](https://gitlab.com/serebit/loggerkt/pipelines)
+# Logkat
+[![Download][bintray]](https://bintray.com/serebit/Maven/logkat)
+[![Pipeline Status][gitlab-ci]](https://gitlab.com/serebit/logkat/pipelines)
 [![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Donate][paypal]](https://paypal.me/gdeadshot)
 
-LoggerKt is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator.
+Logkat is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator.
 
 ## Usage
 Logging is made as simple as possible. To write a log message, just invoke one of the methods on the `Logger` class. 
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.serebit", name: "loggerkt", version: "0.4.0"
+    compile group: "com.serebit", name: "logkat", version: "0.4.1"
 }
 ```
 ### Gradle (Kotlin build script)
@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    compile(group = "com.serebit", name = "loggerkt", version = "0.4.0")
+    compile(group = "com.serebit", name = "logkat", version = "0.4.1")
 }
 ```
 ### Maven
@@ -56,12 +56,12 @@ dependencies {
 ```xml
 <dependency>
     <groupId>com.serebit</groupId>
-    <artifactId>loggerkt</artifactId>
-    <version>0.4.0</version>
+    <artifactId>logkat</artifactId>
+    <version>0.4.1</version>
 </dependency>
 ```
 
-[bintray]: https://api.bintray.com/packages/serebit/public/loggerkt-jvm/images/download.svg "Download from Bintray"
-[gitlab-ci]: https://gitlab.com/serebit/loggerkt/badges/master/build.svg "Pipeline Status"
+[bintray]: https://api.bintray.com/packages/serebit/Maven/logkat/images/download.svg "Download from Bintray"
+[gitlab-ci]: https://gitlab.com/serebit/logkat/badges/master/build.svg "Pipeline Status"
 [license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg "License"
 [paypal]: https://img.shields.io/badge/Donate-PayPal-blue.svg "Donate via PayPal"
