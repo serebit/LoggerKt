@@ -29,6 +29,7 @@ logger.error("Test class was not loaded correctly.")
 ```gradle
 repositories {
     jcenter()
+    maven { url "https://dl.bintray.com/serebit/public" }
 }
 
 dependencies {
@@ -39,6 +40,7 @@ dependencies {
 ```kts
 repositories {
     jcenter()
+    maven("https://dl.bintray.com/serebit/public")
 }
 
 dependencies {
@@ -49,8 +51,11 @@ dependencies {
 ```xml
 <repository>
     <id>jcenter</id>
-    <name>jcenter-bintray</name>
-    <url>http://jcenter.bintray.com</url>
+    <url>https://jcenter.bintray.com</url>
+</repository>
+<repository>
+    <id>serebit-public</id>
+    <url>https://bintray.com/serebit/public</url>
 </repository>
 ```
 ```xml
@@ -61,7 +66,7 @@ dependencies {
 </dependency>
 ```
 
-[bintray]: https://api.bintray.com/packages/serebit/Maven/logkat/images/download.svg "Download from Bintray"
+[bintray]: https://api.bintray.com/packages/serebit/public/logkat/images/download.svg "Download from Bintray"
 [gitlab-ci]: https://gitlab.com/serebit/logkat/badges/master/build.svg "Pipeline Status"
 [license]: https://img.shields.io/badge/License-Apache%202.0-lightgrey.svg "License"
 [paypal]: https://img.shields.io/badge/Donate-PayPal-blue.svg "Donate via PayPal"
