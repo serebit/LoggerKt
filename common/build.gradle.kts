@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     compile(kotlin("stdlib-common"))
-    compile(kotlinx("coroutines-core-common", version = "0.30.1"))
+    compile(kotlinx("coroutines-core-common", version = "0.30.0"))
 }
 
 kotlin.experimental.coroutines = Coroutines.ENABLE
