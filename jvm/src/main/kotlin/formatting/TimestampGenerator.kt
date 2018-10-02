@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.formatting
+package com.serebit.logkat.formatting
 
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter

@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.platform
+package com.serebit.logkat.platform
 
 import java.io.File as JvmFile
 

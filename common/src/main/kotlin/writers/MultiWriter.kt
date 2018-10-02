@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.writers
+package com.serebit.logkat.writers
 
 /**
  * An implementation of [MessageWriter] that contains multiple LogWriters. This writer passes the log messages through to

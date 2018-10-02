@@ -1,7 +1,7 @@
-package com.serebit.loggerkt.writers
+package com.serebit.logkat.writers
 
-import com.serebit.loggerkt.LogLevel
-import com.serebit.loggerkt.platform.Platform
+import com.serebit.logkat.LogLevel
+import com.serebit.logkat.platform.Platform
 
 /**
  * An implementation of [MessageWriter] that outputs to the console. This writer's output is color coded using ANSI

@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.formatting
+package com.serebit.logkat.formatting
 
 private const val ESCAPE = '\u001B'
 private const val RESET = "$ESCAPE[0m"

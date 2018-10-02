@@ -1,8 +1,7 @@
-rootProject.name = "loggerkt"
+rootProject.name = "logkat"
 enableFeaturePreview("STABLE_PUBLISHING")
 
-include(":common")
-include(":jvm")
+include(":common", ":jvm")
 
 pluginManagement {
     resolutionStrategy {

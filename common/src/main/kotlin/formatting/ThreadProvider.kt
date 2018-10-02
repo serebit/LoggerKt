@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.formatting
+package com.serebit.logkat.formatting
 
 internal expect object ThreadProvider {
     val currentThreadName: String

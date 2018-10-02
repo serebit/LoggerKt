@@ -1,7 +1,7 @@
-package com.serebit.loggerkt.writers
+package com.serebit.logkat.writers
 
-import com.serebit.loggerkt.platform.File
-import com.serebit.loggerkt.platform.Platform
+import com.serebit.logkat.platform.File
+import com.serebit.logkat.platform.Platform
 
 /**
  * An implementation of [MessageWriter] that outputs to a file at the given path. Can be set to either append to the
