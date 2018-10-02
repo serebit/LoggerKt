@@ -6,7 +6,9 @@ plugins {
 
 dependencies {
     compile(kotlin("stdlib-common"))
-    compile(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "0.26.1")
+    compile(kotlinx("coroutines-core-common", version = "0.30.1"))
 }
 
 kotlin.experimental.coroutines = Coroutines.ENABLE
+
+fun kotlinx(module: String, version: String): Any = "org.jetbrains.kotlinx:kotlinx-$module:$version"

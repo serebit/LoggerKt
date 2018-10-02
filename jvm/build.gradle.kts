@@ -11,6 +11,7 @@ plugins {
 dependencies {
     expectedBy(project(":common"))
     compile(kotlin("stdlib-jdk8"))
+    compile(kotlinx("coroutines-core", version = "0.30.0"))
     testCompile(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
 }
 
@@ -20,3 +21,5 @@ tasks.getByName<DokkaTask>("dokka") {
     moduleName = "jvm"
     outputDirectory = "$rootDir/public"
 }
+
+fun kotlinx(module: String, version: String): Any = "org.jetbrains.kotlinx:kotlinx-$module:$version"
