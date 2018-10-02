@@ -1,5 +1,5 @@
 # Logkat
-[![Download][bintray]](https://bintray.com/serebit/Maven/logkat)
+[![Download][bintray]](https://bintray.com/serebit/public/logkat)
 [![Pipeline Status][gitlab-ci]](https://gitlab.com/serebit/logkat/pipelines)
 [![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Donate][paypal]](https://paypal.me/gdeadshot)
