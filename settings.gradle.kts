@@ -1,4 +1,4 @@
-rootProject.name = "loggerkt"
+rootProject.name = "logkat"
 enableFeaturePreview("STABLE_PUBLISHING")
 
 include(":common", ":jvm", ":native")

@@ -1,12 +1,12 @@
-package com.serebit.loggerkt.writers
+package com.serebit.logkat.writers
 
 /**
- * Defines an object that receives messages from the [com.serebit.loggerkt.Logger] and writes them to an output vector,
+ * Defines an object that receives messages from the [com.serebit.logkat.Logger] and writes them to an output vector,
  * such as the console or a file.
  *
- * @see com.serebit.loggerkt.writers.ConsoleWriter
- * @see com.serebit.loggerkt.writers.FileWriter
- * @see com.serebit.loggerkt.writers.MultiWriter
+ * @see com.serebit.logkat.writers.ConsoleWriter
+ * @see com.serebit.logkat.writers.FileWriter
+ * @see com.serebit.logkat.writers.MultiWriter
  */
 interface MessageWriter {
     /**

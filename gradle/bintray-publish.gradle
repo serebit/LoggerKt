@@ -1,0 +1,12 @@
+apply plugin: "com.jfrog.bintray"
+
+bintray {
+    user = "serebit"
+    key = System.getenv("BINTRAY_KEY")
+    publications = [ "BintrayRelease" ]
+    pkg {
+        repo = "public"
+        name = rootProject.name
+        version.name = rootProject.version.toString()
+    }
+}

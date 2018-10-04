@@ -1,10 +1,10 @@
-package com.serebit.loggerkt
+package com.serebit.logkat
 
-import com.serebit.loggerkt.formatting.ansiGray
-import com.serebit.loggerkt.formatting.ansiRed
-import com.serebit.loggerkt.formatting.ansiWhite
-import com.serebit.loggerkt.formatting.ansiYellow
-import com.serebit.loggerkt.writers.ConsoleWriter
+import com.serebit.logkat.formatting.ansiGray
+import com.serebit.logkat.formatting.ansiRed
+import com.serebit.logkat.formatting.ansiWhite
+import com.serebit.logkat.formatting.ansiYellow
+import com.serebit.logkat.writers.ConsoleWriter
 
 /**
  * The level at which a message is output. Each LogLevel has a different level of severity, ranging from

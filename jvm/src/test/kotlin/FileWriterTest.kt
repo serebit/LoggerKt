@@ -1,4 +1,4 @@
-import com.serebit.loggerkt.writers.FileWriter
+import com.serebit.logkat.writers.FileWriter
 import io.kotlintest.should
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec

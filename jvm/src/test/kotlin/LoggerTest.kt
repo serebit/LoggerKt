@@ -1,6 +1,6 @@
-import com.serebit.loggerkt.LogLevel
-import com.serebit.loggerkt.Logger
-import com.serebit.loggerkt.writers.MessageWriter
+import com.serebit.logkat.LogLevel
+import com.serebit.logkat.Logger
+import com.serebit.logkat.writers.MessageWriter
 import io.kotlintest.Description
 import io.kotlintest.should
 import io.kotlintest.shouldBe

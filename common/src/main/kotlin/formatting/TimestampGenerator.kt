@@ -1,4 +1,4 @@
-package com.serebit.loggerkt.formatting
+package com.serebit.logkat.formatting
 
 internal expect class TimestampGenerator(pattern: String) {
     var pattern: String
