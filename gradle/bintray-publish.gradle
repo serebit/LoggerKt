@@ -5,7 +5,7 @@ bintray {
     key = System.getenv("BINTRAY_KEY")
     publications = [ "BintrayRelease" ]
     pkg {
-        repo = "public"
+        repo = "test"
         name = rootProject.name
         version.name = rootProject.version.toString()
     }

@@ -33,13 +33,11 @@ kotlin {
     }
 }
 
+apply(from = "$rootDir/gradle/kotlin-targets.gradle")
+
 subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "java")
-
-    tasks.withType<Jar> {
-        baseName = "${rootProject.name}-${project.name}"
-    }
 
     val sourcesJar by tasks.creating(Jar::class) {
         classifier = "sources"
