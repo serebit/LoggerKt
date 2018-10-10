@@ -25,7 +25,7 @@ build:
 test:
   stage: analyze
   script:
-    - ./gradlew test
+    - ./gradlew jvmTest
 
 pages:
   stage: deploy
@@ -45,7 +45,7 @@ deploy:
     - ./gradlew bintrayUpload
   when: manual
   only:
-#    refs:
-#      - master
+    refs:
+      - master
     variables:
       - $BINTRAY_KEY
