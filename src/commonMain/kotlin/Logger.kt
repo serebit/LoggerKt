@@ -4,12 +4,17 @@ import com.serebit.logkat.formatting.FormatterPayload
 import com.serebit.logkat.formatting.TimestampGenerator
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * The main logging class, through which messages are processed and sent to an output vector. This object can be
  * configured at runtime, extended, and instantiated.
  */
-open class Logger {
+open class Logger : CoroutineScope {
+    override val coroutineContext: CoroutineContext = Dispatchers.Default
     private var timestampGenerator = TimestampGenerator("yyyy-MM-dd HH:mm:ss")
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
@@ -19,6 +24,11 @@ open class Logger {
         set(value) {
             timestampGenerator.pattern = value
         }
+    /**
+     * Determines whether logs should be written asynchronously via coroutines. While this does provide significant
+     * performance improvements, logs just before a program exit may not be written, so this defaults to false.
+     */
+    var async: Boolean = false
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
      */
@@ -77,10 +87,16 @@ open class Logger {
      */
     fun fatal(message: String) = log(LogLevel.FATAL, message)
 
-    private fun log(level: LogLevel, message: String) {
+    private fun log(level: LogLevel, message: String) = when {
         // check if the message should actually be logged
-        if (this.level > level) return
-            writeLog(level, message)
+        this.level > level -> Unit
+        // write the log within a coroutine if async is enabled
+        async -> {
+            launch { writeLog(level, message) }
+            Unit
+        }
+        // otherwise, just run it on the current thread
+        else -> writeLog(level, message)
     }
 
     private fun writeLog(level: LogLevel, message: String) {

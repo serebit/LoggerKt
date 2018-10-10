@@ -14,5 +14,8 @@ target/
 build/
 out/
 
+# Not sure what these are, but they appear after running tests with IntelliJ
+.attach_pid*
+
 # Virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
