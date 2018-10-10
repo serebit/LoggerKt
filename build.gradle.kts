@@ -40,3 +40,13 @@ kotlin {
 
 apply(from = "$rootDir/gradle/kotlin-targets.gradle")
 
+bintray {
+    user = "serebit"
+    key = System.getenv("BINTRAY_KEY")
+    setPublications("metadata", "jvm")
+    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+        repo = "test"
+        name = rootProject.name
+        version.name = project.version.toString()
+    })
+}
