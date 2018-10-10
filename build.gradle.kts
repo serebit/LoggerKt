@@ -21,20 +21,18 @@ fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$m
 fun KotlinDependencyHandler.implementation(group: String, name: String, version: String) =
     implementation("$group:$name:$version")
 
-kotlin {
-    sourceSets {
-        getByName("commonMain").dependencies {
-            implementation(kotlin("stdlib-common"))
-            implementation(kotlinx("coroutines-core-common", version = "0.30.2-eap13"))
-        }
-        create("jvmMain").dependencies {
-            implementation(kotlin("stdlib-jdk8"))
-            implementation(kotlinx("coroutines-core", version = "0.30.2-eap13"))
-        }
-        create("jvmTest").dependencies {
-            implementation(kotlin("reflect"))
-            implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
-        }
+kotlin.sourceSets {
+    getByName("commonMain").dependencies {
+        implementation(kotlin("stdlib-common"))
+        implementation(kotlinx("coroutines-core-common", version = "0.30.2-eap13"))
+    }
+    create("jvmMain").dependencies {
+        implementation(kotlin("stdlib-jdk8"))
+        implementation(kotlinx("coroutines-core", version = "0.30.2-eap13"))
+    }
+    create("jvmTest").dependencies {
+        implementation(kotlin("reflect"))
+        implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
     }
 }
 
