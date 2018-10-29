@@ -2,7 +2,7 @@ import com.jfrog.bintray.gradle.BintrayExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
-    kotlin("multiplatform") version "1.3.0-rc-146"
+    kotlin("multiplatform") version "1.3.0"
     id("com.github.ben-manes.versions") version "0.20.0"
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
@@ -13,7 +13,6 @@ version = "0.4.2"
 
 repositories {
     jcenter()
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 fun kotlin(module: String) = "org.jetbrains.kotlin:kotlin-$module"
@@ -24,15 +23,21 @@ fun KotlinDependencyHandler.implementation(group: String, name: String, version:
 kotlin.sourceSets {
     getByName("commonMain").dependencies {
         implementation(kotlin("stdlib-common"))
-        implementation(kotlinx("coroutines-core-common", version = "0.30.2-eap13"))
+        implementation(kotlinx("coroutines-core-common", version = "1.0.0"))
     }
-    create("jvmMain").dependencies {
-        implementation(kotlin("stdlib-jdk8"))
-        implementation(kotlinx("coroutines-core", version = "0.30.2-eap13"))
+    create("jvmMain") {
+        dependsOn(getByName("commonMain"))
+        dependencies {
+            implementation(kotlin("stdlib-jdk8"))
+            implementation(kotlinx("coroutines-core", version = "1.0.0"))
+        }
     }
-    create("jvmTest").dependencies {
-        implementation(kotlin("reflect"))
-        implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
+    create("jvmTest") {
+        dependsOn(getByName("commonTest"))
+        dependencies {
+            implementation(kotlin("reflect"))
+            implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
+        }
     }
 }
 
