@@ -48,7 +48,7 @@ bintray {
     key = System.getenv("BINTRAY_KEY")
     setPublications("metadata", "jvm")
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-        repo = "test"
+        repo = "public"
         name = rootProject.name
         version.name = project.version.toString()
     })
