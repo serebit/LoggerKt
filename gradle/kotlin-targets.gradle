@@ -9,5 +9,6 @@ kotlin {
             }
         }
         fromPreset(presets.jvm, "jvm")
+        fromPreset(presets.linuxX64, "linux")
     }
 }

@@ -4,17 +4,12 @@ import com.serebit.logkat.formatting.FormatterPayload
 import com.serebit.logkat.formatting.TimestampGenerator
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 /**
  * The main logging class, through which messages are processed and sent to an output vector. This object can be
  * configured at runtime, extended, and instantiated.
  */
-open class Logger : CoroutineScope {
-    override val coroutineContext: CoroutineContext = Dispatchers.Default
+open class Logger {
     private var timestampGenerator = TimestampGenerator("yyyy-MM-dd HH:mm:ss")
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
@@ -87,16 +82,9 @@ open class Logger : CoroutineScope {
      */
     fun fatal(message: String) = log(LogLevel.FATAL, message)
 
-    private fun log(level: LogLevel, message: String) = when {
-        // check if the message should actually be logged
-        this.level > level -> Unit
-        // write the log within a coroutine if async is enabled
-        async -> {
-            launch { writeLog(level, message) }
-            Unit
-        }
-        // otherwise, just run it on the current thread
-        else -> writeLog(level, message)
+    private fun log(level: LogLevel, message: String) {
+        // if the message's level is higher than or equal to the level setting, write it to the output vector
+        if (level >= this.level) writeLog(level, message)
     }
 
     private fun writeLog(level: LogLevel, message: String) {

@@ -22,23 +22,15 @@ fun KotlinDependencyHandler.implementation(group: String, name: String, version:
 
 kotlin.sourceSets {
     getByName("commonMain").dependencies {
-        implementation(kotlin("stdlib-common"))
-        implementation(kotlinx("coroutines-core-common", version = "1.0.0"))
+        implementation(kotlin("stdlib"))
     }
-    create("jvmMain") {
-        dependsOn(getByName("commonMain"))
-        dependencies {
-            implementation(kotlin("stdlib-jdk8"))
-            implementation(kotlinx("coroutines-core", version = "1.0.0"))
-        }
+    create("jvmMain").dependencies {
+        implementation(kotlin("stdlib-jdk8"))
     }
-    create("jvmTest") {
-        dependsOn(getByName("commonTest"))
-        dependencies {
-            implementation(kotlin("reflect"))
-            implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
-        }
+    create("jvmTest").dependencies {
+        implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
     }
+    create("linuxMain")
 }
 
 apply(from = "$rootDir/gradle/kotlin-targets.gradle")

@@ -15,7 +15,5 @@ class StreamWriter(output: OutputStream) : MessageWriter {
     /**
      * Prints the given [message] to the stream.
      */
-    override fun write(message: String) {
-        stream.println(message)
-    }
+    override fun write(message: String) = stream.println(message)
 }
