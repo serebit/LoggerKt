@@ -1,5 +1,6 @@
 package com.serebit.logkat.writers
 
+import com.serebit.logkat.LogLevel
 import java.io.OutputStream
 import java.io.PrintStream
 
@@ -15,5 +16,5 @@ class StreamWriter(output: OutputStream) : MessageWriter {
     /**
      * Prints the given [message] to the stream.
      */
-    override fun write(message: String) = stream.println(message)
+    override fun write(message: String, level: LogLevel) = stream.println(message)
 }

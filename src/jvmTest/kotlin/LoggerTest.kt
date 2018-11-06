@@ -60,7 +60,7 @@ class LoggerTest : StringSpec({
         var log: String = ""
             private set
 
-        override fun write(message: String) {
+        override fun write(message: String, level: LogLevel) {
             log += "$message\n"
         }
     }

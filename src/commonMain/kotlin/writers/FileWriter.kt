@@ -1,5 +1,6 @@
 package com.serebit.logkat.writers
 
+import com.serebit.logkat.LogLevel
 import com.serebit.logkat.platform.File
 import com.serebit.logkat.platform.Platform
 
@@ -23,5 +24,5 @@ class FileWriter(path: String, overwrite: Boolean = true) : MessageWriter {
     /**
      * Appends the given [message] to the file.
      */
-    override fun write(message: String) = file.appendText("$message\n")
+    override fun write(message: String, level: LogLevel) = file.appendText("$message\n")
 }
