@@ -1,5 +1,7 @@
 package com.serebit.logkat.writers
 
+import com.serebit.logkat.LogLevel
+
 /**
  * Defines an object that receives messages from the [com.serebit.logkat.Logger] and writes them to an output vector,
  * such as the console or a file.
@@ -12,5 +14,5 @@ interface MessageWriter {
     /**
      * Writes the given [message] to the output vector.
      */
-    fun write(message: String)
+    fun write(message: String, level: LogLevel)
 }

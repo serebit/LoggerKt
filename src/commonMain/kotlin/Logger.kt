@@ -10,7 +10,7 @@ import com.serebit.logkat.writers.MessageWriter
  * configured at runtime, extended, and instantiated.
  */
 open class Logger {
-    private var timestampGenerator = TimestampGenerator("yyyy-MM-dd HH:mm:ss")
+    private var timestampGenerator = TimestampGenerator()
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
      */
@@ -19,11 +19,6 @@ open class Logger {
         set(value) {
             timestampGenerator.pattern = value
         }
-    /**
-     * Determines whether logs should be written asynchronously via coroutines. While this does provide significant
-     * performance improvements, logs just before a program exit may not be written, so this defaults to false.
-     */
-    var async: Boolean = false
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
      */
@@ -89,11 +84,8 @@ open class Logger {
 
     private fun writeLog(level: LogLevel, message: String) {
         // example: 2018-01-12 21:03:25 [main] INFO: Logged Message
-        FormatterPayload(timestampGenerator, level, message)
-            .let(formatter)
-            .let { formattedMessage ->
-                (writer as? ConsoleWriter)?.write(formattedMessage, level) ?: writer.write(formattedMessage)
-            }
+        val formattedMessage = FormatterPayload(timestampGenerator, level, message).let(formatter)
+        writer.write(formattedMessage, level)
     }
 
     companion object : Logger()
