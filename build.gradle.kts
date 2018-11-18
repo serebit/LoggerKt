@@ -24,13 +24,16 @@ kotlin.sourceSets {
     getByName("commonMain").dependencies {
         implementation(kotlin("stdlib"))
     }
+    getByName("commonTest").dependencies {
+        implementation(kotlin("test-common"))
+        implementation(kotlin("test-annotations-common"))
+    }
     create("jvmMain").dependencies {
         implementation(kotlin("stdlib-jdk8"))
     }
     create("jvmTest").dependencies {
-        implementation(group = "io.kotlintest", name = "kotlintest-runner-junit5", version = "3.1.10")
+        implementation(kotlin("test-junit5"))
     }
-    create("linuxMain")
 }
 
 apply(from = "$rootDir/gradle/kotlin-targets.gradle")

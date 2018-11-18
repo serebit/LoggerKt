@@ -1,23 +1,26 @@
 import com.serebit.logkat.LogLevel
 import com.serebit.logkat.Logger
 import com.serebit.logkat.writers.MessageWriter
-import io.kotlintest.Description
-import io.kotlintest.should
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import kotlin.test.Test
+import kotlin.test.BeforeTest
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
-class LoggerTest : StringSpec({
-    "Logger should log messages" {
+class LoggerTest {
+    @Test
+    fun `Logger should log messages`() {
         Logger.info("Test log string")
-        (Logger.writer as TestWriter).log should { it.isNotEmpty() }
+        assertTrue { (Logger.writer as TestWriter).log.isNotBlank() }
     }
 
-    "Logger should log the text given to it" {
+    @Test
+    fun `Logger should log the text given to it`() {
         Logger.info("Test log string")
-        (Logger.writer as TestWriter).log shouldBe "INFO: Test log string\n"
+        assertEquals((Logger.writer as TestWriter).log, "INFO: Test log string\n")
     }
 
-    "Logger should log the correct LogLevels" {
+    @Test
+    fun `Logger should log the correct LogLevels`() {
         Logger.formatter = { it.level.toString() }
         Logger.level = LogLevel.TRACE
         Logger.trace("")
@@ -26,18 +29,20 @@ class LoggerTest : StringSpec({
         Logger.warn("")
         Logger.error("")
         Logger.fatal("")
-        (Logger.writer as TestWriter).log shouldBe "TRACE\nDEBUG\nINFO\nWARNING\nERROR\nFATAL\n"
+        assertEquals((Logger.writer as TestWriter).log, "TRACE\nDEBUG\nINFO\nWARNING\nERROR\nFATAL\n")
     }
 
-    "Logger should ignore messages below the set LogLevel" {
+    @Test
+    fun `Logger should ignore messages below the set LogLevel`() {
         Logger.level = LogLevel.INFO
         Logger.debug("Test debug string")
         Logger.trace("Test trace string")
         Logger.info("Test info string")
-        (Logger.writer as TestWriter).log shouldBe "INFO: Test info string\n"
+        assertEquals((Logger.writer as TestWriter).log, "INFO: Test info string\n")
     }
 
-    "Logger should be able to log messages of all levels" {
+    @Test
+    fun `Logger should be able to log messages of all levels`() {
         Logger.level = LogLevel.TRACE
         Logger.trace("Test trace string")
         Logger.debug("Test debug string")
@@ -45,17 +50,19 @@ class LoggerTest : StringSpec({
         Logger.warn("Test warning string")
         Logger.error("Test error string")
         Logger.fatal("Test fatal string")
-        (Logger.writer as TestWriter).log shouldBe """
-            TRACE: Test trace string
-            DEBUG: Test debug string
-            INFO: Test info string
-            WARNING: Test warning string
-            ERROR: Test error string
-            FATAL: Test fatal string
+        assertEquals(
+            (Logger.writer as TestWriter).log, """
+                TRACE: Test trace string
+                DEBUG: Test debug string
+                INFO: Test info string
+                WARNING: Test warning string
+                ERROR: Test error string
+                FATAL: Test fatal string
 
-        """.trimIndent()
+            """.trimIndent()
+        )
     }
-}) {
+
     private class TestWriter : MessageWriter {
         var log: String = ""
             private set
@@ -65,7 +72,8 @@ class LoggerTest : StringSpec({
         }
     }
 
-    override fun beforeTest(description: Description) {
+    @BeforeTest
+    fun beforeTest() {
         Logger.level = LogLevel.INFO
         Logger.writer = TestWriter()
         Logger.formatter = { (_, _, level, message) -> "$level: $message" }

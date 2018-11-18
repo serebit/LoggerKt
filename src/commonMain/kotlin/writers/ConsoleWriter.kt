@@ -13,11 +13,6 @@ import com.serebit.logkat.platform.Platform
 class ConsoleWriter(shouldUseAnsiColors: Boolean = true) : MessageWriter {
     private val useAnsiColors = if (Platform.supportsAnsiColors) false else shouldUseAnsiColors
 
-    /**
-     * Prints the given [message] to the console, applying the proper ANSI color transform if necessary.
-     */
-    override fun write(message: String) = println(message)
-
-    internal fun write(message: String, level: LogLevel) =
+    override fun write(message: String, level: LogLevel) =
         println(message.let { if (useAnsiColors) level.ansiColorTransform(it) else it })
 }
