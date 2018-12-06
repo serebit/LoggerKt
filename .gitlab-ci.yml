@@ -12,15 +12,23 @@ cache:
   paths:
     - .gradle/wrapper
     - .gradle/caches
+    - build
 
-build:
+build-jvm:
   stage: build
   script:
-    - ./gradlew build
-  artifacts:
-    paths:
-      - build/libs/*.jar
-    expire_in: 1 week
+    - ./gradlew jvmMainClasses
+    - ./gradlew jvmTestClasses
+
+build-linux:
+  stage: build
+  tags:
+    - linux
+  script:
+    - ./gradlew compileKotlinLinux
+    - ./gradlew compileTestKotlinLinux
+
+
 
 test-jvm:
   stage: test
