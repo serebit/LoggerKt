@@ -17,9 +17,10 @@ import platform.posix.realpath
 import platform.posix.remove
 
 actual class File actual constructor(private val path: String) {
-    actual val absolutePath: String = run {
-        val buffer = memScoped { allocArray<ByteVar>(PATH_MAX) }
-        realpath(path, buffer)!!.toKString()
+    actual val absolutePath: String = memScoped {
+        val buffer = allocArray<ByteVar>(PATH_MAX)
+        realpath(path, buffer)
+        buffer.toKString()
     }
 
     actual fun appendText(text: String) {
@@ -34,10 +35,12 @@ actual class File actual constructor(private val path: String) {
         fseek(file, 0, SEEK_END)
         val fileLength = ftell(file)
         fseek(file, 0, SEEK_SET)
-        val buffer = memScoped { allocArray<ByteVar>(fileLength + 1) }
-        fread(buffer, fileLength.toULong(), 1, file)
-        fclose(file)
-        return buffer.toKString()
+        return memScoped {
+            val buffer = allocArray<ByteVar>(fileLength + 1)
+            fread(buffer, fileLength.toULong(), 1, file)
+            fclose(file)
+            buffer.toKString()
+        }
     }
 
     actual fun delete(): Boolean = remove(path) == 0

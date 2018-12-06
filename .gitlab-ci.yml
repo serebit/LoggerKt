@@ -25,10 +25,8 @@ build-linux:
   tags:
     - linux
   script:
-    - ./gradlew compileKotlinLinux
-    - ./gradlew compileTestKotlinLinux
-
-
+    - ./gradlew linuxKlibrary
+    - ./gradlew linuxTestKlibrary
 
 test-jvm:
   stage: test
