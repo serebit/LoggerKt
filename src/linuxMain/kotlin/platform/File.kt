@@ -36,6 +36,7 @@ actual class File actual constructor(private val path: String) {
         fseek(file, 0, SEEK_SET)
         val buffer = memScoped { allocArray<ByteVar>(fileLength + 1) }
         fread(buffer, fileLength.toULong(), 1, file)
+        fclose(file)
         return buffer.toKString()
     }
 

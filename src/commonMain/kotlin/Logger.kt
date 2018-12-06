@@ -10,7 +10,7 @@ import com.serebit.logkat.writers.MessageWriter
  * configured at runtime, extended, and instantiated.
  */
 open class Logger {
-    private var timestampGenerator = TimestampGenerator()
+    private var timestampGenerator = TimestampGenerator(TimestampGenerator.DEFAULT_PATTERN)
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
      */
@@ -33,7 +33,7 @@ open class Logger {
      * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
      * implementation.
      */
-    var writer: MessageWriter = ConsoleWriter()
+    var writer: MessageWriter = ConsoleWriter(true)
 
     /**
      * Logs a [message] with the level [TRACE][LogLevel.TRACE].

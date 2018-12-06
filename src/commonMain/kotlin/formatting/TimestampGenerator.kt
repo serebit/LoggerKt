@@ -1,6 +1,6 @@
 package com.serebit.logkat.formatting
 
-internal expect class TimestampGenerator(pattern: String = DEFAULT_PATTERN) {
+internal expect class TimestampGenerator(pattern: String) {
     var pattern: String
 
     fun now(): String

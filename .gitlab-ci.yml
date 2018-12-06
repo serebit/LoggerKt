@@ -2,7 +2,7 @@ image: java:8-jdk
 
 stages:
   - build
-  - analyze
+  - test
   - deploy
 
 before_script:
@@ -22,10 +22,17 @@ build:
       - build/libs/*.jar
     expire_in: 1 week
 
-test:
-  stage: analyze
+test-jvm:
+  stage: test
   script:
-    - ./gradlew check
+    - ./gradlew jvmTest --parallel
+
+test-linux:
+  stage: test
+  tags:
+    - linux
+  script:
+    - ./gradlew linuxTest --parallel
 
 pages:
   stage: deploy

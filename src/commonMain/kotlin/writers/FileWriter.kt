@@ -14,7 +14,7 @@ import com.serebit.logkat.platform.Platform
  * classpath.
  * @param overwrite Whether or not the file at the specified path will be overwritten. Defaults to true.
  */
-class FileWriter(path: String, overwrite: Boolean = true) : MessageWriter {
+class FileWriter(path: String, overwrite: Boolean) : MessageWriter {
     private val file = if (path.startsWith("/")) {
         File(path)
     } else {
