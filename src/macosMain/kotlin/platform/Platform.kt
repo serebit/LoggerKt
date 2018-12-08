@@ -9,8 +9,8 @@ import platform.posix.dirname
 import platform.posix.readlink
 
 internal actual object Platform {
-    actual val classpath: String = run {
-        val buffer = memScoped { allocArray<ByteVar>(PATH_MAX) }
+    actual val classpath: String = memScoped {
+        val buffer = allocArray<ByteVar>(PATH_MAX)
         readlink("/proc/self/exe", buffer, PATH_MAX)
         dirname(buffer)!!.toKString()
     }
