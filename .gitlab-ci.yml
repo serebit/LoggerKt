@@ -28,14 +28,6 @@ build-linux:
     - ./gradlew linuxKlibrary
     - ./gradlew linuxTestKlibrary
 
-build-macos:
-  stage: build
-  tags:
-    - osx
-  script:
-    - ./gradlew macosKlibrary
-    - ./gradlew macosTestKlibrary
-
 test-jvm:
   stage: test
   script:
@@ -47,13 +39,6 @@ test-linux:
     - linux
   script:
     - ./gradlew linuxTest --parallel
-
-test-macos:
-  stage: test
-  tags:
-    - linux
-  script:
-    - ./gradlew macosTest --parallel
 
 pages:
   stage: deploy
