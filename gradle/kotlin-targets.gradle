@@ -2,12 +2,6 @@ apply plugin: "org.jetbrains.kotlin.multiplatform"
 
 kotlin {
     targets {
-        metadata {
-            mavenPublication {
-                groupId = rootProject.group
-                version = rootProject.version
-            }
-        }
         fromPreset(presets.jvm, "jvm")
         fromPreset(presets.linuxX64, "linux")
         fromPreset(presets.macosX64, "macos")
