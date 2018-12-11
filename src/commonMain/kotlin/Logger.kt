@@ -26,8 +26,8 @@ class Logger {
     /**
      * The log message formatter.
      */
-    var formatter: (FormatterPayload) -> String = { (time, threadName, level, message) ->
-        "$time [$threadName] $level: $message"
+    var formatter: (FormatterPayload) -> String = { (time, level, message) ->
+        "$time $level: $message"
     }
     /**
      * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
@@ -79,12 +79,10 @@ class Logger {
 
     private fun log(level: LogLevel, message: String) {
         // if the message's level is higher than or equal to the level setting, write it to the output vector
-        if (level >= this.level) writeLog(level, message)
+        if (level >= this.level) {
+            val formattedMessage = FormatterPayload(timestampGenerator.generate(), level, message).let(formatter)
+            writer.write(formattedMessage, level)
+        }
     }
 
-    private fun writeLog(level: LogLevel, message: String) {
-        // example: 2018-01-12 21:03:25 [main] INFO: Logged Message
-        val formattedMessage = FormatterPayload(timestampGenerator, level, message).let(formatter)
-        writer.write(formattedMessage, level)
-    }
 }

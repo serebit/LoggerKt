@@ -12,7 +12,7 @@ internal actual class TimestampGenerator actual constructor(pattern: String) {
             formatter = DateTimeFormatter.ofPattern(value)
         }
 
-    actual fun now(): String = formatter.format(OffsetDateTime.now())
+    actual fun generate(): String = formatter.format(OffsetDateTime.now())
 
     actual companion object {
         actual val DEFAULT_PATTERN = "yyyy-MM-dd HH:mm:ss"

@@ -9,7 +9,7 @@ class LoggerTest {
     private val logger = Logger().apply {
         level = LogLevel.INFO
         writer = TestWriter()
-        formatter = { (_, _, level, message) -> "$level: $message" }
+        formatter = { (_, level, message) -> "$level: $message" }
     }
 
     @Test

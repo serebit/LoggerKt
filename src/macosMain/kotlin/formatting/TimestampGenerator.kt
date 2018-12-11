@@ -12,7 +12,7 @@ import platform.posix.time
 import platform.posix.time_tVar
 
 internal actual class TimestampGenerator actual constructor(actual var pattern: String) {
-    actual fun now(): String = memScoped {
+    actual fun generate(): String = memScoped {
         val timePointer = alloc<time_tVar>()
         time(timePointer.ptr)
         val timeInfo = localtime(timePointer.ptr)
