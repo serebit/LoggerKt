@@ -9,7 +9,7 @@ import com.serebit.logkat.writers.MessageWriter
  * The main logging class, through which messages are processed and sent to an output vector. This object can be
  * configured at runtime, extended, and instantiated.
  */
-open class Logger {
+class Logger {
     private var timestampGenerator = TimestampGenerator(TimestampGenerator.DEFAULT_PATTERN)
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
@@ -87,6 +87,4 @@ open class Logger {
         val formattedMessage = FormatterPayload(timestampGenerator, level, message).let(formatter)
         writer.write(formattedMessage, level)
     }
-
-    companion object : Logger()
 }
