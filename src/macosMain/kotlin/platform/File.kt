@@ -16,7 +16,7 @@ import platform.posix.ftell
 import platform.posix.realpath
 import platform.posix.remove
 
-actual class File actual constructor(private val path: String) {
+internal actual class File actual constructor(private val path: String) {
     actual val absolutePath: String = memScoped {
         val buffer = allocArray<ByteVar>(PATH_MAX)
         realpath(path, buffer)

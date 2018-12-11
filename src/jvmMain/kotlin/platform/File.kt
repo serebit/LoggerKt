@@ -2,8 +2,14 @@ package com.serebit.logkat.platform
 
 import java.io.File as JvmFile
 
-actual class File actual constructor(path: String) {
-    private val file = JvmFile(path)
+internal actual class File actual constructor(path: String) {
+    private val realPath = if (path.startsWith("/")) {
+        path
+    } else {
+        "${Platform.classpath}/$path"
+    }
+
+    private val file = JvmFile(realPath)
     actual val absolutePath: String get() = file.absolutePath
 
     actual fun appendText(text: String) = file.appendText(text)

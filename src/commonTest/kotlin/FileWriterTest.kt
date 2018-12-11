@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class FileWriterTest {
-    val file = File("/tmp/test.tmp")
+    private val file = File("/tmp/test.tmp")
 
     @Test
     fun `writer should write messages to the set file`() {

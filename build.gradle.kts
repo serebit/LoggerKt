@@ -17,8 +17,6 @@ repositories {
 
 fun kotlin(module: String) = "org.jetbrains.kotlin:kotlin-$module"
 fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$module:$version"
-fun KotlinDependencyHandler.implementation(group: String, name: String, version: String) =
-    implementation("$group:$name:$version")
 
 apply(from = "$rootDir/gradle/kotlin-targets.gradle")
 
