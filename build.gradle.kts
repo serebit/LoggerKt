@@ -1,8 +1,7 @@
 import com.jfrog.bintray.gradle.BintrayExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
-    kotlin("multiplatform") version "1.3.11"
+    kotlin("multiplatform") version "1.3.20-eap-25"
     id("com.github.ben-manes.versions") version "0.20.0"
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
@@ -13,27 +12,33 @@ version = "0.4.2"
 
 repositories {
     jcenter()
+    maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
-fun kotlin(module: String) = "org.jetbrains.kotlin:kotlin-$module"
 fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$module:$version"
 
-apply(from = "$rootDir/gradle/kotlin-targets.gradle")
+kotlin {
+    targets {
+        targetFromPreset(presets["jvm"], "jvm")
+        targetFromPreset(presets["linuxX64"], "linux")
+        targetFromPreset(presets["macosX64"], "macos")
+    }
 
-kotlin.sourceSets {
-    getByName("commonMain").dependencies {
-        implementation(kotlin("stdlib"))
-    }
-    getByName("commonTest").dependencies {
-        implementation(kotlin("test-common"))
-        implementation(kotlin("test-annotations-common"))
-    }
-    getByName("jvmMain").dependencies {
-        implementation(kotlin("stdlib-jdk8"))
-    }
-    getByName("jvmTest").dependencies {
-        implementation(kotlin("test"))
-        implementation(kotlin("test-junit"))
+    sourceSets {
+        getByName("commonMain").dependencies {
+            implementation(kotlin("stdlib"))
+        }
+        getByName("commonTest").dependencies {
+            implementation(kotlin("test-common"))
+            implementation(kotlin("test-annotations-common"))
+        }
+        getByName("jvmMain").dependencies {
+            implementation(kotlin("stdlib-jdk8"))
+        }
+        getByName("jvmTest").dependencies {
+            implementation(kotlin("test"))
+            implementation(kotlin("test-junit"))
+        }
     }
 }
 

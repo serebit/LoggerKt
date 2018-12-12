@@ -1,9 +1,0 @@
-apply plugin: "org.jetbrains.kotlin.multiplatform"
-
-kotlin {
-    targets {
-        fromPreset(presets.jvm, "jvm")
-        fromPreset(presets.linuxX64, "linux")
-        fromPreset(presets.macosX64, "macos")
-    }
-}

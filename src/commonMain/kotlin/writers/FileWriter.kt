@@ -2,7 +2,6 @@ package com.serebit.logkat.writers
 
 import com.serebit.logkat.LogLevel
 import com.serebit.logkat.platform.File
-import com.serebit.logkat.platform.Platform
 
 /**
  * An implementation of [MessageWriter] that outputs to a file at the given path. Can be set to either append to the
@@ -14,12 +13,8 @@ import com.serebit.logkat.platform.Platform
  * classpath.
  * @param overwrite Whether or not the file at the specified path will be overwritten. Defaults to true.
  */
-class FileWriter(path: String, overwrite: Boolean) : MessageWriter {
-    private val file = if (path.startsWith("/")) {
-        File(path)
-    } else {
-        File("${Platform.classpath}/$path")
-    }.also { if (overwrite) it.delete() }
+class FileWriter(path: String, overwrite: Boolean = false) : MessageWriter {
+    private val file = File(path).also { if (overwrite) it.delete() }
 
     /**
      * Appends the given [message] to the file.

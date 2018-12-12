@@ -10,7 +10,7 @@ import com.serebit.logkat.writers.MessageWriter
  * configured at runtime, extended, and instantiated.
  */
 class Logger {
-    private var timestampGenerator = TimestampGenerator(TimestampGenerator.DEFAULT_PATTERN)
+    private var timestampGenerator = TimestampGenerator()
     /**
      * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
      */
@@ -84,5 +84,4 @@ class Logger {
             writer.write(formattedMessage, level)
         }
     }
-
 }
