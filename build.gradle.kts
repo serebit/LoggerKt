@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.serebit"
-version = "0.4.2"
+version = "0.4.3"
 
 repositories {
     jcenter()
@@ -19,23 +19,24 @@ fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$m
 
 kotlin {
     targets {
-        targetFromPreset(presets["jvm"], "jvm")
-        targetFromPreset(presets["linuxX64"], "linux")
-        targetFromPreset(presets["macosX64"], "macos")
+        jvm()
+        linuxX64("linux")
+        macosX64("macos")
+        mingwX64("windows")
     }
 
     sourceSets {
-        getByName("commonMain").dependencies {
-            implementation(kotlin("stdlib"))
+        get("commonMain").dependencies {
+            implementation(kotlin("stdlib-common"))
         }
-        getByName("commonTest").dependencies {
+        get("commonTest").dependencies {
             implementation(kotlin("test-common"))
             implementation(kotlin("test-annotations-common"))
         }
-        getByName("jvmMain").dependencies {
+        get("jvmMain").dependencies {
             implementation(kotlin("stdlib-jdk8"))
         }
-        getByName("jvmTest").dependencies {
+        get("jvmTest").dependencies {
             implementation(kotlin("test"))
             implementation(kotlin("test-junit"))
         }
@@ -45,7 +46,7 @@ kotlin {
 bintray {
     user = "serebit"
     key = System.getenv("BINTRAY_KEY")
-    setPublications("metadata", "jvm", "linux")
+    setPublications("metadata", "jvm", "linux", "macos", "windows")
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
         repo = "public"
         name = rootProject.name
