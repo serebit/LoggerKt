@@ -13,19 +13,19 @@ class LoggerTest {
     }
 
     @Test
-    fun `logger should log messages`() {
+    fun `should log messages`() {
         logger.info("Test log string")
         assertTrue { (logger.writer as TestWriter).log.isNotBlank() }
     }
 
     @Test
-    fun `logger should log the text given to it`() {
+    fun `should log correct text`() {
         logger.info("Test log string")
         assertEquals((logger.writer as TestWriter).log, "INFO: Test log string\n")
     }
 
     @Test
-    fun `logger should log the correct LogLevels`() {
+    fun `should log correct levels`() {
         logger.formatter = { it.level.toString() }
         logger.level = LogLevel.TRACE
         logger.trace("")
@@ -38,7 +38,7 @@ class LoggerTest {
     }
 
     @Test
-    fun `logger should ignore messages below the set LogLevel`() {
+    fun `should ignore messages below set level`() {
         logger.level = LogLevel.INFO
         logger.debug("Test debug string")
         logger.trace("Test trace string")
@@ -47,7 +47,7 @@ class LoggerTest {
     }
 
     @Test
-    fun `logger should be able to log messages of all levels`() {
+    fun `should log messages of all levels`() {
         logger.level = LogLevel.TRACE
         logger.trace("Test trace string")
         logger.debug("Test debug string")
