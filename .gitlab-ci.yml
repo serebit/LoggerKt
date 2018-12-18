@@ -1,4 +1,4 @@
-image: java:8-jdk
+image: registry.gitlab.com/serebit/logkat:latest
 
 stages:
   - build
