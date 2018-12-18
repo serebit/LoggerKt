@@ -1,4 +1,4 @@
-image: registry.gitlab.com/serebit/logkat:latest
+image: registry.gitlab.com/serebit/logkat:0.4.3
 
 stages:
   - build
