@@ -5,20 +5,16 @@ stages:
   - test
   - deploy
 
-before_script:
-  - export GRADLE_USER_HOME=`pwd`/.gradle
-
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
-    - build
-
 build-jvm:
   stage: build
   script:
     - ./gradlew jvmMainClasses
     - ./gradlew jvmTestClasses
+  artifacts:
+    paths:
+      - build/
+      - source/build/
+      - .gradle/
 
 build-linux:
   stage: build
@@ -27,23 +23,35 @@ build-linux:
   script:
     - ./gradlew linuxKlibrary
     - ./gradlew linuxTestKlibrary
+  artifacts:
+    paths:
+      - build/
+      - source/build/
+      - .gradle/
 
 test-jvm:
   stage: test
   script:
-    - ./gradlew jvmTest --parallel
+    - ./gradlew jvmTest
+  dependencies:
+    - build-jvm
 
 test-linux:
   stage: test
   tags:
     - linux
   script:
-    - ./gradlew linuxTest --parallel
+    - ./gradlew linuxTest
+  dependencies:
+    - build-linux
 
 pages:
   stage: deploy
   script:
     - ./gradlew dokka
+  dependencies:
+    - build-jvm
+    - build-linux
   when: manual
   artifacts:
     paths:
@@ -56,6 +64,9 @@ deploy:
   stage: deploy
   script:
     - ./gradlew bintrayUpload
+  dependencies:
+    - build-jvm
+    - build-linux
   when: manual
   only:
     refs:

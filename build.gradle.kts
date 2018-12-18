@@ -21,8 +21,6 @@ kotlin {
     targets {
         jvm()
         linuxX64("linux")
-        macosX64("macos")
-        mingwX64("windows")
     }
 
     sourceSets {
@@ -38,7 +36,7 @@ kotlin {
         }
         get("jvmTest").dependencies {
             implementation(kotlin("test"))
-            implementation(kotlin("test-junit"))
+            implementation(kotlin("test-junit5"))
         }
     }
 }
