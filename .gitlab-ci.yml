@@ -13,7 +13,6 @@ build-jvm:
   artifacts:
     paths:
       - build/
-      - source/build/
       - .gradle/
 
 build-linux:
@@ -26,7 +25,6 @@ build-linux:
   artifacts:
     paths:
       - build/
-      - source/build/
       - .gradle/
 
 test-jvm:
