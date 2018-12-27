@@ -75,9 +75,12 @@ class Logger {
      */
     fun fatal(message: String) = log(LogLevel.FATAL, message)
 
-    private fun log(level: LogLevel, message: String) {
-        // if the message's level is higher than or equal to the level setting, write it to the output vector
-        if (level >= this.level) {
+    fun log(level: LogLevel, message: String) {
+        /*
+        if the message's level is higher than or equal to the level setting, and the level setting isn't OFF, write
+        it to the output vector
+        */
+        if (level >= this.level && this.level != LogLevel.OFF) {
             val formattedMessage = FormatterPayload(timestampGenerator.generate(), level, message).let(formatter)
             writer.write(formattedMessage, level)
         }
