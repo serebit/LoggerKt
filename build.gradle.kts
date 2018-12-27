@@ -18,10 +18,9 @@ repositories {
 fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$module:$version"
 
 kotlin {
-    targets {
-        jvm()
-        linuxX64("linux")
-    }
+    jvm()
+    linuxX64("linux")
+    macosX64("macos")
 
     sourceSets {
         get("commonMain").dependencies {
