@@ -14,6 +14,7 @@ internal actual object Platform {
         readlink("/proc/self/exe", buffer, PATH_MAX)
         dirname(buffer)!!.toKString()
     }
-    actual val supportsAnsiColors: Boolean
-        get() = true
+    actual val supportsAnsiColors = true
+    actual val lineSeparator = "\n"
+    actual val pathSeparator = '/'
 }
