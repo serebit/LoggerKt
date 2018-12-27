@@ -10,7 +10,7 @@ import com.serebit.logkat.platform.Platform
  * @constructor Creates a new instance, using ANSI color transforms if specified.
  * @param coloredOutput Whether or not the writer should use ANSI color transforms. Defaults to true.
  */
-class ConsoleWriter(coloredOutput: Boolean) : MessageWriter {
+class ConsoleWriter(coloredOutput: Boolean = true) : MessageWriter {
     private val useAnsiColors = if (!Platform.supportsAnsiColors) false else coloredOutput
 
     override fun write(message: String, level: LogLevel) =

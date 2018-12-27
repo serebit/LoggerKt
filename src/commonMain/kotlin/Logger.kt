@@ -26,14 +26,12 @@ class Logger {
     /**
      * The log message formatter.
      */
-    var formatter: (FormatterPayload) -> String = { (time, level, message) ->
-        "$time $level: $message"
-    }
+    var formatter: FormatterPayload.() -> String = { "$timestamp $level: $message" }
     /**
      * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
      * implementation.
      */
-    var writer: MessageWriter = ConsoleWriter(true)
+    var writer: MessageWriter = ConsoleWriter()
 
     /**
      * Logs a [message] with the level [TRACE][LogLevel.TRACE].

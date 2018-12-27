@@ -9,7 +9,7 @@ class LoggerTest {
     private val logger = Logger().apply {
         level = LogLevel.INFO
         writer = TestWriter()
-        formatter = { (_, level, message) -> "$level: $message" }
+        formatter = { "$level: $message" }
     }
 
     @Test
@@ -26,7 +26,7 @@ class LoggerTest {
 
     @Test
     fun `should log correct levels`() {
-        logger.formatter = { it.level.toString() }
+        logger.formatter = { level.toString() }
         logger.level = LogLevel.TRACE
         logger.trace("")
         logger.debug("")
@@ -44,6 +44,13 @@ class LoggerTest {
         logger.trace("Test trace string")
         logger.info("Test info string")
         assertEquals((logger.writer as TestWriter).log, "INFO: Test info string\n")
+    }
+
+    @Test
+    fun `should not log messages with the level OFF`() {
+        logger.level = LogLevel.OFF
+        logger.fatal("Test fatal string")
+        assertTrue((logger.writer as TestWriter).log.isEmpty())
     }
 
     @Test
