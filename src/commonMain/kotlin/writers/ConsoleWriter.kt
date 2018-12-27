@@ -8,11 +8,11 @@ import com.serebit.logkat.platform.Platform
  * escape codes by default, unless the operating system is Windows.
  *
  * @constructor Creates a new instance, using ANSI color transforms if specified.
- * @param shouldUseAnsiColors Whether or not the writer should use ANSI color transforms. Defaults to true.
+ * @param coloredOutput Whether or not the writer should use ANSI color transforms. Defaults to true.
  */
-class ConsoleWriter(shouldUseAnsiColors: Boolean) : MessageWriter {
-    private val useAnsiColors = if (Platform.supportsAnsiColors) false else shouldUseAnsiColors
+class ConsoleWriter(coloredOutput: Boolean) : MessageWriter {
+    private val useAnsiColors = if (!Platform.supportsAnsiColors) false else coloredOutput
 
     override fun write(message: String, level: LogLevel) =
-        println(message.let { if (useAnsiColors) level.ansiColorTransform(it) else it })
+        println(message.let { if (useAnsiColors) level.colorTransform(it) else it })
 }
