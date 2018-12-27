@@ -75,6 +75,9 @@ class Logger {
      */
     fun fatal(message: String) = log(LogLevel.FATAL, message)
 
+    /**
+     * Logs a [message] with the given [level], unless the given [level] is [LogLevel.OFF].
+     */
     fun log(level: LogLevel, message: String) {
         /*
         if the message's level is higher than or equal to the level setting, and the level setting isn't OFF, write
