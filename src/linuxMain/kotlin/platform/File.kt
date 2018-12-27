@@ -15,6 +15,8 @@ import platform.posix.fseek
 import platform.posix.ftell
 import platform.posix.realpath
 import platform.posix.remove
+import kotlin.math.absoluteValue
+import kotlin.random.Random
 
 internal actual class File actual constructor(private val path: String) {
     actual val absolutePath: String = memScoped {
@@ -44,4 +46,8 @@ internal actual class File actual constructor(private val path: String) {
     }
 
     actual fun delete(): Boolean = remove(path) == 0
+
+    actual companion object {
+        actual fun createTempFile(prefix: String): File = File("$prefix${Random.nextLong().absoluteValue}.tmp")
+    }
 }

@@ -17,4 +17,8 @@ internal actual class File actual constructor(path: String) {
     actual fun readText(): String = file.readText()
 
     actual fun delete() = file.delete()
+
+    actual companion object {
+        actual fun createTempFile(prefix: String): File = File(kotlin.io.createTempFile(prefix).absolutePath)
+    }
 }

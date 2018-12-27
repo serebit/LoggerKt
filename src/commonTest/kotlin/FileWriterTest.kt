@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class FileWriterTest {
-    private val file = File("/tmp/test.tmp")
+    private val file = File.createTempFile("test")
 
     @Test
     fun `should write to the set file`() {

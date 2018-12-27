@@ -8,4 +8,8 @@ internal expect class File(path: String) {
     fun readText(): String
 
     fun delete(): Boolean
+
+    companion object {
+        fun createTempFile(prefix: String): File
+    }
 }
