@@ -6,8 +6,8 @@ import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
 
 /**
- * The main logging class, through which messages are processed and sent to an output vector. This object can be
- * configured at runtime, extended, and instantiated.
+ * The main logging class, through which messages are processed and sent to an output vector. This class can be
+ * configured at runtime using several utility functions and properties.
  */
 class Logger {
     private var timestampGenerator = TimestampGenerator()
