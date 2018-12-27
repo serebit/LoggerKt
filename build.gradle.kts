@@ -15,8 +15,6 @@ repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
-fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$module:$version"
-
 kotlin {
     jvm()
     linuxX64("linux")
