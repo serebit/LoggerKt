@@ -12,7 +12,8 @@ import com.serebit.logkat.writers.MessageWriter
  */
 class Logger {
     /**
-     * Convenience variable for setting the format of the timestamp used in log messages.
+     * Convenience variable for setting the format of the timestamp used in log messages. Defaults to the ISO-8601
+     * date format.
      */
     var timestampFormat: DateTime.() -> String = {
         "$year-$month-$day $hour:$minute:$second"
