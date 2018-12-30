@@ -1,7 +1,7 @@
 package com.serebit.logkat
 
 import com.serebit.logkat.formatting.FormatterPayload
-import com.serebit.logkat.formatting.TimestampGenerator
+import com.serebit.logkat.time.TimestampGenerator
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
 

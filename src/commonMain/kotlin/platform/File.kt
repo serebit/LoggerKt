@@ -10,6 +10,8 @@ internal expect class File(path: String) {
     fun delete(): Boolean
 
     companion object {
+        val classpath: String
+        val pathSeparator: Char
         fun createTempFile(prefix: String): File
     }
 }

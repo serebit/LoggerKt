@@ -48,6 +48,12 @@ internal actual class File actual constructor(private val path: String) {
     actual fun delete(): Boolean = remove(path) == 0
 
     actual companion object {
+        actual val classpath: String = memScoped {
+            val buffer = allocArray<ByteVar>(PATH_MAX)
+            readlink("/proc/self/exe", buffer, PATH_MAX)
+            dirname(buffer)!!.toKString()
+        }
+        actual val pathSeparator = '/'
         actual fun createTempFile(prefix: String): File = File("$prefix${Random.nextLong().absoluteValue}.tmp")
     }
 }

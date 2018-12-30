@@ -6,7 +6,7 @@ internal actual class File actual constructor(path: String) {
     private val realPath = if (path.startsWith("/")) {
         path
     } else {
-        "${Platform.classpath}/$path"
+        "$classpath/$path"
     }
 
     private val file = JvmFile(realPath)
@@ -19,6 +19,8 @@ internal actual class File actual constructor(path: String) {
     actual fun delete() = file.delete()
 
     actual companion object {
+        actual val classpath: String = JvmFile(this::class.java.protectionDomain.codeSource.location.path).parent
+        actual val pathSeparator = JvmFile.pathSeparatorChar
         actual fun createTempFile(prefix: String): File = File(kotlin.io.createTempFile(prefix).absolutePath)
     }
 }

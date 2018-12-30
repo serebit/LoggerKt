@@ -7,12 +7,14 @@ import kotlinx.cinterop.toKString
 import platform.posix.PATH_MAX
 import platform.posix.SEEK_END
 import platform.posix.SEEK_SET
+import platform.posix.dirname
 import platform.posix.fclose
 import platform.posix.fopen
 import platform.posix.fprintf
 import platform.posix.fread
 import platform.posix.fseek
 import platform.posix.ftell
+import platform.posix.readlink
 import platform.posix.realpath
 import platform.posix.remove
 import kotlin.math.absoluteValue
@@ -48,6 +50,12 @@ internal actual class File actual constructor(private val path: String) {
     actual fun delete(): Boolean = remove(path) == 0
 
     actual companion object {
+        actual val classpath: String = memScoped {
+            val buffer = allocArray<ByteVar>(PATH_MAX)
+            readlink("/proc/self/exe", buffer, PATH_MAX)
+            dirname(buffer)!!.toKString()
+        }
+        actual val pathSeparator = '/'
         actual fun createTempFile(prefix: String): File = File("$prefix${Random.nextLong().absoluteValue}.tmp")
     }
 }

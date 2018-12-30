@@ -1,4 +1,4 @@
-package com.serebit.logkat.formatting
+package com.serebit.logkat.time
 
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.alloc
