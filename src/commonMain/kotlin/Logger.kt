@@ -1,7 +1,8 @@
 package com.serebit.logkat
 
 import com.serebit.logkat.formatting.FormatterPayload
-import com.serebit.logkat.time.TimestampGenerator
+import com.serebit.logkat.time.DateTime
+import com.serebit.logkat.time.now
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
 
@@ -10,15 +11,12 @@ import com.serebit.logkat.writers.MessageWriter
  * configured at runtime using several utility functions and properties.
  */
 class Logger {
-    private var timestampGenerator = TimestampGenerator()
     /**
-     * Convenience variable for setting the pattern of the timestamp sent to the [formatter].
+     * Convenience variable for setting the format of the timestamp used in log messages.
      */
-    var timestampPattern: String
-        get() = timestampGenerator.pattern
-        set(value) {
-            timestampGenerator.pattern = value
-        }
+    var timestampFormat: DateTime.() -> String = {
+        "$year-$month-$day $hour:$minute:$second"
+    }
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
      */
@@ -26,7 +24,7 @@ class Logger {
     /**
      * The log message formatter.
      */
-    var formatter: FormatterPayload.() -> String = { "$timestamp $level: $message" }
+    var messageFormat: FormatterPayload.() -> String = { "$timestamp $level: $message" }
     /**
      * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
      * implementation.
@@ -84,7 +82,8 @@ class Logger {
         it to the output vector
         */
         if (level >= this.level && this.level != LogLevel.OFF) {
-            val formattedMessage = FormatterPayload(timestampGenerator.generate(), level, message).let(formatter)
+            val timestamp = now().timestampFormat()
+            val formattedMessage = FormatterPayload(timestamp, level, message).let(messageFormat)
             writer.write(formattedMessage, level)
         }
     }

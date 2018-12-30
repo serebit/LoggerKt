@@ -9,7 +9,7 @@ class LoggerTest {
     private val logger = Logger().apply {
         level = LogLevel.INFO
         writer = TestWriter()
-        formatter = { "$level: $message" }
+        messageFormat = { "$level: $message" }
     }
 
     @Test
@@ -26,7 +26,7 @@ class LoggerTest {
 
     @Test
     fun `should log correct levels`() {
-        logger.formatter = { level.toString() }
+        logger.messageFormat = { level.toString() }
         logger.level = LogLevel.TRACE
         logger.trace("")
         logger.debug("")
