@@ -19,6 +19,7 @@ kotlin {
     jvm()
     linuxX64("linux")
     macosX64("macos")
+    mingwX64("mingw")
 
     sourceSets {
         get("commonMain").dependencies {
