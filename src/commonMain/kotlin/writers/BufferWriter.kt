@@ -18,4 +18,9 @@ class BufferWriter : MessageWriter {
      * Reads from the buffer to a String.
      */
     fun read() = buffer.toString()
+
+    /**
+     * Clears the buffer.
+     */
+    fun clear() = buffer.clear()
 }
