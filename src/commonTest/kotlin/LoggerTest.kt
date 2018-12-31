@@ -17,17 +17,17 @@ class LoggerTest {
     @Test
     fun `should log messages`() {
         logger.info("Test log string")
-        assertTrue { buffer.read().isNotBlank() }
+        assertTrue(buffer.read().isNotBlank())
     }
 
     @Test
     fun `should log correct text`() {
         logger.info("Test log string")
         assertEquals(
-            buffer.read(), """
+            """
                 INFO: Test log string
 
-            """.trimIndent()
+            """.trimIndent(), buffer.read()
         )
     }
 
@@ -42,7 +42,6 @@ class LoggerTest {
         logger.error("")
         logger.fatal("")
         assertEquals(
-            (logger.writer as BufferWriter).read(),
             """
                 TRACE
                 DEBUG
@@ -50,8 +49,8 @@ class LoggerTest {
                 WARNING
                 ERROR
                 FATAL
-
-            """.trimIndent()
+                
+            """.trimIndent(), buffer.read()
         )
     }
 
@@ -61,7 +60,12 @@ class LoggerTest {
         logger.debug("Test debug string")
         logger.trace("Test trace string")
         logger.info("Test info string")
-        assertEquals(buffer.read(), "INFO: Test info string\n")
+        assertEquals(
+            """
+                INFO: Test info string
+
+            """.trimIndent(), buffer.read()
+        )
     }
 
     @Test
@@ -81,7 +85,7 @@ class LoggerTest {
         logger.error("Test error string")
         logger.fatal("Test fatal string")
         assertEquals(
-            buffer.read(), """
+            """
                 TRACE: Test trace string
                 DEBUG: Test debug string
                 INFO: Test info string
@@ -89,7 +93,7 @@ class LoggerTest {
                 ERROR: Test error string
                 FATAL: Test fatal string
 
-            """.trimIndent()
+            """.trimIndent(), buffer.read()
         )
     }
 

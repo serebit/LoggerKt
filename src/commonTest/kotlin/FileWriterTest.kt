@@ -20,7 +20,7 @@ class FileWriterTest {
     fun `should write the correct text to the set file`() {
         val writer = FileWriter(file.absolutePath)
         writer.write("Test text", LogLevel.FATAL)
-        assertEquals(file.readText(), "Test text\n")
+        assertEquals("Test text\n", file.readText())
     }
 
     @Test
@@ -28,7 +28,7 @@ class FileWriterTest {
         val writer = FileWriter(file.absolutePath)
         writer.write("Test string", LogLevel.FATAL)
         writer.write("Second test string", LogLevel.FATAL)
-        assertEquals(file.readText(), "Test string\nSecond test string\n")
+        assertEquals("Test string\nSecond test string\n", file.readText())
     }
 
     @Test
@@ -37,7 +37,7 @@ class FileWriterTest {
         writer.write("Old test string", LogLevel.FATAL)
         writer = FileWriter(file.absolutePath, overwrite = true)
         writer.write("New test string", LogLevel.FATAL)
-        assertEquals(file.readText(), "New test string\n")
+        assertEquals("New test string\n", file.readText())
     }
 
     @Test
@@ -46,7 +46,7 @@ class FileWriterTest {
         writer.write("Old test string", LogLevel.FATAL)
         writer = FileWriter(file.absolutePath, overwrite = false)
         writer.write("New test string", LogLevel.FATAL)
-        assertEquals(file.readText(), "Old test string\nNew test string\n")
+        assertEquals("Old test string\nNew test string\n", file.readText())
     }
 
     @BeforeTest
