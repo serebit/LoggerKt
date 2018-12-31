@@ -1,27 +1,34 @@
 import com.serebit.logkat.LogLevel
 import com.serebit.logkat.Logger
-import com.serebit.logkat.writers.MessageWriter
+import com.serebit.logkat.writers.BufferWriter
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class LoggerTest {
+    private val buffer = BufferWriter()
     private val logger = Logger().apply {
         level = LogLevel.INFO
-        writer = TestWriter()
+        writer = buffer
         messageFormat = { "$level: $message" }
     }
 
     @Test
     fun `should log messages`() {
         logger.info("Test log string")
-        assertTrue { (logger.writer as TestWriter).log.isNotBlank() }
+        assertTrue { buffer.read().isNotBlank() }
     }
 
     @Test
     fun `should log correct text`() {
         logger.info("Test log string")
-        assertEquals((logger.writer as TestWriter).log, "INFO: Test log string\n")
+        assertEquals(
+            buffer.read(), """
+                INFO: Test log string
+
+            """.trimIndent()
+        )
     }
 
     @Test
@@ -34,7 +41,18 @@ class LoggerTest {
         logger.warn("")
         logger.error("")
         logger.fatal("")
-        assertEquals((logger.writer as TestWriter).log, "TRACE\nDEBUG\nINFO\nWARNING\nERROR\nFATAL\n")
+        assertEquals(
+            (logger.writer as BufferWriter).read(),
+            """
+                TRACE
+                DEBUG
+                INFO
+                WARNING
+                ERROR
+                FATAL
+
+            """.trimIndent()
+        )
     }
 
     @Test
@@ -43,14 +61,14 @@ class LoggerTest {
         logger.debug("Test debug string")
         logger.trace("Test trace string")
         logger.info("Test info string")
-        assertEquals((logger.writer as TestWriter).log, "INFO: Test info string\n")
+        assertEquals(buffer.read(), "INFO: Test info string\n")
     }
 
     @Test
     fun `should not log messages with the level OFF`() {
         logger.level = LogLevel.OFF
         logger.fatal("Test fatal string")
-        assertTrue((logger.writer as TestWriter).log.isEmpty())
+        assertTrue(buffer.read().isEmpty())
     }
 
     @Test
@@ -63,7 +81,7 @@ class LoggerTest {
         logger.error("Test error string")
         logger.fatal("Test fatal string")
         assertEquals(
-            (logger.writer as TestWriter).log, """
+            buffer.read(), """
                 TRACE: Test trace string
                 DEBUG: Test debug string
                 INFO: Test info string
@@ -75,12 +93,8 @@ class LoggerTest {
         )
     }
 
-    private class TestWriter : MessageWriter {
-        var log: String = ""
-            private set
-
-        override fun write(message: String, level: LogLevel) {
-            log += "$message\n"
-        }
+    @BeforeTest
+    fun clearBuffer() {
+        buffer.clear()
     }
 }
