@@ -12,6 +12,7 @@ internal actual fun now(): DateTime {
         platformTime.dayOfWeek.value,
         platformTime.hour,
         platformTime.minute,
-        platformTime.second
+        platformTime.second,
+        platformTime.nano
     )
 }
