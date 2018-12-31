@@ -51,7 +51,8 @@ class DateTime(
     val millisecond = floor(nanosecond / 1.0e6).roundToInt().coerceIn(0 until 1000).pad(2)
 
     private fun Int.pad(maxZeroes: Int): String {
-        val prependingZeroes = maxZeroes - floor(log10(this.toFloat())).roundToInt()
+        val log = if (this > 0) floor(log10(toDouble())).roundToInt() else 0
+        val prependingZeroes = maxZeroes - log
         return "${"0".repeat(prependingZeroes)}$this"
     }
 
