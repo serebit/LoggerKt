@@ -21,7 +21,7 @@ build-linux:
   tags:
     - linux
   script:
-    - ./gradlew linuxKlibrary
+    - ./gradlew linuxMainKlibrary
     - ./gradlew linuxTestKlibrary
   artifacts:
     paths:
