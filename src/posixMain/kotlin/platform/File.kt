@@ -4,19 +4,7 @@ import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.toKString
-import platform.posix.PATH_MAX
-import platform.posix.SEEK_END
-import platform.posix.SEEK_SET
-import platform.posix.dirname
-import platform.posix.fclose
-import platform.posix.fopen
-import platform.posix.fprintf
-import platform.posix.fread
-import platform.posix.fseek
-import platform.posix.ftell
-import platform.posix.readlink
-import platform.posix.realpath
-import platform.posix.remove
+import platform.posix.*
 import kotlin.math.absoluteValue
 import kotlin.random.Random
 

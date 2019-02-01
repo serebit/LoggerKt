@@ -4,12 +4,7 @@ import kotlinx.cinterop.alloc
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.pointed
 import kotlinx.cinterop.ptr
-import platform.posix.CLOCK_REALTIME
-import platform.posix.clock_gettime
-import platform.posix.localtime
-import platform.posix.time
-import platform.posix.time_tVar
-import platform.posix.timespec
+import platform.posix.*
 
 internal actual fun now(): DateTime = memScoped {
     val timePointer = alloc<time_tVar>()

@@ -1,7 +1,7 @@
 import com.jfrog.bintray.gradle.BintrayExtension
 
 plugins {
-    kotlin("multiplatform") version "1.3.20-eap-25"
+    kotlin("multiplatform") version "1.3.20"
     id("com.github.ben-manes.versions") version "0.20.0"
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
@@ -16,27 +16,22 @@ repositories {
 }
 
 kotlin {
-    jvm()
-    linuxX64("linux")
-    macosX64("macos")
-    mingwX64("mingw")
-
-    sourceSets {
-        get("commonMain").dependencies {
-            implementation(kotlin("stdlib-common"))
-        }
-        get("commonTest").dependencies {
-            implementation(kotlin("test-common"))
-            implementation(kotlin("test-annotations-common"))
-        }
-        get("jvmMain").dependencies {
-            implementation(kotlin("stdlib-jdk8"))
-        }
-        get("jvmTest").dependencies {
-            implementation(kotlin("test"))
-            implementation(kotlin("test-junit"))
-        }
+    sourceSets["commonMain"].dependencies {
+        implementation(kotlin("stdlib-common"))
     }
+    sourceSets["commonTest"].dependencies {
+        implementation(kotlin("test-common"))
+        implementation(kotlin("test-annotations-common"))
+    }
+    jvm().compilations["main"].defaultSourceSet.dependencies {
+        implementation(kotlin("stdlib-jdk8"))
+    }
+    jvm().compilations["test"].defaultSourceSet.dependencies {
+        implementation(kotlin("test-junit"))
+    }
+    linuxX64("linux").compilations["main"].defaultSourceSet.kotlin.srcDir("src/posixMain/kotlin")
+    macosX64("macos").compilations["main"].defaultSourceSet.kotlin.srcDir("src/posixMain/kotlin")
+    mingwX64("mingw")
 }
 
 bintray {
