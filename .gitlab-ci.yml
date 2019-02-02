@@ -28,6 +28,19 @@ build-linux:
       - build/
       - .gradle/
 
+build-mingw:
+  stage: build
+  image: openjdk:windowsservercore
+  tags:
+    - windows
+  script:
+    - gradlew mingwMainKlibrary
+    - gradlew mingwTestKlibrary
+  artifacts:
+    paths:
+      - build/
+      - .gradle/
+
 test-jvm:
   stage: test
   script:
@@ -44,6 +57,16 @@ test-linux:
     - ./gradlew linuxTest
   dependencies:
     - build-linux
+
+test-mingw:
+  stage: test
+  image: openjdk:windowsservercore
+  tags:
+    - windows
+  script:
+    - gradlew mingwTest
+  dependencies:
+    - build-mingw
 
 pages:
   stage: deploy
