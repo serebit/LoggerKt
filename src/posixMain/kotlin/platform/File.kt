@@ -44,6 +44,7 @@ internal actual class File actual constructor(private val path: String) {
             dirname(buffer)!!.toKString()
         }
         actual val pathSeparator = '/'
-        actual fun createTempFile(prefix: String): File = File("$prefix${Random.nextLong().absoluteValue}.tmp")
+        actual fun createTempFile(prefix: String): File =
+            File("/tmp/$prefix${Random.nextLong().absoluteValue}.tmp")
     }
 }

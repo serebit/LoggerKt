@@ -1,5 +1,6 @@
 import com.serebit.logkat.LogLevel
 import com.serebit.logkat.platform.File
+import com.serebit.logkat.platform.Platform
 import com.serebit.logkat.writers.FileWriter
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -8,6 +9,7 @@ import kotlin.test.assertTrue
 
 class FileWriterTest {
     private val file = File.createTempFile("test")
+    private val ls = Platform.lineSeparator
 
     @Test
     fun `should write to the set file`() {
@@ -20,7 +22,7 @@ class FileWriterTest {
     fun `should write the correct text to the set file`() {
         val writer = FileWriter(file.absolutePath)
         writer.write("Test text", LogLevel.FATAL)
-        assertEquals("Test text\n", file.readText())
+        assertEquals("Test text$ls", file.readText())
     }
 
     @Test
@@ -28,7 +30,7 @@ class FileWriterTest {
         val writer = FileWriter(file.absolutePath)
         writer.write("Test string", LogLevel.FATAL)
         writer.write("Second test string", LogLevel.FATAL)
-        assertEquals("Test string\nSecond test string\n", file.readText())
+        assertEquals("Test string${ls}Second test string$ls", file.readText())
     }
 
     @Test
@@ -37,7 +39,7 @@ class FileWriterTest {
         writer.write("Old test string", LogLevel.FATAL)
         writer = FileWriter(file.absolutePath, overwrite = true)
         writer.write("New test string", LogLevel.FATAL)
-        assertEquals("New test string\n", file.readText())
+        assertEquals("New test string$ls", file.readText())
     }
 
     @Test
@@ -46,7 +48,7 @@ class FileWriterTest {
         writer.write("Old test string", LogLevel.FATAL)
         writer = FileWriter(file.absolutePath, overwrite = false)
         writer.write("New test string", LogLevel.FATAL)
-        assertEquals("Old test string\nNew test string\n", file.readText())
+        assertEquals("Old test string${ls}New test string${ls}", file.readText())
     }
 
     @BeforeTest

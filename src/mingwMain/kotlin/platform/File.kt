@@ -1,28 +1,52 @@
 package com.serebit.logkat.platform
 
-internal actual class File actual constructor(path: String) {
-    actual val absolutePath: String
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+import kotlinx.cinterop.*
+import platform.posix.*
+import platform.windows.GetModuleFileNameA
+import platform.windows.GetTempPathA
+import kotlin.math.absoluteValue
+import kotlin.random.Random
+
+internal actual class File actual constructor(private val path: String) {
+    actual val absolutePath = memScoped {
+        val buffer = allocArray<ByteVar>(PATH_MAX)
+        _fullpath(buffer, path, PATH_MAX)
+        buffer.toKString()
+    }
 
     actual fun appendText(text: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val workingFile = fopen(path, "a")!!
+        fprintf(workingFile, "%s", text)
+        fclose(workingFile)
     }
 
     actual fun readText(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val file = fopen(path, "rb")!!
+        fseek(file, 0, SEEK_END)
+        val fileLength = ftell(file)
+        fseek(file, 0, SEEK_SET)
+        return memScoped {
+            val buffer = allocArray<ByteVar>(fileLength + 1)
+            fread(buffer, fileLength.toULong(), 1, file)
+            fclose(file)
+            buffer.toKString()
+        }
     }
 
-    actual fun delete(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    actual fun delete() = remove(path) == 0
 
     actual companion object {
-        actual val classpath: String
-            get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+        actual val classpath = memScoped {
+            val buffer = allocArray<ByteVar>(PATH_MAX)
+            GetModuleFileNameA(null, buffer, PATH_MAX.toUInt())
+            dirname(buffer)!!.toKString()
+        }
         actual val pathSeparator = '\\'
 
-        actual fun createTempFile(prefix: String): File {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        actual fun createTempFile(prefix: String): File = memScoped {
+            val tempPath = allocArray<ByteVar>(PATH_MAX)
+            GetTempPathA(PATH_MAX, tempPath)
+            File("${dirname(tempPath)!!.toKString()}\\$prefix${Random.nextLong().absoluteValue}.tmp")
         }
     }
 }

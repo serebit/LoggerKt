@@ -1,5 +1,26 @@
 package com.serebit.logkat.time
 
-internal actual fun now(): DateTime {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+import kotlinx.cinterop.alloc
+import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.pointed
+import kotlinx.cinterop.ptr
+import platform.posix.*
+
+internal actual fun now(): DateTime  = memScoped {
+    val timePointer = alloc<time_tVar>()
+    time(timePointer.ptr)
+    val timeInfo = localtime(timePointer.ptr)!!.pointed
+    val timeSpec = alloc<timespec>()
+    clock_gettime(CLOCK_REALTIME, timeSpec.ptr)
+    return DateTime(
+        timeInfo.tm_year,
+        timeInfo.tm_mon,
+        timeInfo.tm_yday,
+        timeInfo.tm_mday,
+        timeInfo.tm_wday,
+        timeInfo.tm_hour,
+        timeInfo.tm_min,
+        timeInfo.tm_sec,
+        timeSpec.tv_nsec
+    )
 }
