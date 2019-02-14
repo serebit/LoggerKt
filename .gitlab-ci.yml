@@ -140,7 +140,7 @@ deploy-mingw:
   tags:
     - windows
   variables:
-    BINTRAY_PUBLICATION: "linux"
+    BINTRAY_PUBLICATION: "mingw"
   when: manual
   only:
     refs:
