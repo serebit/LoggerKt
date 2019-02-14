@@ -60,7 +60,6 @@ test-linux:
 
 test-mingw:
   stage: test
-  image: openjdk:windowsservercore
   tags:
     - windows
   script:
@@ -75,6 +74,7 @@ pages:
   dependencies:
     - build-jvm
     - build-linux
+    - build-mingw
   when: manual
   artifacts:
     paths:
@@ -83,13 +83,64 @@ pages:
     refs:
       - master
 
-deploy:
+deploy-metadata:
   stage: deploy
   script:
     - ./gradlew bintrayUpload
   dependencies:
     - build-jvm
     - build-linux
+  variables:
+    BINTRAY_PUBLICATION: "metadata"
+  when: manual
+  only:
+    refs:
+      - master
+    variables:
+      - $BINTRAY_KEY
+
+deploy-jvm:
+  stage: deploy
+  script:
+    - ./gradlew bintrayUpload
+  dependencies:
+    - build-jvm
+  variables:
+    BINTRAY_PUBLICATION: "jvm"
+  when: manual
+  only:
+    refs:
+      - master
+    variables:
+      - $BINTRAY_KEY
+
+deploy-linux:
+  stage: deploy
+  script:
+    - ./gradlew bintrayUpload
+  dependencies:
+    - build-linux
+  tags:
+    - linux
+  variables:
+    BINTRAY_PUBLICATION: "linux"
+  when: manual
+  only:
+    refs:
+      - master
+    variables:
+      - $BINTRAY_KEY
+
+deploy-mingw:
+  stage: deploy
+  script:
+    - ./gradlew bintrayUpload
+  dependencies:
+    - build-mingw
+  tags:
+    - windows
+  variables:
+    BINTRAY_PUBLICATION: "linux"
   when: manual
   only:
     refs:

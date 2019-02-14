@@ -60,7 +60,7 @@ kotlin {
 bintray {
     user = "serebit"
     key = System.getenv("BINTRAY_KEY")
-    setPublications("metadata", "jvm", "mingw", "linux")
+    System.getenv("BINTRAY_PUBLICATION")?.let { setPublications(it) }
     pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
         repo = "public"
         name = rootProject.name
