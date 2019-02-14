@@ -4,7 +4,7 @@
 [![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Donate][paypal]](https://paypal.me/gdeadshot)
 
-Logkat is a simple, lightweight Kotlin logger with no dependencies and an idiomatic runtime configurator.
+Logkat is a simple, lightweight Kotlin logger with an idiomatic runtime configurator.
 
 ## Usage
 To write a log message, just invoke one of the methods on the `Logger` class. Each method corresponds to a different

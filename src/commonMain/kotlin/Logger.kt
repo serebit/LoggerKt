@@ -1,10 +1,9 @@
 package com.serebit.logkat
 
 import com.serebit.logkat.formatting.FormatterPayload
-import com.serebit.logkat.time.DateTime
-import com.serebit.logkat.time.now
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
+import com.soywiz.klock.DateTime
 
 /**
  * The main logging class, through which messages are processed and sent to an output vector. This class can be
@@ -16,7 +15,7 @@ class Logger {
      * date and time formats.
      */
     var timestampFormat: DateTime.() -> String = {
-        "$year-$month-$day $hour:$minute:$second.$millisecond"
+        "$year-$month-$dayOfMonth $hours:$minutes:$seconds.$milliseconds"
     }
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
@@ -83,7 +82,7 @@ class Logger {
         it to the output vector
         */
         if (level >= this.level && this.level != LogLevel.OFF) {
-            val timestamp = now().timestampFormat()
+            val timestamp = DateTime.now().timestampFormat()
             val formattedMessage = FormatterPayload(timestamp, level, message).let(messageFormat)
             writer.write(formattedMessage, level)
         }
