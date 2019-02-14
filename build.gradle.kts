@@ -5,7 +5,7 @@ import com.serebit.logkat.gradle.kotlinEap
 import com.serebit.logkat.gradle.soywiz
 
 plugins {
-    kotlin("multiplatform") version "1.3.20"
+    kotlin("multiplatform") version "1.3.21"
     id("com.github.ben-manes.versions") version "0.20.0"
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
