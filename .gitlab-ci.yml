@@ -1,4 +1,4 @@
-image: registry.gitlab.com/serebit/logkat:0.4.3
+image: registry.gitlab.com/serebit/logkat
 
 stages:
   - build
@@ -17,7 +17,6 @@ build-jvm:
 
 build-linux:
   stage: build
-  image: registry.gitlab.com/serebit/logkat:linux-0.4.3
   tags:
     - linux
   script:
@@ -50,7 +49,6 @@ test-jvm:
 
 test-linux:
   stage: test
-  image: registry.gitlab.com/serebit/logkat:linux-0.4.3
   tags:
     - linux
   script:
