@@ -55,7 +55,7 @@ test-mingw:
   stage: test
   tags:
     - windows
-  script: gradlew mingwTest
+  script: ./gradlew mingwTest
   dependencies:
     - build-mingw
 
@@ -105,8 +105,7 @@ deploy-jvm:
 
 deploy-linux:
   stage: deploy
-  script:
-    - ./gradlew publishLinuxPublicationToMavenLocal bintrayUpload
+  script: ./gradlew publishLinuxPublicationToMavenLocal bintrayUpload
   dependencies:
     - build-linux
   tags:
@@ -122,8 +121,7 @@ deploy-linux:
 
 deploy-mingw:
   stage: deploy
-  script:
-    - ./gradlew publishMingwPublicationToMavenLocal bintrayUpload
+  script: ./gradlew publishMingwPublicationToMavenLocal bintrayUpload
   dependencies:
     - build-mingw
   tags:
