@@ -5,11 +5,13 @@ stages:
   - test
   - deploy
 
+build-metadata:
+  stage: build
+  script: ./gradlew metadataMainClasses metadataJar
+
 build-jvm:
   stage: build
-  script:
-    - ./gradlew jvmMainClasses
-    - ./gradlew jvmTestClasses
+  script: ./gradlew jvmMainClasses jvmTestClasses jvmJar
   artifacts:
     paths:
       - build/
@@ -19,9 +21,7 @@ build-linux:
   stage: build
   tags:
     - linux
-  script:
-    - ./gradlew linuxMainKlibrary
-    - ./gradlew linuxTestKlibrary
+  script: ./gradlew linuxMainKlibrary linuxTestKlibrary linkTestDebugExecutableLinux
   artifacts:
     paths:
       - build/
@@ -29,12 +29,9 @@ build-linux:
 
 build-mingw:
   stage: build
-  image: openjdk:windowsservercore
   tags:
     - windows
-  script:
-    - gradlew mingwMainKlibrary
-    - gradlew mingwTestKlibrary
+  script: gradlew mingwMainKlibrary mingwTestKlibrary linkTestDebugExecutableMingw
   artifacts:
     paths:
       - build/
@@ -42,8 +39,7 @@ build-mingw:
 
 test-jvm:
   stage: test
-  script:
-    - ./gradlew jvmTest
+  script: ./gradlew jvmTest
   dependencies:
     - build-jvm
 
@@ -51,8 +47,7 @@ test-linux:
   stage: test
   tags:
     - linux
-  script:
-    - ./gradlew linuxTest
+  script: ./gradlew linuxTest
   dependencies:
     - build-linux
 
@@ -60,8 +55,7 @@ test-mingw:
   stage: test
   tags:
     - windows
-  script:
-    - gradlew mingwTest
+  script: gradlew mingwTest
   dependencies:
     - build-mingw
 
@@ -83,11 +77,9 @@ pages:
 
 deploy-metadata:
   stage: deploy
-  script:
-    - ./gradlew bintrayUpload
+  script: ./gradlew publishMetadataPublicationToMavenLocal bintrayUpload
   dependencies:
-    - build-jvm
-    - build-linux
+    - build-metadata
   variables:
     BINTRAY_PUBLICATION: "metadata"
   when: manual
@@ -99,8 +91,7 @@ deploy-metadata:
 
 deploy-jvm:
   stage: deploy
-  script:
-    - ./gradlew bintrayUpload
+  script: ./gradlew publishJvmPublicationToMavenLocal bintrayUpload
   dependencies:
     - build-jvm
   variables:
@@ -115,7 +106,7 @@ deploy-jvm:
 deploy-linux:
   stage: deploy
   script:
-    - ./gradlew bintrayUpload
+    - ./gradlew publishLinuxPublicationToMavenLocal bintrayUpload
   dependencies:
     - build-linux
   tags:
@@ -132,7 +123,7 @@ deploy-linux:
 deploy-mingw:
   stage: deploy
   script:
-    - ./gradlew bintrayUpload
+    - ./gradlew publishMingwPublicationToMavenLocal bintrayUpload
   dependencies:
     - build-mingw
   tags:
