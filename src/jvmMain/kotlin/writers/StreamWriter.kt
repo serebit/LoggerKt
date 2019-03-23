@@ -7,7 +7,6 @@ import java.io.PrintStream
 /**
  * An implementation of [MessageWriter] that outputs to the given stream.
  *
- * @constructor Creates a new instance with the specified [OutputStream].
  * @param output The output stream to be printed to.
  */
 class StreamWriter(output: OutputStream) : MessageWriter {

@@ -1,4 +1,4 @@
-package com.serebit.logkat.platform
+package com.serebit.logkat.internal
 
 internal expect class File(path: String) {
     val absolutePath: String
@@ -14,4 +14,9 @@ internal expect class File(path: String) {
         val pathSeparator: Char
         fun createTempFile(prefix: String): File
     }
+}
+
+internal expect object Platform {
+    val supportsAnsiColors: Boolean
+    val lineSeparator: String
 }

@@ -1,7 +1,7 @@
 package com.serebit.logkat.writers
 
 import com.serebit.logkat.LogLevel
-import com.serebit.logkat.platform.Platform
+import com.serebit.logkat.internal.Platform
 
 /**
  * An implementation of [MessageWriter] that writes to a string buffer. The chronological order of log entries is not

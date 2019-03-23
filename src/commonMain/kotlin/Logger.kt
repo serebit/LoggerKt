@@ -1,6 +1,5 @@
 package com.serebit.logkat
 
-import com.serebit.logkat.formatting.FormatterPayload
 import com.serebit.logkat.writers.ConsoleWriter
 import com.serebit.logkat.writers.MessageWriter
 import com.soywiz.klock.DateTime
@@ -33,43 +32,31 @@ class Logger {
 
     /**
      * Logs a [message] with the level [TRACE][LogLevel.TRACE].
-     *
-     * @param message The message to log.
      */
     fun trace(message: String) = log(LogLevel.TRACE, message)
 
     /**
      * Logs a [message] with the level [DEBUG][LogLevel.DEBUG].
-     *
-     * @param message The message to log.
      */
     fun debug(message: String) = log(LogLevel.DEBUG, message)
 
     /**
      * Logs a [message] with the level [INFO][LogLevel.INFO].
-     *
-     * @param message The message to log.
      */
     fun info(message: String) = log(LogLevel.INFO, message)
 
     /**
      * Logs a [message] with the level [WARNING][LogLevel.WARNING].
-     *
-     * @param message The message to log.
      */
     fun warn(message: String) = log(LogLevel.WARNING, message)
 
     /**
      * Logs a [message] with the level [ERROR][LogLevel.ERROR].
-     *
-     * @param message The message to log.
      */
     fun error(message: String) = log(LogLevel.ERROR, message)
 
     /**
      * Logs a [message] with the level [FATAL][LogLevel.FATAL].
-     *
-     * @param message The message to log.
      */
     fun fatal(message: String) = log(LogLevel.FATAL, message)
 
@@ -77,10 +64,6 @@ class Logger {
      * Logs a [message] with the given [level], unless the given [level] is [LogLevel.OFF].
      */
     fun log(level: LogLevel, message: String) {
-        /*
-        if the message's level is higher than or equal to the level setting, and the level setting isn't OFF, write
-        it to the output vector
-        */
         if (level >= this.level && this.level != LogLevel.OFF) {
             val timestamp = DateTime.now().timestampFormat()
             val formattedMessage = FormatterPayload(timestamp, level, message).let(messageFormat)
@@ -88,3 +71,5 @@ class Logger {
         }
     }
 }
+
+data class FormatterPayload(val timestamp: String, val level: LogLevel, val message: String)

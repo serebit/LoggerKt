@@ -10,6 +10,7 @@ import com.serebit.logkat.Logger
  * @see ConsoleWriter
  * @see FileWriter
  * @see MultiWriter
+ * @see BufferWriter
  */
 interface MessageWriter {
     /**

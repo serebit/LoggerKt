@@ -12,5 +12,5 @@ fun RepositoryHandler.kotlinEap() = maven("https://dl.bintray.com/kotlin/kotlin-
 fun RepositoryHandler.soywiz() = maven("https://dl.bintray.com/soywiz/soywiz")
 
 object Versions {
-    const val KLOCK = "1.2.1"
+    const val KLOCK = "1.3.1"
 }

@@ -1,6 +1,7 @@
+
 import com.serebit.logkat.LogLevel
-import com.serebit.logkat.platform.File
-import com.serebit.logkat.platform.Platform
+import com.serebit.logkat.internal.File
+import com.serebit.logkat.internal.Platform
 import com.serebit.logkat.writers.FileWriter
 import kotlin.test.BeforeTest
 import kotlin.test.Test
