@@ -14,7 +14,13 @@ class Logger {
      * date and time formats.
      */
     var timestampFormat: DateTime.() -> String = {
-        "$year-$month-$dayOfMonth $hours:$minutes:$seconds.$milliseconds"
+        val newMonth = yearMonth.month1.toString().padStart(2, '0')
+        val newDay = dayOfMonth.toString().padStart(2, '0')
+        val newHours = hours.toString().padStart(2, '0')
+        val newMinutes = minutes.toString().padStart(2, '0')
+        val newSeconds = seconds.toString().padStart(2, '0')
+        val newMilliseconds = milliseconds.toString().padStart(3, '0')
+        "${year.year}-$newMonth-$newDay $newHours:$newMinutes:$newSeconds.$newMilliseconds"
     }
     /**
      * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
