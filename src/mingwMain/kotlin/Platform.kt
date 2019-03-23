@@ -1,13 +1,14 @@
 package com.serebit.logkat.internal
 
+import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.toKString
-import kotlin.math.absoluteValue
-import kotlin.random.Random
 import platform.posix.*
 import platform.windows.GetModuleFileNameA
 import platform.windows.GetTempPathA
+import kotlin.math.absoluteValue
+import kotlin.random.Random
 
 internal actual class File actual constructor(private val path: String) {
     actual val absolutePath = memScoped {
