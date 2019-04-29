@@ -21,7 +21,7 @@ build-linuxX64:
   stage: build
   tags:
     - linux
-  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinux
+  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinuxX64
   artifacts:
     paths:
       - build/
@@ -31,7 +31,7 @@ build-mingwX64:
   stage: build
   tags:
     - windows
-  script: gradlew mingwX64MainKlibrary mingwX64TestKlibrary linkTestDebugExecutableMingw
+  script: gradlew mingwX64MainKlibrary mingwX64TestKlibrary linkTestDebugExecutableMingwX64
   artifacts:
     paths:
       - build/
@@ -105,7 +105,7 @@ deploy-jvm:
 
 deploy-linuxX64:
   stage: deploy
-  script: ./gradlew publishLinuxPublicationToMavenLocal bintrayUpload
+  script: ./gradlew publishLinuxX64PublicationToMavenLocal bintrayUpload
   dependencies:
     - build-linuxX64
   tags:
@@ -121,7 +121,7 @@ deploy-linuxX64:
 
 deploy-mingwX64:
   stage: deploy
-  script: ./gradlew publishMingwPublicationToMavenLocal bintrayUpload
+  script: ./gradlew publishMingwX64PublicationToMavenLocal bintrayUpload
   dependencies:
     - build-mingwX64
   tags:
