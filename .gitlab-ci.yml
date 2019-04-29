@@ -17,21 +17,21 @@ build-jvm:
       - build/
       - .gradle/
 
-build-linux:
+build-linuxX64:
   stage: build
   tags:
     - linux
-  script: ./gradlew linuxMainKlibrary linuxTestKlibrary linkTestDebugExecutableLinux
+  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinux
   artifacts:
     paths:
       - build/
       - .gradle/
 
-build-mingw:
+build-mingwX64:
   stage: build
   tags:
     - windows
-  script: gradlew mingwMainKlibrary mingwTestKlibrary linkTestDebugExecutableMingw
+  script: gradlew mingwX64MainKlibrary mingwX64TestKlibrary linkTestDebugExecutableMingw
   artifacts:
     paths:
       - build/
@@ -43,21 +43,21 @@ test-jvm:
   dependencies:
     - build-jvm
 
-test-linux:
+test-linuxX64:
   stage: test
   tags:
     - linux
-  script: ./gradlew linuxTest
+  script: ./gradlew linuxX64Test
   dependencies:
-    - build-linux
+    - build-linuxX64
 
-test-mingw:
+test-mingwX64:
   stage: test
   tags:
     - windows
-  script: ./gradlew mingwTest
+  script: ./gradlew mingwX64Test
   dependencies:
-    - build-mingw
+    - build-mingwX64
 
 pages:
   stage: deploy
@@ -65,8 +65,8 @@ pages:
     - ./gradlew dokka
   dependencies:
     - build-jvm
-    - build-linux
-    - build-mingw
+    - build-linuxX64
+    - build-mingwX64
   when: manual
   artifacts:
     paths:
@@ -103,15 +103,15 @@ deploy-jvm:
     variables:
       - $BINTRAY_KEY
 
-deploy-linux:
+deploy-linuxX64:
   stage: deploy
   script: ./gradlew publishLinuxPublicationToMavenLocal bintrayUpload
   dependencies:
-    - build-linux
+    - build-linuxX64
   tags:
     - linux
   variables:
-    BINTRAY_PUBLICATION: "linux"
+    BINTRAY_PUBLICATION: "linuxX64"
   when: manual
   only:
     refs:
@@ -119,15 +119,15 @@ deploy-linux:
     variables:
       - $BINTRAY_KEY
 
-deploy-mingw:
+deploy-mingwX64:
   stage: deploy
   script: ./gradlew publishMingwPublicationToMavenLocal bintrayUpload
   dependencies:
-    - build-mingw
+    - build-mingwX64
   tags:
     - windows
   variables:
-    BINTRAY_PUBLICATION: "mingw"
+    BINTRAY_PUBLICATION: "mingwX64"
   when: manual
   only:
     refs:
