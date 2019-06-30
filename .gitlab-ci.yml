@@ -1,86 +1,37 @@
-image: registry.gitlab.com/serebit/logkat
+image: registry.gitlab.com/serebit/logkat:latest
 
-stages:
-  - build
-  - deploy
+variables:
+  PUBLISH_BUILD_SCAN: "true"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  DOCKER_DRIVER: overlay2
 
-build-metadata:
+.deploy-conditions: &deploy-conditions
+  when: manual
+  only:
+    refs:
+      - master
+    variables:
+      - $BINTRAY_KEY
+
+build:
   stage: build
-  script: ./gradlew metadataMainClasses metadataJar
-
-build-jvm:
-  stage: build
-  script: ./gradlew jvmMainClasses jvmTestClasses jvmJar jvmTest
+  script: ./gradlew build
   artifacts:
-    paths:
-      - build/
-      - .gradle/
+    untracked: true
 
-build-linuxX64:
-  stage: build
-  tags:
-    - linux
-  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinuxX64 linuxX64Test
-  artifacts:
-    paths:
-      - build/
-      - .gradle/
+deploy:
+  stage: deploy
+  script: ./gradlew publishAllPublicationsToBintrayRepository
+  dependencies:
+    - build
+  <<: *deploy-conditions
 
 pages:
   stage: deploy
-  script:
-    - ./gradlew dokka
+  script: ./gradlew dokka
   dependencies:
-    - build-jvm
-    - build-linuxX64
-  when: manual
+    - build
   artifacts:
     paths:
       - public
-  only:
-    refs:
-      - master
-
-deploy-metadata:
-  stage: deploy
-  script: ./gradlew publishMetadataPublicationToMavenLocal bintrayUpload
-  dependencies:
-    - build-metadata
-  variables:
-    BINTRAY_PUBLICATION: "metadata"
-  when: manual
-  only:
-    refs:
-      - master
-    variables:
-      - $BINTRAY_KEY
-
-deploy-jvm:
-  stage: deploy
-  script: ./gradlew publishJvmPublicationToMavenLocal bintrayUpload
-  dependencies:
-    - build-jvm
-  variables:
-    BINTRAY_PUBLICATION: "jvm"
-  when: manual
-  only:
-    refs:
-      - master
-    variables:
-      - $BINTRAY_KEY
-
-deploy-linuxX64:
-  stage: deploy
-  script: ./gradlew publishLinuxX64PublicationToMavenLocal bintrayUpload
-  dependencies:
-    - build-linuxX64
-  tags:
-    - linux
-  variables:
-    BINTRAY_PUBLICATION: "linuxX64"
-  when: manual
-  only:
-    refs:
-      - master
-    variables:
-      - $BINTRAY_KEY
+  <<: *deploy-conditions
