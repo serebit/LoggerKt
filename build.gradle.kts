@@ -1,59 +1,40 @@
-import com.jfrog.bintray.gradle.BintrayExtension
 import com.serebit.logkat.gradle.Versions
 import com.serebit.logkat.gradle.api
-import com.serebit.logkat.gradle.kotlinEap
-import com.serebit.logkat.gradle.soywiz
+import com.serebit.logkat.gradle.configureBintray
 
 plugins {
-    kotlin("multiplatform") version "1.3.31"
+    kotlin("multiplatform") version "1.3.40"
     id("com.github.ben-manes.versions") version "0.21.0"
-    id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
 }
 
 group = "com.serebit"
-version = "0.4.5"
+version = "0.4.6"
 
 repositories {
     jcenter()
-    kotlinEap()
-    soywiz()
 }
 
 kotlin {
     sourceSets.commonMain.get().dependencies {
         implementation(kotlin("stdlib-common"))
-        api(group = "com.soywiz", name = "klock-metadata", version = Versions.KLOCK)
+        api(group = "com.soywiz.korlibs.klock", name = "klock", version = Versions.KLOCK)
     }
     sourceSets.commonTest.get().dependencies {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
     }
 
-    jvm().compilations["main"].defaultSourceSet.dependencies {
-        implementation(kotlin("stdlib-jdk8"))
-        api(group = "com.soywiz", name = "klock-jvm", version = Versions.KLOCK)
-    }
-    jvm().compilations["test"].defaultSourceSet.dependencies {
-        implementation(kotlin("test-junit"))
-    }
-
-    linuxX64().compilations["main"].defaultSourceSet.dependencies {
-        api(group = "com.soywiz", name = "klock-linuxx64", version = Versions.KLOCK)
+    jvm {
+        compilations["main"].defaultSourceSet.dependencies {
+            implementation(kotlin("stdlib-jdk8"))
+        }
+        compilations["test"].defaultSourceSet.dependencies {
+            implementation(kotlin("test-junit"))
+        }
     }
 
-    mingwX64().compilations["main"].defaultSourceSet.dependencies {
-        api(group = "com.soywiz", name = "klock-mingwx64", version = Versions.KLOCK)
-    }
+    linuxX64()
 }
 
-bintray {
-    user = "serebit"
-    key = System.getenv("BINTRAY_KEY")
-    System.getenv("BINTRAY_PUBLICATION")?.let { setPublications(it) }
-    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
-        repo = "public"
-        name = rootProject.name
-        version.name = project.version.toString()
-    })
-}
+publishing.configureBintray("serebit", "public", rootProject.name, System.getenv("BINTRAY_KEY"))

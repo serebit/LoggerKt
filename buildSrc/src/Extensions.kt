@@ -1,16 +1,25 @@
 package com.serebit.logkat.gradle
 
-import org.gradle.api.artifacts.dsl.RepositoryHandler
+import org.gradle.api.publish.PublishingExtension
 import org.gradle.kotlin.dsl.maven
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 fun KotlinDependencyHandler.api(group: String, name: String, version: String) = api("$group:$name:$version")
-fun KotlinDependencyHandler.implementation(group: String, name: String, version: String) =
-    implementation("$group:$name:$version")
 
-fun RepositoryHandler.kotlinEap() = maven("https://dl.bintray.com/kotlin/kotlin-eap")
-fun RepositoryHandler.soywiz() = maven("https://dl.bintray.com/soywiz/soywiz")
+fun PublishingExtension.configureBintray(
+    userName: String,
+    repositoryName: String,
+    projectName: String,
+    accessKey: String?
+) = repositories.maven("https://api.bintray.com/maven/serebit/$repositoryName/$projectName/;publish=0") {
+    name = "bintray"
+
+    credentials {
+        username = userName
+        accessKey?.let { password = it }
+    }
+}
 
 object Versions {
-    const val KLOCK = "1.4.0"
+    const val KLOCK = "1.5.0"
 }
