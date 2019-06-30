@@ -2,7 +2,6 @@ image: registry.gitlab.com/serebit/logkat
 
 stages:
   - build
-  - test
   - deploy
 
 build-metadata:
@@ -11,7 +10,7 @@ build-metadata:
 
 build-jvm:
   stage: build
-  script: ./gradlew jvmMainClasses jvmTestClasses jvmJar
+  script: ./gradlew jvmMainClasses jvmTestClasses jvmJar jvmTest
   artifacts:
     paths:
       - build/
@@ -21,43 +20,11 @@ build-linuxX64:
   stage: build
   tags:
     - linux
-  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinuxX64
+  script: ./gradlew linuxX64MainKlibrary linuxX64TestKlibrary linkTestDebugExecutableLinuxX64 linuxX64Test
   artifacts:
     paths:
       - build/
       - .gradle/
-
-build-mingwX64:
-  stage: build
-  tags:
-    - windows
-  script: gradlew mingwX64MainKlibrary mingwX64TestKlibrary linkTestDebugExecutableMingwX64
-  artifacts:
-    paths:
-      - build/
-      - .gradle/
-
-test-jvm:
-  stage: test
-  script: ./gradlew jvmTest
-  dependencies:
-    - build-jvm
-
-test-linuxX64:
-  stage: test
-  tags:
-    - linux
-  script: ./gradlew linuxX64Test
-  dependencies:
-    - build-linuxX64
-
-test-mingwX64:
-  stage: test
-  tags:
-    - windows
-  script: ./gradlew mingwX64Test
-  dependencies:
-    - build-mingwX64
 
 pages:
   stage: deploy
@@ -66,7 +33,6 @@ pages:
   dependencies:
     - build-jvm
     - build-linuxX64
-    - build-mingwX64
   when: manual
   artifacts:
     paths:
@@ -112,22 +78,6 @@ deploy-linuxX64:
     - linux
   variables:
     BINTRAY_PUBLICATION: "linuxX64"
-  when: manual
-  only:
-    refs:
-      - master
-    variables:
-      - $BINTRAY_KEY
-
-deploy-mingwX64:
-  stage: deploy
-  script: ./gradlew publishMingwX64PublicationToMavenLocal bintrayUpload
-  dependencies:
-    - build-mingwX64
-  tags:
-    - windows
-  variables:
-    BINTRAY_PUBLICATION: "mingwX64"
   when: manual
   only:
     refs:
