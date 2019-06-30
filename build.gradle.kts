@@ -8,7 +8,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.serebit"
+group = "com.serebit.logkat"
 version = "0.4.6"
 
 repositories {
