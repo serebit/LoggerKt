@@ -4,7 +4,7 @@
 [![License][license]](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Donate][paypal]](https://paypal.me/gdeadshot)
 
-Logkat is a simple, lightweight Kotlin logger with an idiomatic runtime configurator.
+Logkat is a simple, lightweight Kotlin logger with an idiomatic runtime configurator. This is only meant to be used for my own projects, and as such, I make *no* guarantees for backwards compatibility.
 
 ## Usage
 To write a log message, just invoke one of the methods on the `Logger` class. Each method corresponds to a different
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.serebit", name: "logkat-jvm", version: "0.4.5"
+    compile group: "com.serebit", name: "logkat-jvm", version: "0.4.6"
 }
 ```
 ### Gradle (Kotlin build script)
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compile(group = "com.serebit", name = "logkat-jvm", version = "0.4.5")
+    compile(group = "com.serebit", name = "logkat-jvm", version = "0.4.6")
 }
 ```
 ### Maven
