@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    compile group: "com.serebit", name: "logkat-jvm", version: "0.4.6"
+    compile group: "com.serebit", name: "logkat-jvm", version: "0.4.7"
 }
 ```
 ### Gradle (Kotlin build script)
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    compile(group = "com.serebit", name = "logkat-jvm", version = "0.4.6")
+    compile(group = "com.serebit", name = "logkat-jvm", version = "0.4.7")
 }
 ```
 ### Maven
@@ -51,7 +51,7 @@ dependencies {
 <dependency>
     <groupId>com.serebit</groupId>
     <artifactId>logkat</artifactId>
-    <version>0.4.5</version>
+    <version>0.4.7</version>
 </dependency>
 ```
 
