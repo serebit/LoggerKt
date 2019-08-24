@@ -5,6 +5,8 @@ import org.gradle.kotlin.dsl.maven
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 fun KotlinDependencyHandler.api(group: String, name: String, version: String) = api("$group:$name:$version")
+fun KotlinDependencyHandler.implementation(group: String, name: String, version: String) =
+    implementation("$group:$name:$version")
 
 fun PublishingExtension.configureBintray(
     userName: String,
@@ -21,5 +23,6 @@ fun PublishingExtension.configureBintray(
 }
 
 object Versions {
-    const val KLOCK = "1.5.0"
+    const val KLOCK = "1.6.2"
+    const val JUPITER = "5.5.1"
 }

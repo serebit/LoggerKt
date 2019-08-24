@@ -1,10 +1,11 @@
 import com.serebit.logkat.gradle.Versions
 import com.serebit.logkat.gradle.api
 import com.serebit.logkat.gradle.configureBintray
+import com.serebit.logkat.gradle.implementation
 
 plugins {
-    kotlin("multiplatform") version "1.3.40"
-    id("com.github.ben-manes.versions") version "0.21.0"
+    kotlin("multiplatform") version "1.3.50"
+    id("com.github.ben-manes.versions") version "0.22.0"
     `maven-publish`
 }
 
@@ -30,11 +31,14 @@ kotlin {
             implementation(kotlin("stdlib-jdk8"))
         }
         compilations["test"].defaultSourceSet.dependencies {
-            implementation(kotlin("test-junit"))
+            implementation(kotlin("test-junit5"))
+            implementation(group = "org.junit.jupiter", name = "junit-jupiter", version = Versions.JUPITER)
         }
     }
 
     linuxX64()
 }
+
+tasks.withType<Test> { useJUnitPlatform() }
 
 publishing.configureBintray("serebit", "public", rootProject.name, System.getenv("BINTRAY_KEY"))
