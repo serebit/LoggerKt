@@ -16,6 +16,7 @@ variables:
 build:
   stage: build
   script: ./gradlew build
+  allow_failure: true
   artifacts:
     untracked: true
 
