@@ -11,10 +11,12 @@ import com.soywiz.klock.DateTime
  * @property level The logLevel from which the logger will output log messages. Defaults to [LogLevel.WARNING].
  * @property writer The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter,
  * or a custom implementation.
+ * @property messageFormat The log message formatter.
  */
 class Logger(
     var level: LogLevel = LogLevel.WARNING,
-    var writer: MessageWriter = ConsoleWriter()
+    var writer: MessageWriter = ConsoleWriter(),
+    var messageFormat: FormatterPayload.() -> String = { "$timestamp $level: $message" }
 ) {
 
     /**
@@ -39,9 +41,6 @@ class Logger(
         val newMilliseconds = milliseconds.toString().padStart(3, '0')
         "${year.year}-$newMonth-$newDay $newHours:$newMinutes:$newSeconds.$newMilliseconds"
     }
-
-    /** The log message formatter. */
-    var messageFormat: FormatterPayload.() -> String = { "$timestamp $level: $message" }
 
     /** Logs a [message] with the given [level], unless the given [level] is [LogLevel.OFF]. */
     fun log(level: LogLevel, message: String) {
