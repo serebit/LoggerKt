@@ -5,13 +5,30 @@ import com.serebit.logkat.writers.MessageWriter
 import com.soywiz.klock.DateTime
 
 /**
- * The main logging class, through which messages are processed and sent to an output vector. This class can be
- * configured at runtime using several utility functions and properties.
+ * The main logging class, through which messages are processed and sent to an output vector.
+ * This class can be configured at runtime using several utility functions and properties.
+ *
+ * @property level The logLevel from which the logger will output log messages. Defaults to [LogLevel.WARNING].
+ * @property writer The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter,
+ * or a custom implementation.
  */
-class Logger {
+class Logger(
+    var level: LogLevel = LogLevel.WARNING,
+    var writer: MessageWriter = ConsoleWriter()
+) {
+
     /**
-     * Convenience variable for setting the format of the timestamp used in log messages. Defaults to the ISO-8601
-     * date and time formats.
+     * Used in conjunction with the [messageFormat] to format the contents of each log message.
+     *
+     * @property timestamp The time of the log message.
+     * @property level The [LogLevel] of the message.
+     * @property message The content of the message.
+     */
+    data class FormatterPayload(val timestamp: String, val level: LogLevel, val message: String)
+
+    /**
+     * Convenience variable for setting the format of the timestamp used in log messages.
+     * Defaults to the ISO-8601 date and time formats.
      */
     var timestampFormat: DateTime.() -> String = {
         val newMonth = yearMonth.month1.toString().padStart(2, '0')
@@ -22,53 +39,11 @@ class Logger {
         val newMilliseconds = milliseconds.toString().padStart(3, '0')
         "${year.year}-$newMonth-$newDay $newHours:$newMinutes:$newSeconds.$newMilliseconds"
     }
-    /**
-     * The [LogLevel] from which the logger will output log messages. Defaults to [LogLevel.WARNING].
-     */
-    var level: LogLevel = LogLevel.WARNING
-    /**
-     * The log message formatter.
-     */
+
+    /** The log message formatter. */
     var messageFormat: FormatterPayload.() -> String = { "$timestamp $level: $message" }
-    /**
-     * The [MessageWriter] that will be used to output log messages. Can be any predefined MessageWriter, or a custom
-     * implementation.
-     */
-    var writer: MessageWriter = ConsoleWriter()
 
-    /**
-     * Logs a [message] with the level [TRACE][LogLevel.TRACE].
-     */
-    fun trace(message: String) = log(LogLevel.TRACE, message)
-
-    /**
-     * Logs a [message] with the level [DEBUG][LogLevel.DEBUG].
-     */
-    fun debug(message: String) = log(LogLevel.DEBUG, message)
-
-    /**
-     * Logs a [message] with the level [INFO][LogLevel.INFO].
-     */
-    fun info(message: String) = log(LogLevel.INFO, message)
-
-    /**
-     * Logs a [message] with the level [WARNING][LogLevel.WARNING].
-     */
-    fun warn(message: String) = log(LogLevel.WARNING, message)
-
-    /**
-     * Logs a [message] with the level [ERROR][LogLevel.ERROR].
-     */
-    fun error(message: String) = log(LogLevel.ERROR, message)
-
-    /**
-     * Logs a [message] with the level [FATAL][LogLevel.FATAL].
-     */
-    fun fatal(message: String) = log(LogLevel.FATAL, message)
-
-    /**
-     * Logs a [message] with the given [level], unless the given [level] is [LogLevel.OFF].
-     */
+    /** Logs a [message] with the given [level], unless the given [level] is [LogLevel.OFF]. */
     fun log(level: LogLevel, message: String) {
         if (level >= this.level && this.level != LogLevel.OFF) {
             val timestamp = DateTime.now().timestampFormat()
@@ -76,6 +51,23 @@ class Logger {
             writer.write(formattedMessage, level)
         }
     }
+
 }
 
-data class FormatterPayload(val timestamp: String, val level: LogLevel, val message: String)
+/** Logs a [message] with the level [DEBUG][LogLevel.DEBUG]. */
+fun Logger.debug(message: String): Unit = log(LogLevel.DEBUG, message)
+
+/** Logs a [message] with the level [INFO][LogLevel.INFO]. */
+fun Logger.info(message: String): Unit = log(LogLevel.INFO, message)
+
+/** Logs a [message] with the level [WARNING][LogLevel.WARNING]. */
+fun Logger.warn(message: String): Unit = log(LogLevel.WARNING, message)
+
+/** Logs a [message] with the level [ERROR][LogLevel.ERROR]. */
+fun Logger.error(message: String): Unit = log(LogLevel.ERROR, message)
+
+/** Logs a [message] with the level [TRACE][LogLevel.TRACE]. */
+fun Logger.trace(message: String): Unit = log(LogLevel.TRACE, message)
+
+/** Logs a [message] with the level [FATAL][LogLevel.FATAL]. */
+fun Logger.fatal(message: String): Unit = log(LogLevel.FATAL, message)
