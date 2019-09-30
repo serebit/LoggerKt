@@ -15,8 +15,6 @@ import com.serebit.logkat.internal.File
 class FileWriter(path: String, overwrite: Boolean = false) : MessageWriter {
     private val file = File(path).also { if (overwrite) it.delete() }
 
-    /**
-     * Appends the given [message] to the file.
-     */
-    override fun write(message: String, level: LogLevel) = file.appendText("$message\n")
+    /** Appends the given [message] to the file. */
+    override fun write(message: String, level: LogLevel): Unit = file.appendText("$message\n")
 }

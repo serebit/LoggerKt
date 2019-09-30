@@ -1,10 +1,10 @@
 package com.serebit.logkat
 
-import com.serebit.logkat.formatting.ansiGray
-import com.serebit.logkat.formatting.ansiNormal
-import com.serebit.logkat.formatting.ansiRed
-import com.serebit.logkat.formatting.ansiWhite
-import com.serebit.logkat.formatting.ansiYellow
+import com.serebit.logkat.internal.ansiGray
+import com.serebit.logkat.internal.ansiNormal
+import com.serebit.logkat.internal.ansiRed
+import com.serebit.logkat.internal.ansiWhite
+import com.serebit.logkat.internal.ansiYellow
 import com.serebit.logkat.writers.ConsoleWriter
 
 /**
