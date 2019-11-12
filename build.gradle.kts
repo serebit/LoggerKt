@@ -2,12 +2,14 @@ import com.serebit.logkat.buildsrc.*
 
 plugins {
     kotlin("multiplatform") version "1.3.50"
+    id("org.jetbrains.dokka") version "0.10.0"
     id("com.github.ben-manes.versions") version "0.27.0"
     `maven-publish`
 }
 
 group = "com.serebit.logkat"
-version = "0.5.0-SNAPSHOT"
+version = System.getenv("SNAPSHOT_VERSION") ?: "0.5.0-SNAPSHOT"
+description = "A lightweight and simple Kotlin logger"
 
 repositories {
     mavenCentral()
@@ -38,6 +40,21 @@ kotlin {
 }
 
 tasks.withType<Test> { useJUnitPlatform() }
+
+tasks.dokka {
+    outputDirectory = "$rootDir/public/docs"
+
+    multiplatform {
+        register("global") {
+            perPackageOption {
+                prefix = "com.serebit.logkat.internal"
+                suppress = true
+            }
+        }
+        register("jvm")
+        register("linuxX64")
+    }
+}
 
 publishing {
     createBintrayRepositories()
