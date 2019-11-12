@@ -3,7 +3,7 @@ image: registry.gitlab.com/serebit/logkat:latest
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   GIT_DEPTH: 10
-  DOCKER_DRIVER: overlay2
+  GRADLE_HOME: /root/.gradle
 
 .deploy-conditions: &deploy-conditions
   dependencies:
