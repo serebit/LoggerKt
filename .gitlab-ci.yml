@@ -16,7 +16,7 @@ variables:
 
 build:
   stage: build
-  script: ./gradlew assemble # TODO change this to build once kotlin 1.3.60 comes out
+  script: ./gradlew assemble --info # TODO change this to build once kotlin 1.3.60 comes out
   artifacts:
     untracked: true
 
