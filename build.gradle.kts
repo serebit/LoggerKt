@@ -1,7 +1,7 @@
 import com.serebit.logkat.buildsrc.*
 
 plugins {
-    kotlin("multiplatform") version "1.3.50"
+    kotlin("multiplatform") version "1.3.60"
     id("org.jetbrains.dokka") version "0.10.0"
     id("com.github.ben-manes.versions") version "0.27.0"
     `maven-publish`
@@ -21,7 +21,7 @@ repositories {
 kotlin {
     sourceSets.commonMain.get().dependencies {
         implementation(kotlin("stdlib-common"))
-        api(group = "com.soywiz.korlibs.klock", name = "klock", version = "1.7.5")
+        api(group = "com.soywiz.korlibs.klock", name = "klock", version = "1.8.0")
     }
     sourceSets.commonTest.get().dependencies {
         implementation(kotlin("test-common"))
