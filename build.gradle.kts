@@ -7,11 +7,9 @@ plugins {
     `maven-publish`
 }
 
-allprojects {
-    group = "com.serebit.logkat"
-    version = System.getenv("SNAPSHOT_VERSION") ?: "0.5.0"
-    description = "A lightweight and simple Kotlin logger"
-}
+group = "com.serebit.logkat"
+version = System.getenv("SNAPSHOT_VERSION") ?: "0.5.0"
+description = "A lightweight and simple Kotlin logger"
 
 repositories {
     mavenCentral()
