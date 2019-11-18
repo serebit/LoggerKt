@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.serebit.logkat"
-version = System.getenv("SNAPSHOT_VERSION") ?: "0.5.0"
+version = System.getenv("SNAPSHOT_VERSION") ?: "0.5.1"
 description = "A lightweight and simple Kotlin logger"
 
 repositories {
