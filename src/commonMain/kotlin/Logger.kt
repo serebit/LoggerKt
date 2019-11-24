@@ -16,7 +16,7 @@ import com.soywiz.klock.DateTime
 class Logger(
     var level: LogLevel = LogLevel.WARNING,
     var writer: MessageWriter = ConsoleWriter(),
-    var messageFormat: FormatterPayload.() -> String = { "$timestamp $level: $message" }
+    var messageFormat: (FormatterPayload) -> String = { "${it.timestamp} ${it.level}: ${it.message}" }
 ) {
 
     /**
